@@ -1,0 +1,78 @@
+return {}
+-- local icons = {
+--   diagnostics = require("jordan.icons").get("diagnostics", true),
+--   ui = require("jordan.icons").get("ui", true),
+-- }
+--
+-- local err = "error"
+-- local warn = "warning"
+-- local inform = "info"
+--
+-- local errIcon = icons.diagnostics.Error
+-- local warnIcon = icons.diagnostics.Warning
+-- local informIcon = icons.diagnostics.Information
+-- local hintIcon = icons.diagnostics.Hint
+-- local modified = icons.ui.Modified_alt
+--
+-- return {
+--   "akinsho/bufferline.nvim",
+--   version = "*",
+--   dependencies = "nvim-tree/nvim-web-devicons",
+--   config = function()
+--     require("bufferline").setup({
+--       highlights = require("catppuccin.groups.integrations.bufferline").get({
+--         styles = { "italic", "bold" },
+--       }),
+--
+--       options = {
+--         tab_size = 18,
+--         themable = true,
+--         diagnostics = "nvim_lsp",
+--         show_buffer_close_icons = false,
+--         separator_style = "thick",
+--         number= false,
+--         color_icons = true,
+--         modified_icon = modified,
+--         show_buffer_icons = true,
+--         show_duplicate_prefix = true,
+--         indicator = { style = "underline" },
+--         sort_by = "relative_directory",
+--         offsets = {
+--           {
+--             filetype = "NvimTree",
+--             text = "File Explorer",
+--             text_align = "left",
+--             separator = true,
+--           },
+--         },
+--         -- Separate errors and warnings in tab diagnostics
+--         diagnostics_indicator = function(count, level, diagnostics_dict, context)
+--           local s = " "
+--           for e, n in pairs(diagnostics_dict) do
+--             local sym = e == err and errIcon
+--               or (e == warn and warnIcon)
+--               or (e == inform and informIcon)
+--               or hintIcon
+--             s = s .. n .. sym
+--           end
+--
+--           return s
+--         end,
+--       },
+--     })
+--
+--     local nextBuffer = "<Cmd>BufferLineMoveNext<CR>"
+--     local prevBuffer = "<Cmd>BufferLineMovePrev<CR>"
+--     local selectBuffer = "<Cmd>BufferLinePick<CR>"
+--     local pickCloseBuffer = "<Cmd>BufferLinePickClose<CR>"
+--     local cyclePrevBuffer = "<Cmd>BufferLineCyclePrev<CR>"
+--     local cycleNextBuffer = "<Cmd>BufferLineCycleNext<CR>"
+--
+--     vim.keymap.set("n", "[b", nextBuffer, { desc = "buffer next" })
+--     vim.keymap.set("n", "]b", prevBuffer, { desc = "buffer prev" })
+--     vim.keymap.set("n", "gbb", selectBuffer, { desc = "buffer select" })
+--     vim.keymap.set("n", "gbd", pickCloseBuffer, { desc = "buffer close" })
+--     vim.keymap.set("n", "<S-tab>", cyclePrevBuffer, { desc = "bufferline: prev" })
+--     vim.keymap.set("n", "<leader><tab>", cycleNextBuffer, { desc = "bufferline: next" })
+--   end,
+-- }

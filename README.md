@@ -1,0 +1,3 @@
+# nvim config
+
+🚧 WIP
