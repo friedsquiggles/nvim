@@ -4,7 +4,7 @@ local get_fold_summary = function(lnum, end_lnum, ctx)
   local filetype = vim.bo.filetype
   local bufnr = vim.api.nvim_get_current_buf()
 
-  if filetype == 'bib' then
+  if filetype == "bib" then
     for l = lnum, end_lnum do
       local line_string = vim.api.nvim_buf_get_lines(bufnr, l - 1, l, false)[1]
       local m = line_string:gmatch("title%s*=%s*{(.*)}")()
@@ -60,15 +60,14 @@ local peek_folded_lines = function()
 end
 
 local setup_folding_keymaps = function()
-  vim.keymap.set('n', 'zR', open_all_folds,  {desc='Open all folds'})
-  vim.keymap.set('n', 'zM', close_all_folds, {desc='Close all folds'})
-  vim.keymap.set('n', 'zr', reduce_folding,  {desc='Reduce fold'})
-  vim.keymap.set('n', 'zm', more_folding,    {desc='Fold more'})
-  vim.keymap.set('n', 'zp', peek_folded_lines, {desc='Peek and preview folded lines'})
+  vim.keymap.set("n", "zR", open_all_folds, { desc = "Open all folds" })
+  vim.keymap.set("n", "zM", close_all_folds, { desc = "Close all folds" })
+  vim.keymap.set("n", "zr", reduce_folding, { desc = "Reduce fold" })
+  vim.keymap.set("n", "zm", more_folding, { desc = "Fold more" })
+  vim.keymap.set("n", "zp", peek_folded_lines, { desc = "Peek and preview folded lines" })
 end
 
 local virtual_text_handler = function(virt_text, lnum, end_lnum, width, truncate, ctx)
-
   local counts = (" 󰁂 %d "):format(end_lnum - lnum + 1)
   local ellipsis = "⋯"
   local padding = ""
@@ -83,12 +82,12 @@ local virtual_text_handler = function(virt_text, lnum, end_lnum, width, truncate
   end
 
   if #end_virt_text >= 1 and vim.trim(end_virt_text[1][1]) == "" then
-    table.remove(end_virt_text, 1)      -- e.g., {"   ", ")"} -> {")"}
+    table.remove(end_virt_text, 1) -- e.g., {"   ", ")"} -> {")"}
   end
 
   if #end_virt_text == 1 and #vim.split(vim.trim(end_text), " ") == 1 then
-    end_virt_text[1][1] = vim.trim(end_virt_text[1][1])  -- trim the first token, e.g., "   }" -> "}"
-    end_virt_text = { end_virt_text[1] }  -- show only the first token
+    end_virt_text[1][1] = vim.trim(end_virt_text[1][1]) -- trim the first token, e.g., "   }" -> "}"
+    end_virt_text = { end_virt_text[1] } -- show only the first token
   else
     end_virt_text = {}
   end
@@ -101,7 +100,7 @@ local virtual_text_handler = function(virt_text, lnum, end_lnum, width, truncate
   local target_width = width - sufWidth
   local cur_width = 0
 
-  local result = {}  -- virtual text tokens to display.
+  local result = {} -- virtual text tokens to display.
 
   for _, chunk in ipairs(virt_text) do
     local chunk_text = chunk[1]
@@ -135,8 +134,6 @@ local virtual_text_handler = function(virt_text, lnum, end_lnum, width, truncate
   return result
 end
 
-
-
 return {
   {
     "neovim/nvim-lspconfig",
@@ -160,20 +157,25 @@ return {
         config = function()
           local builtin = require("statuscol.builtin")
           require("statuscol").setup({
+            setopt = true,
             relculright = true,
             segments = {
+              {
+                sign = { name = { ".*" }, maxwidth = 3, colwidth = 2, auto = true },
+                click = "v:lua.ScSa",
+              },
               { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
-              { text = { "%s" }, click = "v:lua.ScSa" },
+              -- { text = { "%s" }, click = "v:lua.ScSa" },
               { text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
             },
           })
         end,
-      }
+      },
     },
     event = "BufReadPost",
     opts = {},
     config = function()
-      ufo = require('ufo')
+      ufo = require("ufo")
 
       vim.o.foldcolumn = "1"
       vim.o.foldlevel = 99
@@ -182,31 +184,31 @@ return {
       vim.o.foldenable = true
       vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
-      ufo.setup {
+      ufo.setup({
         open_fold_hl_timeout = 150,
         provider_selector = function(bufnr, filetype)
-          if pcall(require, 'nvim-treesitter.parsers') then
+          if pcall(require, "nvim-treesitter.parsers") then
             if require("nvim-treesitter.parsers").has_parser(filetype) then
-              return {'treesitter', 'indent'}
+              return { "treesitter", "indent" }
             end
           end
-         return ''
+          return ""
         end,
 
         enable_get_fold_virt_text = true,
         fold_virt_text_handler = virtual_text_handler,
-      }
+      })
 
       setup_folding_keymaps()
     end,
     -- init = function()
-      -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
-      -- vim.keymap.set("n", "zR", function()
-      --   require("ufo").openAllFolds()
-      -- end)
-      -- vim.keymap.set("n", "zM", function()
-      --   require("ufo").closeAllFolds()
-      -- end)
+    -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
+    -- vim.keymap.set("n", "zR", function()
+    --   require("ufo").openAllFolds()
+    -- end)
+    -- vim.keymap.set("n", "zM", function()
+    --   require("ufo").closeAllFolds()
+    -- end)
     -- end,
   },
 }
