@@ -1,3 +1,3 @@
-# nvim config
+# nvim
 
 🚧 WIP
