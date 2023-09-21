@@ -1,6 +1,7 @@
 local icons = {
   diagnostics = require("jordan.icons").get("diagnostics", true),
   git = require("jordan.icons").get("git", true),
+  ui = require("jordan.icons").get("ui", true),
 }
 return {
   "romgrk/barbar.nvim",
@@ -25,7 +26,7 @@ return {
       },
       gitsigns = {
         added = { enabled = true, icon = icons.git.Add },
-        changed = { enabled = true, icon = icons.git.Mod_alt },
+        changed = { enabled = true, icon = icons.git.Mod },
         deleted = { enabled = true, icon = icons.git.Remove },
       },
       filetype = {
@@ -34,25 +35,27 @@ return {
       },
       separator = { left = "▎", right = "" },
       separator_at_end = true,
-      modified = { button = "●" },
-      pinned = { button = "", filename = true },
+      modified = { button = icons.ui.Circle },
+      pinned = { button = icons.ui.Pin, filename = true },
       preset = "default",
       alternate = { filetype = { enabled = false } },
       current = { buffer_index = true },
-      inactive = { button = "×" },
+      inactive = { button = icons.ui.Close },
       visible = { modified = { buffer_number = false } },
     },
   },
   config = function(_, opts)
     require("barbar").setup(opts)
-    -- code
     local map = vim.keymap
     local mopts = { noremap = true, silent = true }
 
+    -- general navigation
     map.set("n", "<Leader>,", "<Cmd>BufferPrevious<CR>", mopts)
     map.set("n", "<Leader>.", "<Cmd>BufferNext<CR>", mopts)
     map.set("n", "<Leader><", "<Cmd>BufferMovePrevious<CR>", mopts)
     map.set("n", "<Leader>>", "<Cmd>BufferMoveNext<CR>", mopts)
+
+    -- go to buffer
     map.set("n", "<Leader>1", "<Cmd>BufferGoto 1<CR>", mopts)
     map.set("n", "<Leader>2", "<Cmd>BufferGoto 2<CR>", mopts)
     map.set("n", "<Leader>3", "<Cmd>BufferGoto 3<CR>", mopts)
@@ -63,9 +66,13 @@ return {
     map.set("n", "<Leader>8", "<Cmd>BufferGoto 8<CR>", mopts)
     map.set("n", "<Leader>9", "<Cmd>BufferGoto 9<CR>", mopts)
     map.set("n", "<Leader>0", "<Cmd>BufferLast<CR>", mopts)
+
+    -- selections
     map.set("n", "<Leader>bp", "<Cmd>BufferPin<CR>", mopts)
     map.set("n", "<Leader>bc", "<Cmd>BufferClose<CR>", mopts)
     map.set("n", "<C-p>", "<Cmd>BufferPick<CR>", mopts)
+
+    -- set buffer sorting
     map.set("n", "<Leader>bb", "<Cmd>BufferOrderByBufferNumber<CR>", mopts)
     map.set("n", "<Leader>bd", "<Cmd>BufferOrderByDirectory<CR>", mopts)
     map.set("n", "<Leader>bl", "<Cmd>BufferOrderByLanguage<CR>", mopts)

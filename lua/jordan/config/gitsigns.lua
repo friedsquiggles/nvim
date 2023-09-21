@@ -115,17 +115,17 @@ return {
     vim.api.nvim_set_hl(
       0,
       "GitSignsAddInline",
-      { underdotted = true, default = true, sp = "green" }
+      { underdotted = false, default = true, sp = "green" }
     ) -- diff mode: Deleted line |diff.txt|
     vim.api.nvim_set_hl(
       0,
       "GitSignsDeleteInline",
-      { strikethrough = true, default = true, sp = "yellow" }
+      { strikethrough = false, default = true, sp = "yellow" }
     ) -- diff mode: Deleted line |diff.txt|
     vim.api.nvim_set_hl(
       0,
       "GitSignsChangeInline",
-      { undercurl = true, default = true, sp = "cyan" }
+      { undercurl = false, default = true, sp = "cyan" }
     ) -- diff mode: Deleted line |diff.txt|
     vim.api.nvim_create_user_command("Stage", "'<,'>Gitsigns stage_hunk", { range = true })
   end,
