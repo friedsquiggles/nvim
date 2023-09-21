@@ -14,6 +14,7 @@ return {
   opts = function()
     local dashboard = require("alpha.themes.dashboard")
     dashboard.section.buttons.val = {
+      dashboard.button("e", file .. " Explorer", "<Cmd>NvimTreeFocus<CR>>"),
       dashboard.button("f", file .. " Find file", ":Telescope find_files <CR>"),
       dashboard.button("r", recent .. " Recent files", ":Telescope oldfiles <CR>"),
       dashboard.button("g", text .. " Find text", ":Telescope live_grep <CR>"),

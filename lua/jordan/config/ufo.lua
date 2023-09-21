@@ -161,12 +161,20 @@ return {
             relculright = true,
             segments = {
               {
-                sign = { name = { ".*" }, maxwidth = 3, colwidth = 2, auto = true },
+                sign = { name = { ".*" }, maxwidth = 2, auto = true },
+                click = "v:lua#.ScSa",
+              },
+              { text = { builtin.lnumfunc }, click = "v:lua.ScLa" },
+              { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
+              {
+                text = { " " },
+                condition = { builtin.not_empty, true, builtin.not_empty },
+                click = "v:lua.ScFa",
+              },
+              {
+                sign = { name = { "GitSigns" }, maxwidth = 1, colwidth = 1, auto = true },
                 click = "v:lua.ScSa",
               },
-              { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
-              -- { text = { "%s" }, click = "v:lua.ScSa" },
-              { text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
             },
           })
         end,
@@ -179,7 +187,7 @@ return {
 
       vim.o.foldcolumn = "1"
       vim.o.foldlevel = 99
-      vim.o.foldlevelstart = 5
+      vim.o.foldlevelstart = 99
       vim.g.has_folding_ufo = 1
       vim.o.foldenable = true
       vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
