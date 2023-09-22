@@ -58,8 +58,7 @@ return {
           vim.keymap.set(mode, l, r, opts)
         end
 
-        -- Navigation
-        map("n", "]c", function()
+        local nextHunk = function ()
           if vim.wo.diff then
             return "]c"
           end
@@ -67,9 +66,9 @@ return {
             gs.next_hunk()
           end)
           return "<Ignore>"
-        end, { expr = true })
+        end
 
-        map("n", "[c", function()
+        local prevHunk = function ()
           if vim.wo.diff then
             return "[c"
           end
@@ -77,27 +76,40 @@ return {
             gs.prev_hunk()
           end)
           return "<Ignore>"
-        end, { expr = true })
+
+        end
+
+        local stageHunk = function ()
+          gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+        end
+
+        local resetHunk = function ()
+          gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+        end
+
+        local blameLine = function ()
+          gs.blame_line({ full = true })
+        end
+
+        local diffThis = function ()
+          gs.diffthis("~")
+        end
+
+        -- Navigation
+        map("n", "]c", nextHunk, { expr = true, desc = "next hunk" })
+        map("n", "[c", prevHunk, { expr = true, desc = "prev hunk" })
         map("n", "<leader>gs", gs.stage_hunk, { desc = "stage hunk" })
         map("n", "<leader>gr", gs.reset_hunk, { desc = "reset hunk" })
-        map("v", "<leader>gs", function()
-          gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
-        end, { desc = "stage hunk" })
-        map("v", "<leader>gr", function()
-          gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
-        end, { desc = "reset hunk" })
+        map("v", "<leader>gs", stageHunk, { desc = "stage hunk" })
+        map("v", "<leader>gr", resetHunk, { desc = "reset hunk" })
         map("n", "<leader>gS", gs.stage_buffer, { desc = "stage buffer" })
         map("n", "<leader>gu", gs.undo_stage_hunk, { desc = "unstage hunk" })
         map("n", "<leader>gR", gs.reset_buffer, { desc = "reset buffer" })
         map("n", "<leader>gp", gs.preview_hunk, { desc = "preview hunk" })
-        map("n", "<leader>gb", function()
-          gs.blame_line({ full = true })
-        end)
+        map("n", "<leader>gb", blameLine, { desc = "blame line" })
         map("n", "<leader>tb", gs.toggle_current_line_blame, { desc = "blame" })
         map("n", "<leader>gd", gs.diffthis, { desc = "git diff" })
-        map("n", "<leader>gD", function()
-          gs.diffthis("~")
-        end, { desc = "git diff" })
+        map("n", "<leader>gD", diffThis, { desc = "git diff" })
         map("n", "<leader>td", gs.toggle_deleted, { desc = "deleted visibility" })
       end,
 

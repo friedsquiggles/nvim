@@ -16,6 +16,8 @@ return {
         path_display = { "truncate" },
         mappings = {
           i = {
+            ['<ESC>'] = actions.close,
+            ['<TAB>'] = actions.toggle_selection + actions.move_selection_next,
             ["<C-k>"] = actions.move_selection_previous, -- move to prev result
             ["<C-j>"] = actions.move_selection_next, -- move to next result
             ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
@@ -71,33 +73,32 @@ return {
     pcall(telescope.load_extension, "fzf")
 
     local builtin = require("telescope.builtin")
+    local themes = require("telescope.themes")
 
     local getBufferFzyDropdown = function()
-      builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({}))
+      builtin.current_buffer_fuzzy_find(themes.get_dropdown({}))
     end
 
     local map = vim.keymap
 
-    map.set("n", "<leader>sr", builtin.oldfiles, { desc = "list recent files" })
+    -- find buffers
+    map.set("n", "<leader>sr", builtin.oldfiles, { desc = "recent buffers" })
+    map.set("n", "<leader>sb", builtin.buffers, { desc = "active buffers" })
+    map.set("n", "<leader>sf", builtin.find_files, { desc = "find files" })
 
-    map.set("n", "<leader>sb", builtin.buffers, { desc = "list open buffers" })
-
+    -- find text
     map.set("n", "<leader><space>", getBufferFzyDropdown, { desc = "search current buffer" })
+    map.set("n", "<leader>sw", builtin.grep_string, { desc = "current word" })
+    map.set("n", "<leader>sg", builtin.live_grep, { desc = "grep" })
 
-    -- git
+    -- git files and commands
     map.set("n", "<leader>gf", builtin.git_files, { desc = "git files" })
     map.set("n", "<leader>gcs", builtin.git_status, { desc = "git status" })
     map.set("n", "<leader>gcb", builtin.git_branches, { desc = "git branches" })
     map.set("n", "<leader>gcl", builtin.git_commits, { desc = "git log" })
 
-    map.set("n", "<leader>sf", builtin.find_files, { desc = "files" })
-
-    map.set("n", "<leader>sh", builtin.help_tags, { desc = "help" })
-
-    map.set("n", "<leader>sw", builtin.grep_string, { desc = "current word" })
-
-    map.set("n", "<leader>sg", builtin.live_grep, { desc = "grep" })
-
+    -- reference
     map.set("n", "<leader>sd", builtin.diagnostics, { desc = "diagnostics" })
+    map.set("n", "<leader>sh", builtin.help_tags, { desc = "help" })
   end,
 }
