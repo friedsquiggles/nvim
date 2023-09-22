@@ -4,7 +4,15 @@ return {
   config = function()
     vim.o.timeout = true
     vim.o.timeoutlen = 300
+
     local which_key = require("which-key")
+    local icons = {
+      ui = require("jordan.icons").get("ui", true),
+      cmp = require("jordan.icons").get("cmp", true),
+      misc = require("jordan.icons").get("misc", true),
+      type = require("jordan.icons").get("type", true),
+    }
+
     which_key.setup({
       plugins = {
         marks = false, -- shows a list of your marks on ' and `
@@ -24,10 +32,16 @@ return {
         },
       },
       window = {
-        border = "shadow",
+        border = "none",
         position = "bottom",
-        margin = { 0, 1, 1, 5 },
+        margin = { 1, 0, 1, 0 },
         padding = { 1, 2, 1, 2 },
+      },
+      layout = {
+        height = { min = 4, max = 25 }, -- min and max height of the columns
+        width = { min = 20, max = 50 }, -- min and max width of the columns
+        spacing = 3, -- spacing between columns
+        align = "center", -- align columns left, center or right
       },
       triggers_nowait = {
         "`",
@@ -40,6 +54,38 @@ return {
       },
     })
 
+    -- todo - custom mappings by category
+    -- local normalOpts = {
+    --   mode = "n",
+    --   prefix = "<leader>",
+    --   buffer = nil,
+    --   silent = true,
+    --   noremap = true,
+    --   nowait = true,
+    -- }
+    --
+    -- local normalMappings = {
+    --   c = { name = icons.ui.Gear .. "Config" },
+    --   b = { name = icons.ui.FolderOpen .. "Buffers" },
+    --   e = { name = icons.ui.List .. "Explorer" },
+    --   f = { name = icons.ui.Search .. "Find" },
+    --   g = { name = icons.cmp.copilot_alt .. "Git" },
+    --   l = { name = icons.cmp.LspAvailable .. "LSP" },
+    --   r = { name = icons.ui.CodeAction .. "LSP" },
+    --   t = { name = icons.type.Boolean .. "Toggle" },
+    --   ["["] = { name = icons.type.Boolean .. "Previous" },
+    --   ["]"] = { name = icons.type.Boolean .. "Next" },
+    -- }
+    --
+    -- local visualOpts = {
+    --   mode = "v",
+    --   prefix = "<leader>",
+    --   silent = true,
+    --   noremap = true,
+    --   nowait = true,
+    -- }
+    -- local visualMappings = {}
+    --
     local groups = {
       mode = { "n" },
       ["["] = { name = "previous" },
