@@ -42,7 +42,7 @@ return {
           "--trim",
         },
         layout_config = {
-          width = 0.8,
+          width = 0.9,
           height = 0.6,
           preview_cutoff = 120,
           horizontal = {
@@ -70,51 +70,34 @@ return {
 
     pcall(telescope.load_extension, "fzf")
 
-    vim.keymap.set(
-      "n",
-      "<leader>sr",
-      require("telescope.builtin").oldfiles,
-      { desc = "recent files" }
-    )
+    local builtin = require("telescope.builtin")
 
-    vim.keymap.set(
-      "n",
-      "<leader>sb",
-      require("telescope.builtin").buffers,
-      { desc = "existing buffers" }
-    )
+    local getBufferFzyDropdown = function()
+      builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({}))
+    end
 
-    vim.keymap.set("n", "<leader><space>", function()
-      require("telescope.builtin").current_buffer_fuzzy_find(
-        require("telescope.themes").get_dropdown({})
-      )
-    end, { desc = "current buffer" })
+    local map = vim.keymap
 
-    vim.keymap.set(
-      "n",
-      "<leader>gf",
-      require("telescope.builtin").git_files,
-      { desc = "git files" }
-    )
+    map.set("n", "<leader>sr", builtin.oldfiles, { desc = "list recent files" })
 
-    vim.keymap.set("n", "<leader>sf", require("telescope.builtin").find_files, { desc = "files" })
+    map.set("n", "<leader>sb", builtin.buffers, { desc = "list open buffers" })
 
-    vim.keymap.set("n", "<leader>sh", require("telescope.builtin").help_tags, { desc = "help" })
+    map.set("n", "<leader><space>", getBufferFzyDropdown, { desc = "search current buffer" })
 
-    vim.keymap.set(
-      "n",
-      "<leader>sw",
-      require("telescope.builtin").grep_string,
-      { desc = "current word" }
-    )
+    -- git
+    map.set("n", "<leader>gf", builtin.git_files, { desc = "git files" })
+    map.set("n", "<leader>gcs", builtin.git_status, { desc = "git status" })
+    map.set("n", "<leader>gcb", builtin.git_branches, { desc = "git branches" })
+    map.set("n", "<leader>gcl", builtin.git_commits, { desc = "git log" })
 
-    vim.keymap.set("n", "<leader>sg", require("telescope.builtin").live_grep, { desc = "grep" })
+    map.set("n", "<leader>sf", builtin.find_files, { desc = "files" })
 
-    vim.keymap.set(
-      "n",
-      "<leader>sd",
-      require("telescope.builtin").diagnostics,
-      { desc = "diagnostics" }
-    )
+    map.set("n", "<leader>sh", builtin.help_tags, { desc = "help" })
+
+    map.set("n", "<leader>sw", builtin.grep_string, { desc = "current word" })
+
+    map.set("n", "<leader>sg", builtin.live_grep, { desc = "grep" })
+
+    map.set("n", "<leader>sd", builtin.diagnostics, { desc = "diagnostics" })
   end,
 }
