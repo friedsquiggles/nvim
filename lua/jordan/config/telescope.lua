@@ -108,9 +108,9 @@ return {
 
     -- git files and commands
     map.set("n", "<leader>gf", builtin.git_files, { desc = "git files" })
-    map.set("n", "<leader>gcs", builtin.git_status, { desc = "git status" })
-    map.set("n", "<leader>gcb", builtin.git_branches, { desc = "git branches" })
-    map.set("n", "<leader>gcl", builtin.git_commits, { desc = "git log" })
+    map.set("n", "<leader>gs", builtin.git_status, { desc = "git status" })
+    map.set("n", "<leader>gb", builtin.git_branches, { desc = "git branches" })
+    map.set("n", "<leader>gl", builtin.git_commits, { desc = "git log" })
 
     -- reference
     map.set("n", "<leader>sd", builtin.diagnostics, { desc = "diagnostics" })

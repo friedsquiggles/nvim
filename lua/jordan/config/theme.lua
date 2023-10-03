@@ -74,7 +74,7 @@ return {
         markdown = true,
         mason = true,
         mini = true,
-        navic = { enabled = true },
+        navic = { enabled = false },
         neogit = false,
         neotest = false,
         neotree = { enabled = false, show_root = true, transparent_panel = false },
@@ -88,7 +88,8 @@ return {
         semantic_tokens = true,
         symbols_outline = true,
         telekasten = false,
-        telescope = { enabled = true, style = "nvchad" },
+        -- telescope = { enabled = true, style = "nvchad" },
+        telescope = { enabled = true },
         treesitter_context = true,
         ts_rainbow = false,
         vim_sneak = false,
@@ -124,7 +125,7 @@ return {
             BufferCurrentWARN = { fg = cp.subtext0, bg = cp.overlay1 },
             BufferCurrentERROR = { fg = cp.subtext0, bg = cp.overlay1 },
             BufferCurrentADDED = { fg = cp.subtext0, bg = cp.overlay1 },
-            BufferCurrentCHANGED= { fg = cp.subtext0, bg = cp.overlay1 },
+            BufferCurrentCHANGED = { fg = cp.subtext0, bg = cp.overlay1 },
             BufferCurrentDELETED = { fg = cp.subtext0, bg = cp.overlay1 },
 
             -- barbar
@@ -147,6 +148,8 @@ return {
             -- For mason
             MasonNormal = { link = "NormalFloat" },
 
+            MiniTrailspace = { bg = cp.yellow },
+
             -- For nvim-cmp and wilder.nvim
             Pmenu = { fg = cp.overlay2, bg = transparent_background or cp.base },
             PmenuBorder = { fg = cp.surface1, bg = transparent_background or cp.base },
@@ -163,6 +166,7 @@ return {
             FidgetTask = { fg = cp.surface2 },
             FidgetTitle = { fg = cp.blue, style = { "bold" } },
 
+            -- Mini
             MiniIndentscopeSymbol = { fg = cp.flamingo },
             MiniIndentscopeSymbolOff = { fg = cp.flamingo },
 
@@ -175,6 +179,7 @@ return {
             NvimTreeGitRenamed = { fg = cp.lavender },
             NvimTreeGitNew = { fg = cp.yellow },
             NvimTreeGitDeleted = { fg = cp.rosewater },
+
             -- For trouble.nvim
             TroubleNormal = { bg = transparent_background or cp.base },
 

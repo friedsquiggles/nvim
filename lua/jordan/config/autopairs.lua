@@ -26,7 +26,7 @@ return {
         java = false,
       },
       fast_wrap = {
-        map = "<leader>w",
+        map = "<C-w>",
         chars = { "{", "[", "(", '"', "'" },
         pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
         offset = 0, -- Offset from pattern match

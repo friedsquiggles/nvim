@@ -7,7 +7,7 @@ return {
       relculright = true,
       segments = {
         {
-          sign = { name = { ".*" }, maxwidth = 2, auto = true },
+          sign = { name = { ".*" }, colwidth = 1, maxwidth = 2, auto = false },
           click = "v:lua#.ScSa",
         },
         { text = { builtin.lnumfunc }, click = "v:lua.ScLa" },

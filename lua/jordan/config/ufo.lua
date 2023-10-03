@@ -153,36 +153,6 @@ return {
     dependencies = {
       "kevinhwang91/promise-async",
       "luukvbaal/statuscol.nvim",
-      -- {
-      --   "luukvbaal/statuscol.nvim",
-      --   config = function()
-      --     local builtin = require("statuscol.builtin")
-      --     require("statuscol").setup({
-      --       setopt = true,
-      --       relculright = true,
-      --       segments = {
-      --         {
-      --           sign = { name = { ".*" }, maxwidth = 2, auto = true },
-      --           click = "v:lua#.ScSa",
-      --         },
-      --         { text = { builtin.lnumfunc }, click = "v:lua.ScLa" },
-      --         { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
-      --         {
-      --           text = { " " },
-      --           condition = { builtin.not_empty, true, builtin.not_empty },
-      --           click = "v:lua.ScFa",
-      --         },
-      --         {
-      --           sign = { name = { "GitSigns" }, maxwidth = 1, colwidth = 1, auto = true },
-      --           click = "v:lua.ScSa",
-      --         },
-      --         {
-      --           text = { " " },
-      --         },
-      --       },
-      --     })
-      --   end,
-      -- },
     },
     event = "BufReadPost",
     opts = {},
@@ -213,14 +183,5 @@ return {
 
       setup_folding_keymaps()
     end,
-    -- init = function()
-    -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
-    -- vim.keymap.set("n", "zR", function()
-    --   require("ufo").openAllFolds()
-    -- end)
-    -- vim.keymap.set("n", "zM", function()
-    --   require("ufo").closeAllFolds()
-    -- end)
-    -- end,
   },
 }

@@ -58,7 +58,7 @@ return {
           vim.keymap.set(mode, l, r, opts)
         end
 
-        local nextHunk = function ()
+        local nextHunk = function()
           if vim.wo.diff then
             return "]c"
           end
@@ -68,7 +68,7 @@ return {
           return "<Ignore>"
         end
 
-        local prevHunk = function ()
+        local prevHunk = function()
           if vim.wo.diff then
             return "[c"
           end
@@ -76,41 +76,40 @@ return {
             gs.prev_hunk()
           end)
           return "<Ignore>"
-
         end
 
-        local stageHunk = function ()
+        local stageHunk = function()
           gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
         end
 
-        local resetHunk = function ()
+        local resetHunk = function()
           gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
         end
 
-        local blameLine = function ()
+        local blameLine = function()
           gs.blame_line({ full = true })
         end
 
-        local diffThis = function ()
+        local diffThis = function()
           gs.diffthis("~")
         end
 
         -- Navigation
         map("n", "]c", nextHunk, { expr = true, desc = "next hunk" })
         map("n", "[c", prevHunk, { expr = true, desc = "prev hunk" })
-        map("n", "<leader>gs", gs.stage_hunk, { desc = "stage hunk" })
+        map("n", "<leader>gh", gs.stage_hunk, { desc = "stage hunk" })
         map("n", "<leader>gr", gs.reset_hunk, { desc = "reset hunk" })
-        map("v", "<leader>gs", stageHunk, { desc = "stage hunk" })
-        map("v", "<leader>gr", resetHunk, { desc = "reset hunk" })
+        -- map("v", "<leader>gs", stageHunk, { desc = "stage hunk" })
+        -- map("v", "<leader>gr", resetHunk, { desc = "reset hunk" })
         map("n", "<leader>gS", gs.stage_buffer, { desc = "stage buffer" })
         map("n", "<leader>gu", gs.undo_stage_hunk, { desc = "unstage hunk" })
         map("n", "<leader>gR", gs.reset_buffer, { desc = "reset buffer" })
-        map("n", "<leader>gp", gs.preview_hunk, { desc = "preview hunk" })
-        map("n", "<leader>gb", blameLine, { desc = "blame line" })
+        -- map("n", "<leader>gp", gs.preview_hunk, { desc = "preview hunk" })
+        -- map("n", "<leader>gb", blameLine, { desc = "blame line" })
         map("n", "<leader>tb", gs.toggle_current_line_blame, { desc = "blame" })
-        map("n", "<leader>gd", gs.diffthis, { desc = "git diff" })
-        map("n", "<leader>gD", diffThis, { desc = "git diff" })
-        map("n", "<leader>td", gs.toggle_deleted, { desc = "deleted visibility" })
+        map("n", "<leader>gc", gs.diffthis, { desc = "git diff" })
+        map("n", "<leader>gC", diffThis, { desc = "git diff" })
+        -- map("n", "<leader>td", gs.toggle_deleted, { desc = "deleted visibility" })
       end,
 
       watch_gitdir = { interval = 1000, follow_files = true },
