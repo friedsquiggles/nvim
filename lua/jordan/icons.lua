@@ -82,6 +82,7 @@ local data = {
     Bug = "",
     Calendar = "",
     Check = "󰄳",
+    ChevronLeft = "",
     ChevronRight = "",
     Circle = "",
     Close = "󰅖",
@@ -133,6 +134,7 @@ local data = {
     Tab = "",
     Table = "",
     Telescope = "",
+    Toggle = "",
   },
   diagnostics = {
     Error = "",

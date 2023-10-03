@@ -24,11 +24,11 @@ return {
         presets = {
           operators = false, -- adds help for operators like d, y, ...
           motions = false, -- adds help for motions
-          text_objects = false, -- help for text objects triggered after entering an operator
+          text_objects = true, -- help for text objects triggered after entering an operator
           windows = false, -- default bindings on <c-w>
           nav = false, -- misc bindings to work with windows
-          z = false, -- bindings for folds, spelling and others prefixed with z
-          g = false, -- bindings for prefixed with g
+          z = true, -- bindings for folds, spelling and others prefixed with z
+          g = true, -- bindings for prefixed with g
         },
       },
       window = {
@@ -54,52 +54,19 @@ return {
       },
     })
 
-    -- todo - custom mappings by category
-    -- local normalOpts = {
-    --   mode = "n",
-    --   prefix = "<leader>",
-    --   buffer = nil,
-    --   silent = true,
-    --   noremap = true,
-    --   nowait = true,
-    -- }
-    --
-    -- local normalMappings = {
-    --   c = { name = icons.ui.Gear .. "Config" },
-    --   b = { name = icons.ui.FolderOpen .. "Buffers" },
-    --   e = { name = icons.ui.List .. "Explorer" },
-    --   f = { name = icons.ui.Search .. "Find" },
-    --   g = { name = icons.cmp.copilot_alt .. "Git" },
-    --   l = { name = icons.cmp.LspAvailable .. "LSP" },
-    --   r = { name = icons.ui.CodeAction .. "LSP" },
-    --   t = { name = icons.type.Boolean .. "Toggle" },
-    --   ["["] = { name = icons.type.Boolean .. "Previous" },
-    --   ["]"] = { name = icons.type.Boolean .. "Next" },
-    -- }
-    --
-    -- local visualOpts = {
-    --   mode = "v",
-    --   prefix = "<leader>",
-    --   silent = true,
-    --   noremap = true,
-    --   nowait = true,
-    -- }
-    -- local visualMappings = {}
-    --
     local groups = {
       mode = { "n" },
-      ["["] = { name = "previous" },
-      ["]"] = { name = "next" },
-      ["<leader>b"] = { name = "+buffers" },
-      ["<leader>e"] = { name = "+explorer" },
-      -- ["<leader>d"] = { name = "+debug" },
-      ["<leader>s"] = { name = "+search" },
-      ["<leader>g"] = { name = "+git" },
-      -- ["<leader>h"] = { name = "+hop" },
-      -- ["<leader>l"] = { name = "+lsp" },
-      -- ["<leader>m"] = { name = "+markdown" },
-      -- ["<leader>r"] = { name = "+code_runner" },
-      ["<leader>t"] = { name = "+toggle" },
+      --prefix
+      ["["] = { name = icons.ui.ChevronLeft .. " previous" },
+      ["]"] = { name = icons.ui.ChevronRight .. " next" },
+      ["<leader>b"] = { name = icons.ui.FolderOpen .. " buffers" },
+      ["<leader>e"] = { name = icons.ui.List .. " explorer" },
+      ["<leader>s"] = { name = icons.ui.Search .. " search" },
+      ["<leader>g"] = { name = icons.cmp.copilot_alt .. " git" },
+      ["<leader>x"] = { name = icons.misc.LspAvailable .. " trouble" },
+      ["<leader>n"] = { name = icons.ui.Note .. " notifications" },
+      ["<leader>t"] = { name = icons.ui.Toggle .. " toggle" },
+      --ignore
       ["<leader>1"] = "which_key_ignore",
       ["<leader>2"] = "which_key_ignore",
       ["<leader>3"] = "which_key_ignore",
