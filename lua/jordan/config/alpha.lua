@@ -1,18 +1,19 @@
-local icons = {
-  kind = require("jordan.icons").get("kind", true),
-  misc = require("jordan.icons").get("misc", true)
-}
-
-local file = icons.kind.File
-local text = icons.kind.Text
-local recent = icons.misc.Watch
-local mason = icons.misc.Lego
-
 return {
   "goolord/alpha-nvim",
   dependencies = { "nvim-tree/nvim-web-devicons" },
   opts = function()
+    local icons = {
+      kind = require("jordan.icons").get("kind", true),
+      misc = require("jordan.icons").get("misc", true),
+    }
+
+    local file = icons.kind.File
+    local text = icons.kind.Text
+    local recent = icons.misc.Watch
+    local mason = icons.misc.Lego
+
     local dashboard = require("alpha.themes.dashboard")
+
     dashboard.section.buttons.val = {
       dashboard.button("e", file .. " Explorer", "<Cmd>NvimTreeFocus<CR>>"),
       dashboard.button("f", file .. " Find file", ":Telescope find_files <CR>"),
@@ -22,8 +23,10 @@ return {
       dashboard.button("m", mason .. " Mason", ":Mason<CR>"),
       dashboard.button("q", " " .. " Quit", ":qa<CR>"),
     }
+
     dashboard.section.header.opts.hl = "AlphaHeader"
     dashboard.opts.layout[1].val = 6
+
     return dashboard
   end,
   config = function(_, dashboard)

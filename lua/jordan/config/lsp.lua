@@ -5,18 +5,10 @@ return {
   dependencies = {
     "folke/neoconf.nvim",
     "folke/neodev.nvim",
-    "mason.nvim",
+    "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "hrsh7th/cmp-nvim-lsp",
     "jose-elias-alvarez/typescript.nvim",
-    -- {
-    --   "SmiteshP/nvim-navbuddy",
-    --   dependencies = {
-    --     "SmiteshP/nvim-navic",
-    --     "MunifTanjim/nui.nvim",
-    --   },
-    --   opts = { lsp = { auto_attach = true } },
-    -- },
   },
   opts = {
     diagnostics = {
@@ -26,9 +18,6 @@ return {
       virtual_text = { prefix = "icons" },
     },
     servers = {
-      jsonls = {},
-      dockerls = {},
-      eslint = {},
       lua_ls = {
         settings = {
           Lua = {
@@ -83,8 +72,6 @@ return {
           },
         },
       },
-      terraformls = {},
-      tflint = {},
       yamlls = {
         settings = {
           yaml = {
@@ -93,6 +80,7 @@ return {
         },
       },
     },
+
     setup = {
       tsserver = function(_, opts)
         require("typescript").setup({ server = opts })
@@ -101,9 +89,11 @@ return {
       ["*"] = function(server, opts) end,
     },
   },
+
   config = function(_, opts)
     local servers = opts.servers
     local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+
     local capabilities = vim.tbl_deep_extend(
       "force",
       {},
@@ -126,24 +116,32 @@ return {
           return
         end
       end
+
       require("lspconfig")[server].setup(server_opts)
-      -- local navic = require("nvim-navic")
-      --
-      -- require("lspconfig").clangd.setup({
-      --   on_attach = function(client, bufnr)
-      --     navic.attach(client, bufnr)
-      --   end,
-      -- })
     end
 
     local have_mason, mlsp = pcall(require, "mason-lspconfig")
     local all_mlsp_servers = {}
+
     if have_mason then
       all_mlsp_servers =
         vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
     end
 
-    local ensure_installed = {} -- string[]
+    local ensure_installed = {
+      "bashls",
+      "docker_compose_language_service",
+      "dockerls",
+      "marksman",
+      "jsonls",
+      "html",
+      "lua_ls",
+      "sqlls",
+      "terraformls",
+      "tsserver",
+      "yamlls",
+    } -- string[]
+
     for server, server_opts in pairs(servers) do
       if server_opts then
         server_opts = server_opts == true and {} or server_opts

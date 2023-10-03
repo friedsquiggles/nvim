@@ -5,38 +5,35 @@ local icons = {
 
 return {
   "gelguy/wilder.nvim",
-  event = "BufWinEnter",
+  event = "CmdLineEnter",
   build = ":UpdateRemotePlugins",
   dependencies = {
     "nvim-tree/nvim-web-devicons",
-    "romgrk/fzy-lua-native",
-    "nixprime/cpsm",
+    {
+      "romgrk/fzy-lua-native",
+      build = "make",
+    },
   },
+
   config = function()
     local wilder = require("wilder")
 
     wilder.setup({
       modes = { ":", "/", "?" },
-      next_key = "<C-j>",
-      previous_key = "<C-k>",
-      accept_key = "<Tab>",
-      reject_key = "<Esc>",
     })
 
     wilder.set_option("pipeline", {
-
       wilder.branch(
 
         wilder.python_file_finder_pipeline({
           file_command = function(ctx, arg)
             if string.find(arg, ".") ~= nil then
-              return { "fdfind", "-tf", "-H" }
+              return { "fd", "-tf", "-H" }
             else
-              return { "fdfind", "-tf" }
+              return { "fd", "-tf" }
             end
           end,
           dir_command = { "fd", "-td" },
-          filters = { "cpsm_filter" },
         }),
 
         wilder.substitute_pipeline({
@@ -49,9 +46,10 @@ return {
         }),
 
         wilder.cmdline_pipeline({
-          fuzzy = 2,
+          fuzzy = 1,
           fuzzy_filter = wilder.lua_fzy_filter(),
         }),
+
         {
           wilder.check(function(ctx, x)
             return x == ""
@@ -67,27 +65,65 @@ return {
       ),
     })
 
-    local highlighters = {
-      wilder.pcre2_highlighter(),
-      wilder.lua_fzy_highlighter(),
+    local gradient = {
+      "#f4468f",
+      "#fd4a85",
+      "#ff507a",
+      "#ff566f",
+      "#ff5e63",
+      "#ff6658",
+      "#ff704e",
+      "#ff7a45",
+      "#ff843d",
+      "#ff9036",
+      "#f89b31",
+      "#efa72f",
+      "#e6b32e",
+      "#dcbe30",
+      "#d2c934",
+      "#c8d43a",
+      "#bfde43",
+      "#b6e84e",
+      "#aff05b",
     }
 
+    for i, fg in ipairs(gradient) do
+      gradient[i] = wilder.make_hl(
+        "WilderGradient" .. i,
+        "Pmenu",
+        { { a = 1 }, { a = 1 }, { foreground = fg } }
+      )
+    end
+
+    local highlighters = wilder.highlighter_with_gradient({
+      wilder.pcre2_highlighter(),
+      wilder.lua_fzy_highlighter(),
+    })
+
     local popupmenu_renderer = wilder.popupmenu_renderer(wilder.popupmenu_border_theme({
-      border = "double",
-      highlights = { border = "Normal" },
+      pumblend = 20,
+      border = "rounded",
       empty_message = wilder.popupmenu_empty_message_with_spinner(),
       highlighter = highlighters,
+      min_width = 24,
+      max_width = 48,
+      max_height = 16,
+
       left = {
         " ",
         wilder.popupmenu_devicons(),
         wilder.popupmenu_buffer_flags({
           flags = " a + ",
-          icons = { ["+"] = icons.ui.Pencil, a = icons.ui.Indicator, h = icons.ui.File },
+          icons = { ["+"] = icons.ui.Pencil, a = icons.ui.Play, h = icons.ui.Close_alt },
         }),
       },
+
       right = {
         " ",
         wilder.popupmenu_scrollbar(),
+      },
+      highlights = {
+        gradient = gradient,
       },
     }))
 
@@ -96,8 +132,13 @@ return {
       separator = " · ",
       left = { " ", wilder.wildmenu_spinner(), " " },
       right = { " ", wilder.wildmenu_index() },
+      highlights = {
+        gradient = gradient,
+      },
+      apply_incsearch_fix = true,
     })
 
+    -- Map renderers to functions
     wilder.set_option(
       "renderer",
       wilder.renderer_mux({

@@ -3,7 +3,6 @@ return {
   { "tpope/vim-fugitive" },
   { "tpope/vim-rhubarb" },
   { "tpope/vim-sleuth" },
-  -- { "folke/which-key.nvim", opts = {} },
   { "nvim-lua/plenary.nvim" },
   { "stevearc/dressing.nvim", event = "VeryLazy" },
   { "echasnovski/mini.cursorword", version = "*", opts = {} },
@@ -26,13 +25,6 @@ return {
   },
   {
     "folke/neodev.nvim",
-    opts = {},
-  },
-
-  {
-    "echasnovski/mini.pairs",
-    version = "*",
-    event = "VeryLazy",
     opts = {},
   },
 

@@ -1,8 +1,8 @@
 return {
   "mfussenegger/nvim-lint",
   opts = {
-    -- text = { "vale" },
-    -- markdown = { "vale" },
+     text = { "vale" },
+     markdown = { "markdownlint", "vale" },
     -- rst = { "vale" },
     -- dockerfile = { "hadolint" },
     javascript = { "eslint" },

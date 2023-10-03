@@ -9,7 +9,7 @@ return {
   keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
   build = ":MasonUpdate",
   opts = {
-    automatic_install = true,
+    automatic_installation = true,
     ensure_installed = {
       "typescript-language-server",
       "prettier",
@@ -42,6 +42,8 @@ return {
       "sqlls",
       "stylua",
       "gh",
+      "shellcheck",
+      "vale"
     },
     ui = {
       package_installed = icons.ui.Accepted,
