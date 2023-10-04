@@ -7,10 +7,10 @@ return {
       relculright = true,
       segments = {
         {
-          sign = { name = { ".*" }, colwidth = 1, maxwidth = 2, auto = false },
+          sign = { name = { ".*" }, colwidth = 2, maxwidth = 1, auto = false },
           click = "v:lua#.ScSa",
         },
-        { text = { builtin.lnumfunc }, click = "v:lua.ScLa" },
+        { text = { builtin.lnumfunc }, click = "v:lua.ScLa", colwidth = 3 },
         { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
         {
           text = { " " },
@@ -18,7 +18,7 @@ return {
           click = "v:lua.ScFa",
         },
         {
-          sign = { name = { "GitSigns" }, maxwidth = 1, colwidth = 1, auto = true },
+          sign = { name = { "GitSigns" }, maxwidth = 1, colwidth = 1, auto = false },
           click = "v:lua.ScSa",
         },
         {

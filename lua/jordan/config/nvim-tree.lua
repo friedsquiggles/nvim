@@ -96,7 +96,7 @@ return {
     vim.g.loaded_netrw = 1
     vim.g.loaded_netrwPlugin = 1
 
-    local color_peach = require("jordan.colors").peach
+    local color_peach = require("catppuccin.palettes").get_palette("macchiato").peach
     -- change color for arrows in tree to light blue
     vim.cmd([[ highlight NvimTreeIndentMarker guifg=color_peach ]])
 

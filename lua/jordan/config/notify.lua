@@ -1,4 +1,3 @@
-local colors = require("jordan.colors")
 local icons = {
   diagnostics = require("jordan.icons").get("diagnostics"),
   ui = require("jordan.icons").get("ui"),
@@ -30,7 +29,6 @@ return {
       return math.floor(vim.o.columns * 0.75)
     end,
 
-    background_colour = colors.crust,
     render = "default",
 
     icons = {

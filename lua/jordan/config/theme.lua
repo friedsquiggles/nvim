@@ -1,18 +1,14 @@
-local transparent_background = false
-local clear = {}
-
 return {
   "catppuccin/nvim",
   lazy = false,
   priority = 1000,
   config = function()
     require("catppuccin").setup({
-      flavour = "mocha", -- Can be one of: latte, frappe, macchiato, mocha
-      background = { light = "latte", dark = "mocha" },
+      flavour = "macchiato", -- Can be one of: latte, frappe, macchiato, mocha
       dim_inactive = {
         enabled = true,
         shade = "dark",
-        percentage = 0.15,
+        percentage = 0.2,
       },
       show_end_of_buffer = false, -- show the '~' characters after the end of buffers
       term_colors = true,
@@ -88,7 +84,6 @@ return {
         semantic_tokens = true,
         symbols_outline = true,
         telekasten = false,
-        -- telescope = { enabled = true, style = "nvchad" },
         telescope = { enabled = true },
         treesitter_context = true,
         ts_rainbow = false,
@@ -99,15 +94,18 @@ return {
       color_overrides = {},
       highlight_overrides = {
         all = function()
-          local cp = require("jordan.colors")
+          local macchiato = require("catppuccin.palettes").get_palette("macchiato")
+
+          local cp = macchiato
+
           return {
             -- For base configs
             NormalFloat = { fg = cp.text, bg = cp.mantle },
             FloatBorder = {
-              fg = transparent_background and cp.blue or cp.mantle,
-              bg = transparent_background or cp.mantle,
+              fg = cp.blue or cp.mantle,
+              bg = cp.mantle,
             },
-            CursorLineNr = { fg = cp.green, bg = cp.mantle },
+            CursorLineNr = { fg = cp.green },
             TabLineSel = { bg = cp.pink },
 
             -- barbar
@@ -180,16 +178,45 @@ return {
             MiniTrailspace = { bg = cp.yellow },
 
             -- For nvim-cmp and wilder.nvim
-            Pmenu = { fg = cp.overlay2, bg = transparent_background or cp.base },
-            PmenuBorder = { fg = cp.surface1, bg = transparent_background or cp.base },
+            Pmenu = { fg = cp.overlay2, bg = cp.base },
+            PmenuBorder = { fg = cp.surface2, bg = cp.base },
             PmenuSel = { bg = cp.green, fg = cp.base },
             CmpItemAbbr = { fg = cp.overlay2 },
             CmpItemAbbrMatch = { fg = cp.blue, style = { "bold" } },
             CmpDoc = { link = "NormalFloat" },
             CmpDocBorder = {
-              fg = transparent_background and cp.surface1 or cp.mantle,
-              bg = transparent_background or cp.mantle,
+              fg = cp.surface1 or cp.mantle,
+              bg = cp.mantle,
             },
+
+            CmpItemMenu = { fg = cp.mauve, italic = true },
+
+            CmpItemKindSnippet = { fg = cp.base, bg = cp.mauve },
+            CmpItemKindKeyword = { fg = cp.base, bg = cp.red },
+            CmpItemKindText = { fg = cp.base, bg = cp.teal },
+            CmpItemKindMethod = { fg = cp.base, bg = cp.blue },
+            CmpItemKindConstructor = { fg = cp.base, bg = cp.blue },
+            CmpItemKindFunction = { fg = cp.base, bg = cp.blue },
+            CmpItemKindFolder = { fg = cp.base, bg = cp.blue },
+            CmpItemKindModule = { fg = cp.base, bg = cp.blue },
+            CmpItemKindConstant = { fg = cp.base, bg = cp.peach },
+            CmpItemKindField = { fg = cp.base, bg = cp.green },
+            CmpItemKindProperty = { fg = cp.base, bg = cp.green },
+            CmpItemKindEnum = { fg = cp.base, bg = cp.green },
+            CmpItemKindUnit = { fg = cp.base, bg = cp.green },
+            CmpItemKindClass = { fg = cp.base, bg = cp.yellow },
+            CmpItemKindVariable = { fg = cp.base, bg = cp.flamingo },
+            CmpItemKindFile = { fg = cp.base, bg = cp.blue },
+            CmpItemKindInterface = { fg = cp.base, bg = cp.yellow },
+            CmpItemKindColor = { fg = cp.base, bg = cp.red },
+            CmpItemKindReference = { fg = cp.base, bg = cp.red },
+            CmpItemKindEnumMember = { fg = cp.base, bg = cp.red },
+            CmpItemKindStruct = { fg = cp.base, bg = cp.blue },
+            CmpItemKindValue = { fg = cp.base, bg = cp.peach },
+            CmpItemKindEvent = { fg = cp.base, bg = cp.blue },
+            CmpItemKindOperator = { fg = cp.base, bg = cp.blue },
+            CmpItemKindTypeParameter = { fg = cp.base, bg = cp.blue },
+            CmpItemKindCopilot = { fg = cp.base, bg = cp.teal },
 
             -- For fidget
             FidgetTask = { fg = cp.surface2 },
@@ -210,7 +237,7 @@ return {
             NvimTreeGitDeleted = { fg = cp.rosewater },
 
             -- For trouble.nvim
-            TroubleNormal = { bg = transparent_background or cp.base },
+            TroubleNormal = { bg = cp.base },
 
             -- For telescope.nvim
             TelescopeMatching = { fg = cp.lavender },

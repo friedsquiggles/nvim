@@ -2,7 +2,7 @@ return {
   "nvimdev/lspsaga.nvim",
   config = function()
     local gen_lspkind_hl = function()
-      local colors = require("jordan.colors")
+      local colors = require("catppuccin.palettes").get_palette("macchiato")
       local dat = {
         Class = colors.yellow,
         Constant = colors.peach,
