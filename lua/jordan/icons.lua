@@ -68,8 +68,8 @@ local data = {
     Unmerged = "󰘬",
     Added = "",
     Untracked = "󰊠",
-    Unstaged = "",
-    Staged = "",
+    Unstaged = "󰒡",
+    Staged = "󱓞",
     Conflict = "",
   },
   ui = {

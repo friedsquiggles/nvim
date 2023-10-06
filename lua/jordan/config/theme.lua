@@ -94,7 +94,10 @@ return {
       color_overrides = {},
       highlight_overrides = {
         all = function()
+          local mocha = require("catppuccin.palettes").get_palette("macchiato")
           local macchiato = require("catppuccin.palettes").get_palette("macchiato")
+          local frappe = require("catppuccin.palettes").get_palette("macchiato")
+          local latte = require("catppuccin.palettes").get_palette("macchiato")
 
           local cp = macchiato
 
@@ -107,6 +110,9 @@ return {
             },
             CursorLineNr = { fg = cp.green },
             TabLineSel = { bg = cp.pink },
+
+            -- For git
+            DiffAdd = { bg = "#2b343f" },
 
             -- barbar
             -- tabpage
@@ -180,7 +186,7 @@ return {
             -- For nvim-cmp and wilder.nvim
             Pmenu = { fg = cp.overlay2, bg = cp.base },
             PmenuBorder = { fg = cp.surface2, bg = cp.base },
-            PmenuSel = { bg = cp.green, fg = cp.base },
+            PmenuSel = { bg = frappe.green, fg = cp.base },
             CmpItemAbbr = { fg = cp.overlay2 },
             CmpItemAbbrMatch = { fg = cp.blue, style = { "bold" } },
             CmpDoc = { link = "NormalFloat" },
@@ -240,12 +246,21 @@ return {
             TroubleNormal = { bg = cp.base },
 
             -- For telescope.nvim
-            TelescopeMatching = { fg = cp.lavender },
-            TelescopeBorder = { fg = cp.peach },
-            TelescopePromptBorder = { fg = cp.peach },
+            TelescopeMatching = { fg = cp.mauve },
+            TelescopeBorder = { fg = cp.pink },
+            TelescopePromptBorder = { fg = cp.flamingo },
             TelescopeResultsDiffAdd = { fg = cp.green },
             TelescopeResultsDiffChange = { fg = cp.yellow },
             TelescopeResultsDiffDelete = { fg = cp.red },
+
+            -- For which-key
+            WhichKey = { fg = cp.yellow },
+            -- WhichKeyGroup
+            -- WhichKeySeparator
+            -- WhichKeyDesc
+            -- WhichKeyFloat
+            WhichKeyBorder = { fg = cp.sapphire },
+            -- WhichKeyValue
           }
         end,
       },

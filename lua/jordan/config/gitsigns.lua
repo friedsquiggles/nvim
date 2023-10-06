@@ -83,8 +83,8 @@ return {
         end
 
         -- Navigation
-        map("n", "]c", nextHunk, { expr = true, desc = "next hunk" })
-        map("n", "[c", prevHunk, { expr = true, desc = "prev hunk" })
+        map("n", "]g", nextHunk, { expr = true, desc = "next hunk" })
+        map("n", "[g", prevHunk, { expr = true, desc = "prev hunk" })
         map("n", "<leader>gh", gs.stage_hunk, { desc = "stage hunk" })
         map("n", "<leader>gr", gs.reset_hunk, { desc = "reset hunk" })
         map("n", "<leader>gS", gs.stage_buffer, { desc = "stage buffer" })

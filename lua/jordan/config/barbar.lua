@@ -54,7 +54,7 @@ return {
       "n",
       "<Leader>,",
       "<Cmd>BufferPrevious<CR>",
-      { desc = "previous buffer", noremap = true, silent = true }
+      { desc = "prev buffer", noremap = true, silent = true }
     )
     map.set(
       "n",
