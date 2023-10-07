@@ -11,6 +11,11 @@ return {
     local trouble = require("trouble.providers.telescope")
     local themes = require("telescope.themes")
 
+    local icons = {
+      ui = require("jordan.icons").get("ui", true),
+      git = require("jordan.icons").get("git", true),
+    }
+
     telescope.setup({
       defaults = {
         path_display = { "truncate" },
@@ -30,7 +35,8 @@ return {
             ["<C-j>"] = actions.move_selection_next, -- move to next result
             ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
             ["<C-t>"] = trouble.open_with_trouble,
-            ["<C-u>"] = false,
+            ["<C-u>"] = actions.preview_scrolling_up,
+            ["<C-d>"] = actions.preview_scrolling_down,
           },
           n = {
             ["<c-t>"] = trouble.open_with_trouble,
@@ -55,6 +61,18 @@ return {
           "--trim",
         },
 
+        git_icons = {
+          added = icons.git.Add,
+          changed = icons.git.Mod,
+          copied = ">",
+          deleted = icons.git.Remove,
+          renamed = icons.git.Rename,
+          staged = icons.git.Staged,
+          unstaged = icons.git.Unstaged,
+          unmerged = icons.git.Unmerged,
+          untracked = icons.git.Untracked,
+        },
+
         layout_config = {
           width = 0.9,
           height = 0.6,
@@ -66,7 +84,7 @@ return {
           },
           vertical = {
             prompt_position = "top",
-            width = 0.5,
+            width = 0.6,
           },
         },
       },
@@ -94,12 +112,16 @@ return {
       builtin.current_buffer_fuzzy_find(themes.get_dropdown({}))
     end
 
+    local menus = require("jordan.telescope-menus")
+
     local map = vim.keymap
 
     -- find buffers
     map.set("n", "<leader>sr", builtin.oldfiles, { desc = "recent buffers" })
     map.set("n", "<leader>sb", builtin.buffers, { desc = "active buffers" })
-    map.set("n", "<leader>sf", builtin.find_files, { desc = "find files" })
+    map.set("n", "<leader>sf", menus.getFindFiles, { desc = "find files" })
+
+    map.set("n", "<leader>ss", menus.getTreeSitter, { desc = "search symbols" })
 
     -- find text
     map.set("n", "<leader><space>", getBufferFzyDropdown, { desc = "search current buffer" })
@@ -108,7 +130,7 @@ return {
 
     -- git files and commands
     map.set("n", "<leader>gf", builtin.git_files, { desc = "git files" })
-    map.set("n", "<leader>gs", builtin.git_status, { desc = "git status" })
+    map.set("n", "<leader>gs", menus.getGitStatus, { desc = "git status" })
     map.set("n", "<leader>gb", builtin.git_branches, { desc = "git branches" })
     map.set("n", "<leader>gl", builtin.git_commits, { desc = "git log" })
 
