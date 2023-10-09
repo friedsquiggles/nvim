@@ -101,38 +101,35 @@ return {
     pcall(telescope.load_extension, "fzf")
 
     local builtin = require("telescope.builtin")
-
-    -- local getRecentFiles = function()
-    --   builtin.oldfiles(themes.get_dropdown({
-    --     previewer = false,
-    --   }))
-    -- end
+    local menus = require("jordan.telescope-menus")
 
     local getBufferFzyDropdown = function()
       builtin.current_buffer_fuzzy_find(themes.get_dropdown({}))
     end
 
-    local menus = require("jordan.telescope-menus")
-
     local map = vim.keymap
 
     -- find buffers
-    map.set("n", "<leader>sr", builtin.oldfiles, { desc = "recent buffers" })
+    map.set("n", "<leader>sr", menus.getRecentFiles, { desc = "recent buffers" })
     map.set("n", "<leader>sb", builtin.buffers, { desc = "active buffers" })
     map.set("n", "<leader>sf", menus.getFindFiles, { desc = "find files" })
 
-    map.set("n", "<leader>ss", menus.getTreeSitter, { desc = "search symbols" })
-
     -- find text
     map.set("n", "<leader><space>", getBufferFzyDropdown, { desc = "search current buffer" })
-    map.set("n", "<leader>sw", builtin.grep_string, { desc = "current word" })
-    map.set("n", "<leader>st", builtin.live_grep, { desc = "text" })
+    map.set("n", "<leader>sc", menus.getGrepCurrentWord, { desc = "current word" })
+    map.set("n", "<leader>st", menus.getLiveGrep, { desc = "text" })
+
+    -- symbols
+    map.set("n", "<leader>ld", menus.getTreeSitter, { desc = "show document symbols" })
+    map.set("n", "<leader>lr", menus.getLspRefs, { desc = "show references" })
+    map.set("n", "<leader>lw", menus.getLspWorkspaceSymbols, { desc = "show workspace symbols" })
+    map.set("n", "<leader>lq", menus.getQuickFix, { desc = "show quick fix" })
 
     -- git files and commands
     map.set("n", "<leader>gf", builtin.git_files, { desc = "git files" })
     map.set("n", "<leader>gs", menus.getGitStatus, { desc = "git status" })
-    map.set("n", "<leader>gb", builtin.git_branches, { desc = "git branches" })
-    map.set("n", "<leader>gl", builtin.git_commits, { desc = "git log" })
+    map.set("n", "<leader>gb", menus.getGitBranches, { desc = "git branches" })
+    map.set("n", "<leader>gl", menus.getGitCommits, { desc = "git log" })
 
     -- reference
     map.set("n", "<leader>sd", builtin.diagnostics, { desc = "diagnostics" })
