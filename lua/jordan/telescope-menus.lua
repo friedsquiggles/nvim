@@ -10,9 +10,25 @@ local M = {}
 
 -- dimensions
 local heightWithPreview = 0.7
-local widthWithPreview = 0.9
+local widthWithPreview = 0.8
 local heightWithoutPreview = 40
-local widthWithoutPreview = 80
+local widthWithoutPreview = 70
+local bufFzyWidth = 80
+local bufFzyHeight = 80
+
+-- local h = {
+--   ddnp = 0,
+--   ddwp = 0,
+--   cursor = 0,
+--   bufFzy = 0,
+-- }
+--
+-- local w = {
+--   ddnp = 0,
+--   ddwp = 0,
+--   cursor = 0,
+--   bufFzy = 0,
+-- }
 
 -- transparency
 local blend = 10
@@ -27,12 +43,12 @@ local getTitle = function(icon, title)
   local left = cl .. cl .. cl .. " "
   local right = " " .. cr .. cr .. cr
 
-  return left .. icon .. " " .. title .. " " .. icon .. right
+  return " " .. left .. icon .. " " .. title .. " " .. icon .. right
 end
 
 function M.getLiveGrep()
   local icon = icons.kind.Text
-  local title = "FIND TEXT (grep)"
+  local title = "GREP"
 
   require("telescope.builtin").live_grep(themes.get_dropdown({
     previewer = true,
@@ -46,9 +62,27 @@ function M.getLiveGrep()
   }))
 end
 
+function M.getBufferFzy()
+  local icon = icons.kind.Text
+  local title = "HERE"
+
+  require("telescope.builtin").current_buffer_fuzzy_find(themes.get_dropdown({
+    previewer = false,
+    show_line = true,
+    prompt_title = getTitle(icon, title),
+    prompt_prefix = iconPrefix(icon),
+    win_blend = blend,
+    path_display = "hidden",
+    layout_config = {
+      height = bufFzyHeight,
+      width = bufFzyWidth,
+    },
+  }))
+end
+
 function M.getGrepCurrentWord()
   local icon = icons.kind.Text
-  local title = "FIND CURRENT WORD (grep)"
+  local title = "CURSOR"
 
   require("telescope.builtin").grep_string(themes.get_dropdown({
     previewer = true,
@@ -72,7 +106,7 @@ end
 
 function M.getFindFiles()
   local icon = icons.ui.EmptyFolderOpen
-  local title = "FIND FILES"
+  local title = "FILES"
 
   require("telescope.builtin").find_files(themes.get_dropdown({
     previewer = false,
@@ -88,7 +122,7 @@ end
 
 function M.getRecentFiles()
   local icon = icons.ui.EmptyFolderOpen
-  local title = "RECENT FILES"
+  local title = "RECENT"
 
   require("telescope.builtin").oldfiles(themes.get_dropdown({
     previewer = false,
@@ -105,7 +139,7 @@ end
 
 function M.getGitStatus()
   local icon = icons.git.Git
-  local title = "GIT STATUS"
+  local title = "CHANGES"
 
   require("telescope.builtin").git_status(themes.get_dropdown({
     previewer = false,
@@ -121,7 +155,7 @@ end
 
 function M.getGitCommits()
   local icon = icons.git.Git
-  local title = "GIT COMMITS"
+  local title = "COMMITS"
 
   require("telescope.builtin").git_commits(themes.get_dropdown({
     previewer = false,
@@ -137,7 +171,7 @@ end
 
 function M.getGitBranches()
   local icon = icons.git.Git
-  local title = "GIT BRANCHES"
+  local title = "BRANCHES"
 
   require("telescope.builtin").git_branches(themes.get_dropdown({
     previewer = false,
@@ -153,7 +187,7 @@ end
 
 function M.getQuickFix()
   local icon = icons.ui.CodeAction
-  local title = "QUICK FIX"
+  local title = "FIX"
 
   require("telescope.builtin").quickfix(themes.get_dropdown({
     previewer = false,
@@ -169,7 +203,7 @@ end
 
 function M.getTreeSitter()
   local icon = icons.cmp.treesitter
-  local title = "DOCUMENT SYMBOLS"
+  local title = "SYMBOLS"
 
   require("telescope.builtin").treesitter(themes.get_dropdown({
     previewer = false,
@@ -185,7 +219,7 @@ end
 
 function M.getLspRefs()
   local icon = icons.cmp.nvim_lsp
-  local title = "LSP REFERENCES"
+  local title = "REFERENCES"
 
   require("telescope.builtin").lsp_references(themes.get_dropdown({
     previewer = false,
@@ -199,20 +233,20 @@ function M.getLspRefs()
   }))
 end
 
-function M.getLspWorkspaceSymbols()
-  local icon = icons.cmp.nvim_lsp
-  local title = "LSP WORKSPACE SYMBOLS"
-
-  require("telescope.builtin").lsp_workspace_symbols(themes.get_dropdown({
-    previewer = false,
-    prompt_title = getTitle(icon, title),
-    prompt_prefix = iconPrefix(icon),
-    win_blend = blend,
-    layout_config = {
-      height = heightWithoutPreview,
-      width = widthWithoutPreview,
-    },
-  }))
-end
+-- function M.getLspWorkspaceSymbols()
+--   local icon = icons.cmp.nvim_lsp
+--   local title = "LSP WORKSPACE SYMBOLS"
+--
+--   require("telescope.builtin").lsp_workspace_symbols(themes.get_dropdown({
+--     previewer = false,
+--     prompt_title = getTitle(icon, title),
+--     prompt_prefix = iconPrefix(icon),
+--     win_blend = blend,
+--     layout_config = {
+--       height = heightWithoutPreview,
+--       width = widthWithoutPreview,
+--     },
+--   }))
+-- end
 
 return M

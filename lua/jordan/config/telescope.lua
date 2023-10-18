@@ -9,16 +9,31 @@ return {
     local telescope = require("telescope")
     local actions = require("telescope.actions")
     local trouble = require("trouble.providers.telescope")
-    local themes = require("telescope.themes")
+    -- local themes = require("telescope.themes")
 
     local icons = {
       ui = require("jordan.icons").get("ui", true),
       git = require("jordan.icons").get("git", true),
+      cmp = require("jordan.icons").get("cmp", true),
+      kind = require("jordan.icons").get("kind", true),
     }
+
+    local iconPrefix = function(icon)
+      return " " .. icon .. " "
+    end
+
+    local getTitle = function(icon, title)
+      local cl = icons.ui.ChevronLeft
+      local cr = icons.ui.ChevronRight
+      local left = cl .. cl .. cl .. " "
+      local right = " " .. cr .. cr .. cr
+
+      return " " .. left .. icon .. " " .. title .. " " .. icon .. right
+    end
 
     telescope.setup({
       defaults = {
-        path_display = { "truncate" },
+        path_display = { "smart" },
         color_devicons = true,
         layout_strategy = "horizontal",
         sorting_strategy = "ascending",
@@ -43,16 +58,47 @@ return {
           },
         },
 
-        pickers = {
-          oldfiles = {
-            cwd_only = true,
-          },
-        },
+        -- pickers = {
+        --   oldfiles = {
+        --     theme = "dropdown",
+        --     layout_strategy = "vertical",
+        --     cwd_only = true,
+        --     previewer = true,
+        --     preview_cutoff = 120,
+        --     prompt_title = getTitle(icons.ui.EmptyFolderOpen, "RECENT"),
+        --   },
+        --   find_files = {
+        --     previewer = true,
+        --     preview_cutoff = 120,
+        --     prompt_title = getTitle(icons.ui.EmptyFolderOpen, "FILES"),
+        --   },
+        --   git_files = {
+        --     theme = "dropdown",
+        --     previewer = true,
+        --     preview_cutoff = 120,
+        --     prompt_title = getTitle(icons.git.Git, "GIT"),
+        --   },
+        --   grep_string = {
+        --     theme = "cursor",
+        --     prompt_title = getTitle(icons.kind.Text, "WORD"),
+        --   },
+        --   live_grep = {
+        --     theme = "dropdown",
+        --     previewer = true,
+        --     preview_cutoff = 120,
+        --     prompt_title = getTitle(icons.kind.Text, "GREP"),
+        --   },
+        --   lsp_references = {
+        --     theme = "cursor",
+        --     path_display = "tail",
+        --     prompt_title = getTitle(icons.ui.CodeAction, "ACTIONS"),
+        --   },
+        -- },
 
         vimgrep_arguments = {
           "rg",
           "-L",
-          -- "--color=never",
+          "--color=never",
           "--no-heading",
           "--with-filename",
           "--line-number",
@@ -74,20 +120,23 @@ return {
         },
 
         layout_config = {
-          width = 0.9,
+          width = 0.8,
           height = 0.6,
-          preview_cutoff = 100,
+          preview_cutoff = 120,
+
           horizontal = {
             prompt_position = "top",
             results_width = 0.8,
             preview_width = 0.5,
           },
+
           vertical = {
             prompt_position = "top",
             width = 0.6,
           },
         },
       },
+
       extensions = {
         fzf = {
           fuzzy = true,
@@ -103,10 +152,6 @@ return {
     local builtin = require("telescope.builtin")
     local menus = require("jordan.telescope-menus")
 
-    local getBufferFzyDropdown = function()
-      builtin.current_buffer_fuzzy_find(themes.get_dropdown({}))
-    end
-
     local map = vim.keymap
 
     -- find buffers
@@ -115,18 +160,18 @@ return {
     map.set("n", "<leader>sf", menus.getFindFiles, { desc = "find files" })
 
     -- find text
-    map.set("n", "<leader><space>", getBufferFzyDropdown, { desc = "search current buffer" })
+    map.set("n", "<leader><space>", menus.getBufferFzy, { desc = "search current buffer" })
     map.set("n", "<leader>sc", menus.getGrepCurrentWord, { desc = "current word" })
-    map.set("n", "<leader>st", menus.getLiveGrep, { desc = "text" })
+    map.set("n", "<leader>sg", menus.getLiveGrep, { desc = "text" })
 
     -- symbols
     map.set("n", "<leader>ld", menus.getTreeSitter, { desc = "show document symbols" })
     map.set("n", "<leader>lr", menus.getLspRefs, { desc = "show references" })
-    map.set("n", "<leader>lw", menus.getLspWorkspaceSymbols, { desc = "show workspace symbols" })
-    map.set("n", "<leader>lq", menus.getQuickFix, { desc = "show quick fix" })
+    -- map.set("n", "<leader>lw", menus.getLspWorkspaceSymbols, { desc = "show workspace symbols" })
+    map.set("n", "<leader>lq", menus.getLspRefs, { desc = "show quick fix" })
 
     -- git files and commands
-    map.set("n", "<leader>gf", builtin.git_files, { desc = "git files" })
+    -- map.set("n", "<leader>gf", menus., { desc = "git files" })
     map.set("n", "<leader>gs", menus.getGitStatus, { desc = "git status" })
     map.set("n", "<leader>gb", menus.getGitBranches, { desc = "git branches" })
     map.set("n", "<leader>gl", menus.getGitCommits, { desc = "git log" })

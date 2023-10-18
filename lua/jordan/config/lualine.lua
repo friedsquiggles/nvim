@@ -15,7 +15,7 @@ return {
 
   opts = {
     options = {
-      theme = "horizon",
+      theme = "catppuccin",
       globalstatus = true,
     },
 

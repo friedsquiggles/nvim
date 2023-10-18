@@ -1,6 +1,7 @@
 return {
   "goolord/alpha-nvim",
-  dependencies = { "nvim-tree/nvim-web-devicons" },
+  dependencies = { "nvim-tree/nvim-web-devicons", "nvim-telescope/telescope.nvim" },
+  enabled = false,
   opts = function()
     local icons = {
       kind = require("jordan.icons").get("kind", true),
@@ -29,7 +30,22 @@ return {
 
     return dashboard
   end,
+
   config = function(_, dashboard)
-    require("alpha").setup(dashboard.opts)
+    local alpha_loaded, alpha = pcall(require, "alpha")
+
+    if not alpha_loaded then
+      print("alpha not loaded")
+      return
+    end
+
+    local telescope_loaded, _ = pcall(require, "telescope")
+
+    if not telescope_loaded then
+      print("telescope not loaded")
+      return
+    end
+
+    alpha.setup(dashboard.opts)
   end,
 }
