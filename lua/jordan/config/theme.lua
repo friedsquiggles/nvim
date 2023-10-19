@@ -114,6 +114,11 @@ return {
             -- For git
             DiffAdd = { bg = "#2b343f" },
 
+            -- alpha
+            AlphaHeader = { fg = cp.green },
+            AlphaButtons = { fg = cp.flamingo },
+            AlphaFooter = { fg = cp.blue },
+
             -- barbar
             -- tabpage
             BufferTabpageFill = { bg = cp.none },

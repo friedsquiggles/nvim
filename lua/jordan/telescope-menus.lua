@@ -40,10 +40,11 @@ end
 local getTitle = function(icon, title)
   local cl = icons.ui.ChevronLeft
   local cr = icons.ui.ChevronRight
-  local left = cl .. cl .. cl .. " "
+  local left = " " .. cl .. cl .. cl .. " "
   local right = " " .. cr .. cr .. cr
+  local header = icon .. " " .. title .. " " .. icon
 
-  return " " .. left .. icon .. " " .. title .. " " .. icon .. right
+  return left .. header .. right
 end
 
 function M.getLiveGrep()
@@ -55,9 +56,17 @@ function M.getLiveGrep()
     prompt_title = getTitle(icon, title),
     prompt_prefix = iconPrefix(icon),
     win_blend = blend,
+    layout_strategy = "horizontal",
+    sorting_strategy = "ascending",
+    path_display = function(opts, path)
+      local tail = require("telescope.utils").path_tail(path)
+      return string.format("%s (%s)", tail, path)
+    end,
     layout_config = {
       height = heightWithPreview,
       width = widthWithPreview,
+      prompt_position = "top",
+      preview_cutoff = 120,
     },
   }))
 end
@@ -149,6 +158,17 @@ function M.getGitStatus()
     layout_config = {
       height = heightWithoutPreview,
       width = widthWithoutPreview,
+    },
+    git_icons = {
+      added = icons.git.Add,
+      changed = icons.git.Mod,
+      copied = ">",
+      deleted = icons.git.Remove,
+      renamed = icons.git.Rename,
+      staged = icons.git.Staged,
+      unstaged = icons.git.Unstaged,
+      unmerged = icons.git.Unmerged,
+      untracked = icons.git.Untracked,
     },
   }))
 end

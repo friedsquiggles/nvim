@@ -1,51 +1,48 @@
 return {
   "goolord/alpha-nvim",
   dependencies = { "nvim-tree/nvim-web-devicons", "nvim-telescope/telescope.nvim" },
-  enabled = false,
-  opts = function()
+  config = function()
+    local _, alpha = pcall(require, "alpha")
+
     local icons = {
       kind = require("jordan.icons").get("kind", true),
       misc = require("jordan.icons").get("misc", true),
+      git = require("jordan.icons").get("git", true),
+      docs = require("jordan.icons").get("documents", true),
     }
 
-    local file = icons.kind.File
-    local text = icons.kind.Text
-    local recent = icons.misc.Watch
-    local mason = icons.misc.Lego
+    local explorer = icons.docs.FileTree .. " Explorer"
+    local file = icons.kind.File .. " Find file"
+    local text = icons.kind.Text .. " grep"
+    local recent = icons.misc.Watch .. " Recent files"
+    local mason = icons.misc.Lego .. " Mason"
+    local git = icons.git.Git .. " Changes"
+
+    local findFiles = ":lua require('jordan.telescope-menus').getFindFiles()<CR>"
+    local recentFiles = ":lua require('jordan.telescope-menus').getRecentFiles()<CR>"
+    local liveGrep = ":lua require('jordan.telescope-menus').getLiveGrep()<CR>"
+    local gitStatus = ":lua require('jordan.telescope-menus').getGitStatus()<CR>"
+    -- local liveGrep =
 
     local dashboard = require("alpha.themes.dashboard")
 
     dashboard.section.buttons.val = {
-      dashboard.button("e", file .. " Explorer", "<Cmd>NvimTreeFocus<CR>>"),
-      dashboard.button("f", file .. " Find file", ":Telescope find_files <CR>"),
-      dashboard.button("r", recent .. " Recent files", ":Telescope oldfiles <CR>"),
-      dashboard.button("g", text .. " Find text", ":Telescope live_grep <CR>"),
+      dashboard.button("e", explorer, "<Cmd>NvimTreeFocus<CR>>"),
+      dashboard.button("f", file, findFiles),
+      dashboard.button("r", recent, recentFiles),
+      dashboard.button("g", text, liveGrep),
+      dashboard.button("c", git, gitStatus),
       dashboard.button("l", "󰒲 " .. " Lazy", ":Lazy<CR>"),
-      dashboard.button("m", mason .. " Mason", ":Mason<CR>"),
+      dashboard.button("m", mason, ":Mason<CR>"),
       dashboard.button("q", " " .. " Quit", ":qa<CR>"),
     }
 
     dashboard.section.header.opts.hl = "AlphaHeader"
-    dashboard.opts.layout[1].val = 6
+    -- dashboard.section.buttons.opts.hl = "AlphaButtons"
+    -- dashboard.section.buttons.opts.hl_shortcut = "Boolean"
+    -- dashboard.section.footer.opts.hl = "AlphaFooter"
+    dashboard.opts.layout[1].val = 8
 
-    return dashboard
-  end,
-
-  config = function(_, dashboard)
-    local alpha_loaded, alpha = pcall(require, "alpha")
-
-    if not alpha_loaded then
-      print("alpha not loaded")
-      return
-    end
-
-    local telescope_loaded, _ = pcall(require, "telescope")
-
-    if not telescope_loaded then
-      print("telescope not loaded")
-      return
-    end
-
-    alpha.setup(dashboard.opts)
+    alpha.setup(dashboard.config)
   end,
 }
