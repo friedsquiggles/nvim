@@ -13,7 +13,7 @@ local heightWithPreview = 0.7
 local widthWithPreview = 0.8
 local heightWithoutPreview = 40
 local widthWithoutPreview = 70
-local bufFzyWidth = 80
+local bufFzyWidth = 0.8
 local bufFzyHeight = 80
 
 -- local h = {
@@ -58,7 +58,7 @@ function M.getLiveGrep()
     win_blend = blend,
     layout_strategy = "horizontal",
     sorting_strategy = "ascending",
-    path_display = function(opts, path)
+    path_display = function(_, path)
       local tail = require("telescope.utils").path_tail(path)
       return string.format("%s (%s)", tail, path)
     end,
@@ -100,7 +100,7 @@ function M.getGrepCurrentWord()
     win_blend = blend,
     layout_strategy = "horizontal",
     sorting_strategy = "ascending",
-    path_display = function(opts, path)
+    path_display = function(_, path)
       local tail = require("telescope.utils").path_tail(path)
       return string.format("%s (%s)", tail, path)
     end,
@@ -252,21 +252,5 @@ function M.getLspRefs()
     },
   }))
 end
-
--- function M.getLspWorkspaceSymbols()
---   local icon = icons.cmp.nvim_lsp
---   local title = "LSP WORKSPACE SYMBOLS"
---
---   require("telescope.builtin").lsp_workspace_symbols(themes.get_dropdown({
---     previewer = false,
---     prompt_title = getTitle(icon, title),
---     prompt_prefix = iconPrefix(icon),
---     win_blend = blend,
---     layout_config = {
---       height = heightWithoutPreview,
---       width = widthWithoutPreview,
---     },
---   }))
--- end
 
 return M

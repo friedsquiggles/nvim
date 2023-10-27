@@ -118,25 +118,25 @@ return {
       "n",
       "<Leader>bb",
       "<Cmd>BufferOrderByBufferNumber<CR>",
-      { desc = "", noremap = true, silent = true }
+      { desc = "reorder by buffer number", noremap = true, silent = true }
     )
     map.set(
       "n",
       "<Leader>bd",
       "<Cmd>BufferOrderByDirectory<CR>",
-      { desc = "", noremap = true, silent = true }
+      { desc = "reorder by dir", noremap = true, silent = true }
     )
     map.set(
       "n",
       "<Leader>bl",
       "<Cmd>BufferOrderByLanguage<CR>",
-      { desc = "", noremap = true, silent = true }
+      { desc = "reorder by lang", noremap = true, silent = true }
     )
     map.set(
       "n",
       "<Leader>bw",
       "<Cmd>BufferOrderByWindowNumber<CR>",
-      { desc = "", noremap = true, silent = true }
+      { desc = "reorder by window number", noremap = true, silent = true }
     )
   end,
   version = "^1.0.0", -- optional: only update when a new 1.x version is released

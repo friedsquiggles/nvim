@@ -11,15 +11,13 @@ return {
     height = 10, -- height of the trouble list when position is top or bottom
     width = 50, -- width of the list when position is left or right
     icons = true, -- use devicons for filenames
-    mode = "document_diagnostics", -- "workspace_diagnostics", "document_diagnostics", "quickfix", "lsp_references", "loclist"
     fold_open = icons.ui.ArrowOpen, -- icon used for open folds
     fold_closed = icons.ui.ArrowClosed, -- icon used for closed folds
     group = true, -- group results by file
     padding = true, -- add an extra new line on top of the list
+
+    mode = "workspace_diagnostics", -- "workspace_diagnostics", "document_diagnostics", "quickfix", "lsp_references", "loclist"
     action_keys = {
-      -- key mappings for actions in the trouble list
-      -- map to {} to remove a mapping, for example:
-      -- close = {},
       close = "q", -- close the list
       cancel = "<Esc>", -- cancel the preview and get back to your last window / buffer / cursor
       refresh = "r", -- manually refresh
@@ -42,10 +40,9 @@ return {
     auto_open = false, -- automatically open the list when you have diagnostics
     auto_close = false, -- automatically close the list when you have no diagnostics
     auto_preview = true, -- automatically preview the location of the diagnostic. <esc> to close preview and go back to last window
-    auto_fold = false, -- automatically fold a file trouble list at creation
+    auto_fold = true, -- automatically fold a file trouble list at creation
     auto_jump = { "lsp_definitions" }, -- for the given modes, automatically jump if there is only a single result
     signs = {
-      -- icons / text used for a diagnostic
       error = icons.diagnostics.Error,
       warning = icons.diagnostics.Warning,
       hint = icons.diagnostics.Hint,
@@ -54,44 +51,32 @@ return {
     },
     use_diagnostic_signs = false, -- enabling this will use the signs defined in your lsp client
   },
+
   config = function(_, opts)
-    -- Lua
-    vim.api.nvim_set_keymap(
-      "n",
-      "<leader>xx",
-      "<cmd>TroubleToggle<cr>",
-      { silent = true, noremap = true }
-    )
-    vim.api.nvim_set_keymap(
-      "n",
-      "<leader>xw",
-      "<cmd>TroubleToggle workspace_diagnostics<cr>",
-      { silent = true, noremap = true }
-    )
-    vim.api.nvim_set_keymap(
-      "n",
-      "<leader>xd",
-      "<cmd>TroubleToggle document_diagnostics<cr>",
-      { silent = true, noremap = true }
-    )
-    vim.api.nvim_set_keymap(
-      "n",
-      "<leader>xl",
-      "<cmd>TroubleToggle loclist<cr>",
-      { silent = true, noremap = true }
-    )
-    vim.api.nvim_set_keymap(
-      "n",
-      "<leader>xq",
-      "<cmd>TroubleToggle quickfix<cr>",
-      { silent = true, noremap = true }
-    )
-    vim.api.nvim_set_keymap(
-      "n",
-      "gR",
-      "<cmd>Trouble references<cr>",
-      { silent = true, noremap = true }
-    )
     require("trouble").setup(opts)
+
+    vim.keymap.set("n", "<leader>xx", function()
+      require("trouble").toggle()
+    end, { desc = "open" })
+
+    vim.keymap.set("n", "<leader>xw", function()
+      require("trouble").toggle("workspace_diagnostics")
+    end, { desc = "workspace_diagnostics" })
+
+    vim.keymap.set("n", "<leader>xd", function()
+      require("trouble").toggle("document_diagnostics")
+    end, { desc = "document" })
+
+    vim.keymap.set("n", "<leader>xq", function()
+      require("trouble").toggle("quickfix")
+    end, { desc = "quickfix" })
+
+    vim.keymap.set("n", "<leader>xl", function()
+      require("trouble").toggle("loclist")
+    end, { desc = "loclist" })
+
+    vim.keymap.set("n", "<leader>xr", function()
+      require("trouble").toggle("lsp_references")
+    end, { desc = "references" })
   end,
 }

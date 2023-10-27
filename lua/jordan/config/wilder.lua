@@ -26,7 +26,7 @@ return {
       wilder.branch(
 
         wilder.python_file_finder_pipeline({
-          file_command = function(ctx, arg)
+          file_command = function(_, arg)
             if string.find(arg, ".") ~= nil then
               return { "fd", "-tf", "-H" }
             else
@@ -51,7 +51,7 @@ return {
         }),
 
         {
-          wilder.check(function(ctx, x)
+          wilder.check(function(_, x)
             return x == ""
           end),
           wilder.history(),

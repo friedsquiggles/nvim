@@ -60,6 +60,7 @@ return {
         Info = icons.diagnostics.Information_alt,
         Hint = icons.diagnostics.Hint_alt,
       }
+
       for type, icon in pairs(diagnostic_icons) do
         local hl = "DiagnosticSign" .. type
         vim.fn.sign_define(hl, { text = icon, texthl = hl })
@@ -74,6 +75,7 @@ return {
         enable = true,
         hide_keyword = true,
       },
+
       symbol_in_winbar = {
         enable = true,
         separator = " " .. icons.ui.DoubleSeparator,
@@ -83,6 +85,7 @@ return {
         color_mode = true,
         delay = 100,
       },
+
       code_action = {
         num_shortcut = true,
         only_in_cursor = false,
@@ -93,6 +96,7 @@ return {
           exec = "<CR>",
         },
       },
+
       lightbulb = {
         enable = false,
         enable_in_insert = true,
@@ -100,6 +104,7 @@ return {
         sign_priority = 40,
         virtual_text = true,
       },
+
       diagnostic = {
         show_code_action = true,
         jump_num_shortcut = true,
@@ -120,6 +125,7 @@ return {
           quit_in_show = { "q", "<Esc>" },
         },
       },
+
       ui = {
         border = "single", -- Can be single, double, rounded, solid, shadow.
         devicon = true,
@@ -131,6 +137,7 @@ return {
         lines = { "┗", "┣", "┃", "━", "┏" },
         imp_sign = icons.kind.Implementation,
         kind = {
+
           -- Kind
           Class = { icons.kind.Class, "LspKindClass" },
           Constant = { icons.kind.Constant, "LspKindConstant" },
@@ -153,16 +160,19 @@ return {
           Struct = { icons.kind.Struct, "LspKindStruct" },
           TypeParameter = { icons.kind.TypeParameter, "LspKindTypeParameter" },
           Variable = { icons.kind.Variable, "LspKindVariable" },
+
           -- Type
           Array = { icons.type.Array, "LspKindArray" },
           Boolean = { icons.type.Boolean, "LspKindBoolean" },
           Null = { icons.type.Null, "LspKindNull" },
           Object = { icons.type.Object, "LspKindObject" },
           String = { icons.type.String, "LspKindString" },
+
           -- ccls-specific icons.
           TypeAlias = { icons.kind.TypeAlias, "LspKindTypeAlias" },
           Parameter = { icons.kind.Parameter, "LspKindParameter" },
           StaticMethod = { icons.kind.StaticMethod, "LspKindStaticMethod" },
+
           -- Microsoft-specific icons.
           Text = { icons.kind.Text, "LspKindText" },
           Snippet = { icons.kind.Snippet, "LspKindSnippet" },
@@ -171,6 +181,7 @@ return {
           Value = { icons.kind.Value, "LspKindValue" },
         },
       },
+
       callhierarchy = {
         layout = "float",
         show_detail = false,
@@ -186,6 +197,7 @@ return {
       },
     })
   end,
+
   dependencies = {
     "nvim-treesitter/nvim-treesitter", -- optional
     "nvim-tree/nvim-web-devicons", -- optional

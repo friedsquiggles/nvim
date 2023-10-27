@@ -56,7 +56,7 @@ return {
         fern = false,
         fidget = true,
         flash = false,
-        gitgutter = true,
+        gitgutter = false,
         gitsigns = true,
         harpoon = false,
         headlines = false,
@@ -112,7 +112,7 @@ return {
             TabLineSel = { bg = cp.pink },
 
             -- For git
-            DiffAdd = { bg = "#2b343f" },
+            -- DiffAdd = { bg = "#2b343f" },
 
             -- alpha
             AlphaHeader = { fg = cp.green },

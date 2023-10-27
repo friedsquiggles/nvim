@@ -72,15 +72,16 @@ return {
 
     local groups = {
       mode = { "n" },
-      ["<leader>b"] = { name = icons.ui.FolderOpen .. " buffers" },
-      ["<leader>e"] = { name = icons.ui.List .. " explorer" },
-      ["<leader>s"] = { name = icons.ui.Search .. " search" },
-      ["<leader>g"] = { name = icons.cmp.copilot_alt .. " git" },
-      ["<leader>l"] = { name = icons.misc.LspAvailable .. " lsp" },
-      ["<leader>x"] = { name = icons.ui.Fire .. " trouble" },
-      ["<leader>n"] = { name = icons.ui.Note .. " notifications" },
-      ["<leader>t"] = { name = icons.ui.Toggle .. " toggle" },
-      ["<leader>c"] = { name = icons.ui.Gear .. " config" },
+      ["<leader>b"] = { name = icons.ui.FolderOpen .. "buffers" },
+      ["<leader>d"] = { name = icons.ui.Bug .. "diag" },
+      ["<leader>e"] = { name = icons.ui.List .. "explorer" },
+      ["<leader>s"] = { name = icons.ui.Search .. "search" },
+      ["<leader>g"] = { name = icons.cmp.copilot_alt .. "git" },
+      ["<leader>l"] = { name = icons.misc.LspAvailable .. "lsp" },
+      ["<leader>x"] = { name = icons.ui.Fire .. "trouble" },
+      ["<leader>t"] = { name = icons.ui.Toggle .. "toggle" },
+      ["<leader>c"] = { name = icons.ui.Gear .. "config" },
+
       --ignore
       ["<leader>1"] = "which_key_ignore",
       ["<leader>2"] = "which_key_ignore",

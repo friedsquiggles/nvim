@@ -1,54 +1,76 @@
-local icons = {
-  git = require("jordan.icons").get("git", true),
-}
+-- local icons = {
+--   git = require("jordan.icons").get("git", true),
+-- }
 
 return {
   "lewis6991/gitsigns.nvim",
-  event = "BufEnter",
+  -- event = "LspAttach",
   config = function()
     require("gitsigns").setup({
-      signs = {
-        add = {
-          hl = "GitGutterAdd",
-          text = icons.git.Add,
-          numhl = "GitSignsAddNr",
-          linehl = "GitSignsAddLn",
-        },
-        change = {
-          hl = "GitGutterChange",
-          text = icons.git.Mod,
-          numhl = "GitSignsChangeNr",
-          linehl = "GitSignsChangeLn",
-        },
-        delete = {
-          hl = "GitGutterDelete",
-          text = icons.git.Remove,
-          numhl = "GitSignsDeleteNr",
-          linehl = "GitSignsDeleteLn",
-        },
-        topdelete = {
-          hl = "GitGutterDelete",
-          text = icons.git.Remove,
-          numhl = "GitSignsDeleteNr",
-          linehl = "GitSignsDeleteLn",
-        },
-        changedelete = {
-          hl = "GitGutterChangeDelete",
-          text = icons.git.Remove,
-          numhl = "GitSignsChangeNr",
-          linehl = "GitSignsChangeLn",
-        },
-        untracked = {
-          hl = "GitGutterUntracked",
-          text = icons.git.Untracked,
-          numhl = "GitSignsChangeNr",
-          linehl = "GitSignsChangeLn",
-        },
-      },
+
+      -- signs = {
+      --
+      --   add = {
+      --     hl = "GitGutterAdd",
+      --     text = icons.git.Add,
+      --     numhl = "GitSignsAddNr",
+      --     linehl = "GitSignsAddLn",
+      --   },
+      --
+      --   change = {
+      --     hl = "GitGutterChange",
+      --     text = icons.git.Mod,
+      --     numhl = "GitSignsChangeNr",
+      --     linehl = "GitSignsChangeLn",
+      --   },
+      --
+      --   delete = {
+      --     hl = "GitGutterDelete",
+      --     text = icons.git.Remove,
+      --     numhl = "GitSignsDeleteNr",
+      --     linehl = "GitSignsDeleteLn",
+      --   },
+      --
+      --   topdelete = {
+      --     hl = "GitGutterDelete",
+      --     text = icons.git.Remove,
+      --     numhl = "GitSignsDeleteNr",
+      --     linehl = "GitSignsDeleteLn",
+      --   },
+      --
+      --   changedelete = {
+      --     hl = "GitGutterChangeDelete",
+      --     text = icons.git.Remove,
+      --     numhl = "GitSignsChangeNr",
+      --     linehl = "GitSignsChangeLn",
+      --   },
+      --
+      --   untracked = {
+      --     hl = "GitGutterUntracked",
+      --     text = icons.git.Untracked,
+      --     numhl = "GitSignsChangeNr",
+      --     linehl = "GitSignsChangeLn",
+      --   },
+      -- },
+      --
       -- sign_priority = 6,
-      update_debounce = 400,
+      -- update_debounce = 400,
+
+      signcolumn = true,
+      linehl = true,
       numhl = false,
-      word_diff = true,
+      word_diff = false,
+
+      watch_gitdir = { interval = 1000, follow_files = true },
+      status_formatter = nil, -- Use default
+      debug_mode = false,
+
+      current_line_blame = true,
+      current_line_blame_opts = { delay = 1500, virt_text_pos = "right_align" },
+      current_line_blame_formatter = " <author>, <committer_time:%y-%m-%d> [<abbrev_sha>]",
+
+      trouble = true,
+
       on_attach = function(bufnr)
         local gs = package.loaded.gitsigns
 
@@ -83,29 +105,29 @@ return {
         end
 
         -- Navigation
-        map("n", "]g", nextHunk, { expr = true, desc = "next hunk" })
-        map("n", "[g", prevHunk, { expr = true, desc = "prev hunk" })
-        map("n", "<leader>gh", gs.stage_hunk, { desc = "stage hunk" })
-        map("n", "<leader>gr", gs.reset_hunk, { desc = "reset hunk" })
-        map("n", "<leader>gS", gs.stage_buffer, { desc = "stage buffer" })
-        map("n", "<leader>gu", gs.undo_stage_hunk, { desc = "unstage hunk" })
-        map("n", "<leader>gR", gs.reset_buffer, { desc = "reset buffer" })
-        map("n", "<leader>tb", gs.toggle_current_line_blame, { desc = "blame" })
-        map("n", "<leader>gc", gs.diffthis, { desc = "git diff" })
-        map("n", "<leader>gC", diffThis, { desc = "git diff" })
-      end,
+        map("n", "]g", nextHunk, { expr = true, desc = "Git Change Next" })
+        map("n", "<leader>gn", nextHunk, { expr = true, desc = "Git Change Next" })
+        map("n", "[g", prevHunk, { expr = true, desc = "Git Change Prev" })
+        map("n", "<leader>gp", prevHunk, { expr = true, desc = "Git Change Prev" })
 
-      watch_gitdir = { interval = 1000, follow_files = true },
-      status_formatter = nil, -- Use default
-      debug_mode = false,
-      current_line_blame = true,
-      current_line_blame_opts = { delay = 1500 },
-      diff_opts = { internal = true },
-      signcolumn = true,
-      linehl = true,
+        -- Staging
+        map("n", "<leader>gh", gs.stage_hunk, { desc = "stage hunk" })
+        map("n", "<leader>gu", gs.undo_stage_hunk, { desc = "unstage hunk" })
+        map("n", "<leader>gS", gs.stage_buffer, { desc = "stage buffer" })
+
+        -- Resetting
+        map("n", "<leader>gr", gs.reset_hunk, { desc = "reset hunk" })
+        map("n", "<leader>gR", gs.reset_buffer, { desc = "reset buffer" })
+
+        -- Blame
+        map("n", "<leader>tb", gs.toggle_current_line_blame, { desc = "blame" })
+
+        -- Diff
+        map("n", "<leader>gd", gs.diffthis, { desc = "git diff" })
+        map("n", "<leader>gD", diffThis, { desc = "git diff" })
+      end,
     })
 
-    local gs = package.loaded.gitsigns
     vim.api.nvim_set_hl(
       0,
       "GitSignsAddInline",

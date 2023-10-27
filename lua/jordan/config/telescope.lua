@@ -9,7 +9,6 @@ return {
     local telescope = require("telescope")
     local actions = require("telescope.actions")
     local trouble = require("trouble.providers.telescope")
-    -- local themes = require("telescope.themes")
 
     local icons = {
       ui = require("jordan.icons").get("ui", true),
@@ -49,51 +48,14 @@ return {
             ["<C-k>"] = actions.move_selection_previous, -- move to prev result
             ["<C-j>"] = actions.move_selection_next, -- move to next result
             ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-            ["<C-t>"] = trouble.open_with_trouble,
             ["<C-u>"] = actions.preview_scrolling_up,
             ["<C-d>"] = actions.preview_scrolling_down,
+            ["<C-t>"] = trouble.open_with_trouble,
           },
           n = {
             ["<c-t>"] = trouble.open_with_trouble,
           },
         },
-
-        -- pickers = {
-        --   oldfiles = {
-        --     theme = "dropdown",
-        --     layout_strategy = "vertical",
-        --     cwd_only = true,
-        --     previewer = true,
-        --     preview_cutoff = 120,
-        --     prompt_title = getTitle(icons.ui.EmptyFolderOpen, "RECENT"),
-        --   },
-        --   find_files = {
-        --     previewer = true,
-        --     preview_cutoff = 120,
-        --     prompt_title = getTitle(icons.ui.EmptyFolderOpen, "FILES"),
-        --   },
-        --   git_files = {
-        --     theme = "dropdown",
-        --     previewer = true,
-        --     preview_cutoff = 120,
-        --     prompt_title = getTitle(icons.git.Git, "GIT"),
-        --   },
-        --   grep_string = {
-        --     theme = "cursor",
-        --     prompt_title = getTitle(icons.kind.Text, "WORD"),
-        --   },
-        --   live_grep = {
-        --     theme = "dropdown",
-        --     previewer = true,
-        --     preview_cutoff = 120,
-        --     prompt_title = getTitle(icons.kind.Text, "GREP"),
-        --   },
-        --   lsp_references = {
-        --     theme = "cursor",
-        --     path_display = "tail",
-        --     prompt_title = getTitle(icons.ui.CodeAction, "ACTIONS"),
-        --   },
-        -- },
 
         vimgrep_arguments = {
           "rg",
@@ -118,23 +80,6 @@ return {
           unmerged = icons.git.Unmerged,
           untracked = icons.git.Untracked,
         },
-
-        layout_config = {
-          width = 0.8,
-          height = 0.6,
-          preview_cutoff = 120,
-
-          horizontal = {
-            prompt_position = "top",
-            results_width = 0.8,
-            preview_width = 0.5,
-          },
-
-          vertical = {
-            prompt_position = "top",
-            width = 0.6,
-          },
-        },
       },
 
       extensions = {
@@ -156,28 +101,25 @@ return {
 
     -- find buffers
     map.set("n", "<leader>sr", menus.getRecentFiles, { desc = "recent buffers" })
-    map.set("n", "<leader>sb", builtin.buffers, { desc = "active buffers" })
-    map.set("n", "<leader>sf", menus.getFindFiles, { desc = "find files" })
+    map.set("n", "<leader>sa", builtin.buffers, { desc = "active buffers" })
+    map.set("n", "<leader>sf", menus.getFindFiles, { desc = "files" })
 
     -- find text
     map.set("n", "<leader><space>", menus.getBufferFzy, { desc = "search current buffer" })
     map.set("n", "<leader>sc", menus.getGrepCurrentWord, { desc = "current word" })
-    map.set("n", "<leader>sg", menus.getLiveGrep, { desc = "text" })
+    map.set("n", "<leader>sg", menus.getLiveGrep, { desc = "grep" })
 
     -- symbols
-    map.set("n", "<leader>ld", menus.getTreeSitter, { desc = "show document symbols" })
-    map.set("n", "<leader>lr", menus.getLspRefs, { desc = "show references" })
-    -- map.set("n", "<leader>lw", menus.getLspWorkspaceSymbols, { desc = "show workspace symbols" })
-    map.set("n", "<leader>lq", menus.getLspRefs, { desc = "show quick fix" })
+    map.set("n", "<leader>ld", menus.getTreeSitter, { desc = "document symbols" })
+    map.set("n", "<leader>lr", menus.getLspRefs, { desc = "references" })
+    map.set("n", "<leader>lq", menus.getQuickFix, { desc = "quick fix" })
 
     -- git files and commands
-    -- map.set("n", "<leader>gf", menus., { desc = "git files" })
     map.set("n", "<leader>gs", menus.getGitStatus, { desc = "git status" })
     map.set("n", "<leader>gb", menus.getGitBranches, { desc = "git branches" })
     map.set("n", "<leader>gl", menus.getGitCommits, { desc = "git log" })
 
     -- reference
-    map.set("n", "<leader>sd", builtin.diagnostics, { desc = "diagnostics" })
-    map.set("n", "<leader>sh", builtin.help_tags, { desc = "help" })
+    map.set("n", "<leader>dd", builtin.diagnostics, { desc = "diagnostics" })
   end,
 }
