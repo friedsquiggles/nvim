@@ -1,7 +1,7 @@
 local icons = {
-  diagnostics = require("jordan.icons").get("diagnostics", true),
-  git = require("jordan.icons").get("git", true),
-  ui = require("jordan.icons").get("ui", true),
+  diagnostics = require("jordan.ui.icons").get("diagnostics", true),
+  git = require("jordan.ui.icons").get("git", true),
+  ui = require("jordan.ui.icons").get("ui", true),
 }
 return {
   "romgrk/barbar.nvim",

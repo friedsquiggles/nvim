@@ -1,5 +1,5 @@
 -- local icons = {
---   git = require("jordan.icons").get("git", true),
+--   git = require("jordan.ui.icons").get("git", true),
 -- }
 
 return {

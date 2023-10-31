@@ -1,8 +1,8 @@
 local icons = {
-  ui = require("jordan.icons").get("ui", true),
-  git = require("jordan.icons").get("git", true),
-  docs = require("jordan.icons").get("documents", true),
-  diagnostics = require("jordan.icons").get("diagnostics", true),
+  ui = require("jordan.ui.icons").get("ui", true),
+  git = require("jordan.ui.icons").get("git", true),
+  docs = require("jordan.ui.icons").get("documents", true),
+  diagnostics = require("jordan.ui.icons").get("diagnostics", true),
 }
 
 local toggle = "<Cmd>NvimTreeToggle<CR>"

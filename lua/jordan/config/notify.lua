@@ -1,6 +1,6 @@
 local icons = {
-  diagnostics = require("jordan.icons").get("diagnostics"),
-  ui = require("jordan.icons").get("ui"),
+  diagnostics = require("jordan.ui.icons").get("diagnostics"),
+  ui = require("jordan.ui.icons").get("ui"),
 }
 
 return {

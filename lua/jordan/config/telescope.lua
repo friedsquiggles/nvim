@@ -11,10 +11,10 @@ return {
     local trouble = require("trouble.providers.telescope")
 
     local icons = {
-      ui = require("jordan.icons").get("ui", true),
-      git = require("jordan.icons").get("git", true),
-      cmp = require("jordan.icons").get("cmp", true),
-      kind = require("jordan.icons").get("kind", true),
+      ui = require("jordan.ui.icons").get("ui", true),
+      git = require("jordan.ui.icons").get("git", true),
+      cmp = require("jordan.ui.icons").get("cmp", true),
+      kind = require("jordan.ui.icons").get("kind", true),
     }
 
     local iconPrefix = function(icon)

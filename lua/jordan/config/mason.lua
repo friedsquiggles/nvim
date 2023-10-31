@@ -1,6 +1,6 @@
 local icons = {
-  misc = require("jordan.icons").get("misc", true),
-  ui = require("jordan.icons").get("ui", true),
+  misc = require("jordan.ui.icons").get("misc", true),
+  ui = require("jordan.ui.icons").get("ui", true),
 }
 
 return {
@@ -43,7 +43,7 @@ return {
       "stylua",
       "gh",
       "shellcheck",
-      "vale"
+      "vale",
     },
     ui = {
       package_installed = icons.ui.Accepted,

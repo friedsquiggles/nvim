@@ -1,7 +1,7 @@
 local icons = {
-  kind = require("jordan.icons").get("kind", true),
-  type = require("jordan.icons").get("type", true),
-  ui = require("jordan.icons").get("ui", true),
+  kind = require("jordan.ui.icons").get("kind", true),
+  type = require("jordan.ui.icons").get("type", true),
+  ui = require("jordan.ui.icons").get("ui", true),
 }
 
 return {

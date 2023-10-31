@@ -1,8 +1,8 @@
 local icons = {
-  git = require("jordan.icons").get("git", true),
-  ui = require("jordan.icons").get("ui", true),
-  misc = require("jordan.icons").get("misc", true),
-  diagnostics = require("jordan.icons").get("diagnostics", true),
+  git = require("jordan.ui.icons").get("git", true),
+  ui = require("jordan.ui.icons").get("ui", true),
+  misc = require("jordan.ui.icons").get("misc", true),
+  diagnostics = require("jordan.ui.icons").get("diagnostics", true),
 }
 
 return {
@@ -53,7 +53,7 @@ return {
       },
 
       lualine_y = {
-        { "location", separator = " ", padding = { left = 1, right = 0 },},
+        { "location", separator = " ", padding = { left = 1, right = 0 } },
         { "progress", padding = { left = 0, right = 2 } },
       },
 

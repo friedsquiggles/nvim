@@ -5,10 +5,10 @@ return {
     local _, alpha = pcall(require, "alpha")
 
     local icons = {
-      kind = require("jordan.icons").get("kind", true),
-      misc = require("jordan.icons").get("misc", true),
-      git = require("jordan.icons").get("git", true),
-      docs = require("jordan.icons").get("documents", true),
+      kind = require("jordan.ui.icons").get("kind", true),
+      misc = require("jordan.ui.icons").get("misc", true),
+      git = require("jordan.ui.icons").get("git", true),
+      docs = require("jordan.ui.icons").get("documents", true),
     }
 
     local explorer = icons.docs.FileTree .. " Explorer"
