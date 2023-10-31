@@ -95,7 +95,7 @@ return {
     pcall(telescope.load_extension, "fzf")
 
     local builtin = require("telescope.builtin")
-    local menus = require("jordan.telescope-menus")
+    local menus = require("jordan.ui.telescope-menus")
 
     local map = vim.keymap
 

@@ -13,7 +13,7 @@ return {
       on_open = nil,
       on_close = nil,
       render = "default",
-      timeout = 5000,
+      timeout = 3000,
       max_width = nil,
       max_height = nil,
       -- background_colour = "#000000",

@@ -18,10 +18,10 @@ return {
     local mason = icons.misc.Lego .. " Mason"
     local git = icons.git.Git .. " Changes"
 
-    local findFiles = ":lua require('jordan.telescope-menus').getFindFiles()<CR>"
-    local recentFiles = ":lua require('jordan.telescope-menus').getRecentFiles()<CR>"
-    local liveGrep = ":lua require('jordan.telescope-menus').getLiveGrep()<CR>"
-    local gitStatus = ":lua require('jordan.telescope-menus').getGitStatus()<CR>"
+    local findFiles = ":lua require('jordan.ui.telescope-menus').getFindFiles()<CR>"
+    local recentFiles = ":lua require('jordan.ui.telescope-menus').getRecentFiles()<CR>"
+    local liveGrep = ":lua require('jordan.ui.telescope-menus').getLiveGrep()<CR>"
+    local gitStatus = ":lua require('jordan.ui.telescope-menus').getGitStatus()<CR>"
     -- local liveGrep =
 
     local dashboard = require("alpha.themes.dashboard")
