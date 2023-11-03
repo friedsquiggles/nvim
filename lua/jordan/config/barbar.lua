@@ -41,7 +41,6 @@ return {
       preset = "default",
       alternate = { filetype = { enabled = false } },
       current = { buffer_index = true },
-      inactive = { button = icons.ui.Close },
       visible = { modified = { buffer_number = false } },
     },
   },

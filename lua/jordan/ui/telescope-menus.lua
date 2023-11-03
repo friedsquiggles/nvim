@@ -8,27 +8,17 @@ local icons = {
 
 local M = {}
 
--- dimensions
+-- dimensions with preview
 local heightWithPreview = 0.7
 local widthWithPreview = 0.8
-local heightWithoutPreview = 40
-local widthWithoutPreview = 70
-local bufFzyWidth = 0.8
-local bufFzyHeight = 80
 
--- local h = {
---   ddnp = 0,
---   ddwp = 0,
---   cursor = 0,
---   bufFzy = 0,
--- }
---
--- local w = {
---   ddnp = 0,
---   ddwp = 0,
---   cursor = 0,
---   bufFzy = 0,
--- }
+-- dimensions no preview
+local heightWithoutPreview = 0.5
+local widthWithoutPreview = 0.4
+
+-- current buffer fuzzy find
+local bufFzyHeight = 0.7
+local bufFzyWidth = 0.6
 
 -- transparency
 local blend = 10
@@ -135,6 +125,24 @@ function M.getRecentFiles()
 
   require("telescope.builtin").oldfiles(themes.get_dropdown({
     previewer = false,
+    prompt_title = getTitle(icon, title),
+    prompt_prefix = iconPrefix(icon),
+    cwd_only = true,
+    win_blend = blend,
+    layout_config = {
+      height = heightWithoutPreview,
+      width = widthWithoutPreview,
+    },
+  }))
+end
+
+function M.getActiveBuffers()
+  local icon = icons.ui.EmptyFolderOpen
+  local title = "BUFFERS"
+
+  require("telescope.builtin").buffers(themes.get_dropdown({
+    previewer = false,
+    ignore_current_buffer = true,
     prompt_title = getTitle(icon, title),
     prompt_prefix = iconPrefix(icon),
     cwd_only = true,

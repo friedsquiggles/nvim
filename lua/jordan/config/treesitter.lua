@@ -124,7 +124,6 @@ return {
         "RainbowDelimiterViolet",
         "RainbowDelimiterBlue",
         "RainbowDelimiterCyan",
-        -- "RainbowDelimiterGreen",
         "RainbowDelimiterYellow",
         "RainbowDelimiterOrange",
         "RainbowDelimiterRed",
@@ -142,6 +141,7 @@ return {
         return true
       end, opts.ensure_installed)
     end
+
     require("nvim-treesitter.configs").setup(opts)
   end,
 }

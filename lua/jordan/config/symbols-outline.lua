@@ -6,7 +6,7 @@ local icons = {
 
 return {
   "simrat39/symbols-outline.nvim",
-  keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
+  keys = { { "<leader>ts", "<cmd>SymbolsOutline<cr>", desc = "symbols outline" } },
   cmd = "SymbolsOutline",
   opts = {
     highlight_hovered_item = true,

@@ -27,8 +27,6 @@ local attach_ufo_if_necessary = function()
 end
 
 local enable_ufo_fold = function()
-  -- vim.wo.foldenable = true
-  -- vim.wo.foldlevel = 99
   attach_ufo_if_necessary()
   ufo.enableFold()
 end
@@ -135,19 +133,19 @@ local virtual_text_handler = function(virt_text, lnum, end_lnum, width, truncate
 end
 
 return {
-  {
-    "neovim/nvim-lspconfig",
-    opts = {
-      capabilities = {
-        textDocument = {
-          foldingRange = {
-            dynamicRegistration = false,
-            lineFoldingOnly = true,
-          },
-        },
-      },
-    },
-  },
+  -- {
+  --   "neovim/nvim-lspconfig",
+  --   opts = {
+  --     capabilities = {
+  --       textDocument = {
+  --         foldingRange = {
+  --           dynamicRegistration = false,
+  --           lineFoldingOnly = true,
+  --         },
+  --       },
+  --     },
+  --   },
+  -- },
   {
     "kevinhwang91/nvim-ufo",
     dependencies = {

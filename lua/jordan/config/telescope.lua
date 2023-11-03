@@ -17,19 +17,6 @@ return {
       kind = require("jordan.ui.icons").get("kind", true),
     }
 
-    local iconPrefix = function(icon)
-      return " " .. icon .. " "
-    end
-
-    local getTitle = function(icon, title)
-      local cl = icons.ui.ChevronLeft
-      local cr = icons.ui.ChevronRight
-      local left = cl .. cl .. cl .. " "
-      local right = " " .. cr .. cr .. cr
-
-      return " " .. left .. icon .. " " .. title .. " " .. icon .. right
-    end
-
     telescope.setup({
       defaults = {
         path_display = { "smart" },
@@ -100,17 +87,17 @@ return {
     local map = vim.keymap
 
     -- find buffers
-    map.set("n", "<leader>sr", menus.getRecentFiles, { desc = "recent buffers" })
-    map.set("n", "<leader>sa", builtin.buffers, { desc = "active buffers" })
+    map.set("n", "<leader>sr", menus.getRecentFiles, { desc = "recent files" })
+    map.set("n", "<leader>sb", menus.getActiveBuffers, { desc = "active buffers" })
     map.set("n", "<leader>sf", menus.getFindFiles, { desc = "files" })
 
     -- find text
     map.set("n", "<leader><space>", menus.getBufferFzy, { desc = "search current buffer" })
-    map.set("n", "<leader>sc", menus.getGrepCurrentWord, { desc = "current word" })
+    map.set("n", "<leader>sc", menus.getGrepCurrentWord, { desc = "cursor word" })
     map.set("n", "<leader>sg", menus.getLiveGrep, { desc = "grep" })
 
     -- symbols
-    map.set("n", "<leader>ld", menus.getTreeSitter, { desc = "document symbols" })
+    map.set("n", "<leader>ld", menus.getTreeSitter, { desc = "doc symbols" })
     map.set("n", "<leader>lr", menus.getLspRefs, { desc = "references" })
     map.set("n", "<leader>lq", menus.getQuickFix, { desc = "quick fix" })
 
