@@ -15,21 +15,25 @@ return {
   dependencies = { "nvim-tree/nvim-web-devicons" },
   cmd = { "NvimTreeOpen", "NvimTreeToggle", "NvimTreeFocus", "NvimTreeFindFile" },
   keys = {
-    { "<leader>tt", toggle, desc = "toggle tree explorer" },
+    { "<leader>ee", toggle, desc = "toggle explorer" },
     { "<leader>ef", focus, desc = "focus explorer" },
     { "<leader>er", refresh, desc = "refresh explorer" },
     { "<leader>eo", opened, desc = "opened file explorer" },
   },
+
   opts = {
+
     actions = {
       open_file = { quit_on_open = true },
     },
+
     git = { enable = true, ignore = false },
     modified = {
       enable = true,
       show_on_dirs = true,
       show_on_open_dirs = false,
     },
+
     diagnostics = {
       enable = true,
       show_on_dirs = true,
@@ -40,10 +44,12 @@ return {
         error = icons.diagnostics.Error,
       },
     },
+
     view = {
-      width = 50,
+      width = 60,
       side = "right",
     },
+
     renderer = {
       highlight_opened_files = "name",
       highlight_modified = "icon",
@@ -89,18 +95,12 @@ return {
       },
     },
   },
+
   config = function(_, opts)
     local nvimtree = require("nvim-tree")
-
-    -- recommended settings from nvim-tree documentation
     vim.g.loaded_netrw = 1
     vim.g.loaded_netrwPlugin = 1
-
-    local color_peach = require("catppuccin.palettes").get_palette("macchiato").peach
-    -- change color for arrows in tree to light blue
-    vim.cmd([[ highlight NvimTreeIndentMarker guifg=color_peach ]])
-
-    -- configure nvim-tree
+    vim.cmd([[ highlight NvimTreeIndentMarker guifg=#3FC5FF ]])
     nvimtree.setup(opts)
   end,
 }

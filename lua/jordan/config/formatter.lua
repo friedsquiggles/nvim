@@ -1,5 +1,6 @@
 return {
   "stevearc/conform.nvim",
+  lazy = true,
   event = { "BufReadPre", "BufNewFile" },
   config = function()
     local conform = require("conform")
@@ -18,7 +19,6 @@ return {
         markdown = { "prettier" },
         graphql = { "prettier" },
         lua = { "stylua" },
-        python = { "black" },
       },
       format_on_save = {
         lsp_fallback = true,
@@ -33,6 +33,6 @@ return {
         async = false,
         timeout_ms = 1000,
       })
-    end, { desc = "Format file or range" })
+    end, { desc = "format" })
   end,
 }

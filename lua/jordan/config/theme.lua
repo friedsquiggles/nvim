@@ -101,6 +101,11 @@ return {
 
           local cp = macchiato
 
+          -- todo - clean up manual color definitions
+          local dark_green = "#222b36"
+          local dark_yellow = "#292d37"
+          local dark_red = "#2b273a"
+
           return {
             -- For base configs
             NormalFloat = { fg = cp.text, bg = cp.mantle },
@@ -110,9 +115,6 @@ return {
             },
             CursorLineNr = { fg = cp.green },
             TabLineSel = { bg = cp.pink },
-
-            -- For git
-            -- DiffAdd = { bg = "#2b343f" },
 
             -- alpha
             AlphaHeader = { fg = cp.green },
@@ -229,9 +231,9 @@ return {
             CmpItemKindTypeParameter = { fg = cp.base, bg = cp.blue },
             CmpItemKindCopilot = { fg = cp.base, bg = cp.teal },
 
-            -- For fidget
-            FidgetTask = { fg = cp.surface2 },
-            FidgetTitle = { fg = cp.blue, style = { "bold" } },
+            GitSignsAddLn = { bg = dark_green },
+            GitSignsChangeLn = { bg = dark_yellow },
+            GitSignsDeleteLn = { bg = dark_red },
 
             -- Mini
             MiniIndentscopeSymbol = { fg = cp.flamingo },

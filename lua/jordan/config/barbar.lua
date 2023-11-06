@@ -26,9 +26,9 @@ return {
         [vim.diagnostic.severity.HINT] = { enabled = true, icon = icons.diagnostics.Hint },
       },
       gitsigns = {
-        added = { enabled = true, icon = icons.git.Add },
-        changed = { enabled = true, icon = icons.git.Mod },
-        deleted = { enabled = true, icon = icons.git.Remove },
+        added = { enabled = false, icon = icons.git.Add },
+        changed = { enabled = false, icon = icons.git.Mod },
+        deleted = { enabled = false, icon = icons.git.Remove },
       },
       filetype = {
         custom_colors = false,
@@ -89,12 +89,6 @@ return {
     -- selections
     map.set(
       "n",
-      "<Leader>bp",
-      "<Cmd>BufferPin<CR>",
-      { desc = "pin buffer", noremap = true, silent = true }
-    )
-    map.set(
-      "n",
       "<Leader>bc",
       "<Cmd>BufferClose<CR>",
       { desc = "close buffer", noremap = true, silent = true }
@@ -104,12 +98,6 @@ return {
       "<Leader>bC",
       "<Cmd>BufferCloseAllButCurrent<CR>",
       { desc = "close other buffers", noremap = true, silent = true }
-    )
-    map.set(
-      "n",
-      "<C-p>",
-      "<Cmd>BufferPick<CR>",
-      { desc = "pick buffer", noremap = true, silent = true }
     )
 
     -- set buffer sorting

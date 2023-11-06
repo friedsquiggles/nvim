@@ -10,6 +10,7 @@ opt.relativenumber = true
 
 opt.signcolumn = "yes:1"
 opt.showmode = false
+opt.colorcolumn = "80"
 
 opt.ignorecase = true
 opt.smartcase = true

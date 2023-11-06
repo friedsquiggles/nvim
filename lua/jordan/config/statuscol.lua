@@ -21,6 +21,7 @@ return {
           sign = { name = { "GitSigns" }, maxwidth = 1, colwidth = 2, auto = false },
           click = "v:lua.ScSa",
         },
+
         -- symbol wildcard
         {
           sign = {
