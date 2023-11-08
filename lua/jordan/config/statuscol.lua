@@ -16,24 +16,14 @@ return {
           click = "v:lua.ScSa",
         },
 
-        -- git signs -- not working?
+        -- empty space
         {
-          sign = { name = { "GitSigns" }, maxwidth = 1, colwidth = 2, auto = false },
-          click = "v:lua.ScSa",
-        },
-
-        -- symbol wildcard
-        {
-          sign = {
-            name = { ".*" },
-            maxwidth = 1,
-            auto = true,
-          },
-          click = "v:lua.ScSa",
+          text = { " " },
+          condition = { builtin.not_empty, true, builtin.not_empty },
         },
 
         -- line numbers
-        { text = { builtin.lnumfunc }, click = "v:lua.ScLa", colwidth = 3 },
+        { text = { builtin.lnumfunc }, click = "v:lua.ScLa", colwidth = 4 },
 
         -- folding symbols
         { text = { builtin.foldfunc }, click = "v:lua.ScFa", colwidth = 2 },
@@ -42,7 +32,6 @@ return {
         {
           text = { " " },
           condition = { builtin.not_empty, true, builtin.not_empty },
-          -- click = "v:lua.ScFa",
         },
       },
     })

@@ -108,5 +108,6 @@ return {
 
     -- reference
     map.set("n", "<leader>dd", builtin.diagnostics, { desc = "diagnostics" })
+    map.set("n", "<leader>sh", builtin.highlights, { desc = "highlights" })
   end,
 }

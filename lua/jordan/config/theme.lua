@@ -94,10 +94,10 @@ return {
       color_overrides = {},
       highlight_overrides = {
         all = function()
-          local mocha = require("catppuccin.palettes").get_palette("macchiato")
+          local mocha = require("catppuccin.palettes").get_palette("mocha")
           local macchiato = require("catppuccin.palettes").get_palette("macchiato")
-          local frappe = require("catppuccin.palettes").get_palette("macchiato")
-          local latte = require("catppuccin.palettes").get_palette("macchiato")
+          local frappe = require("catppuccin.palettes").get_palette("frappe")
+          local latte = require("catppuccin.palettes").get_palette("latte")
 
           local cp = macchiato
 
@@ -121,66 +121,68 @@ return {
             AlphaButtons = { fg = cp.flamingo },
             AlphaFooter = { fg = cp.blue },
 
+            ColorColumn = { bg = frappe.mantle },
+
             -- barbar
             -- tabpage
             BufferTabpageFill = { bg = cp.none },
 
             -- barbar
             -- current
-            BufferCurrent = { fg = cp.text, bg = cp.surface2 },
-            BufferCurrentIndex = { fg = cp.text, bg = cp.surface2 },
-            BufferCurrentMod = { fg = cp.peach, bg = cp.surface2 },
-            BufferCurrentSign = { fg = cp.pink, bg = cp.surface2 },
-            BufferCurrentSignRight = { fg = cp.pink, bg = cp.surface2 },
-            BufferCurrentHINT = { fg = cp.subtext0, bg = cp.surface2 },
-            BufferCurrentINFO = { fg = cp.subtext0, bg = cp.surface2 },
-            BufferCurrentWARN = { fg = cp.subtext0, bg = cp.surface2 },
-            BufferCurrentERROR = { fg = cp.subtext0, bg = cp.surface2 },
-            BufferCurrentADDED = { fg = cp.subtext0, bg = cp.surface2 },
-            BufferCurrentCHANGED = { fg = cp.subtext0, bg = cp.surface2 },
-            BufferCurrentDELETED = { fg = cp.subtext0, bg = cp.surface2 },
+            BufferCurrent = { fg = frappe.text, bg = frappe.surface2 },
+            BufferCurrentIndex = { fg = cp.text, bg = frappe.surface2 },
+            BufferCurrentMod = { fg = frappe.peach, bg = frappe.surface2 },
+            BufferCurrentSign = { fg = frappe.pink, bg = frappe.surface2 },
+            BufferCurrentSignRight = { fg = frappe.pink, bg = frappe.surface2 },
+            BufferCurrentHINT = { fg = frappe.subtext0, bg = frappe.surface2 },
+            BufferCurrentINFO = { fg = frappe.subtext0, bg = frappe.surface2 },
+            BufferCurrentWARN = { fg = frappe.subtext0, bg = frappe.surface2 },
+            BufferCurrentERROR = { fg = frappe.subtext0, bg = frappe.surface2 },
+            BufferCurrentADDED = { fg = frappe.subtext0, bg = frappe.surface2 },
+            BufferCurrentCHANGED = { fg = frappe.subtext0, bg = frappe.surface2 },
+            BufferCurrentDELETED = { fg = frappe.subtext0, bg = frappe.surface2 },
 
             -- barbar
             -- inactive
-            BufferInactive = { fg = cp.subtext0, bg = cp.surface0 },
-            BufferInactiveIndex = { fg = cp.subtext0, bg = cp.surface0 },
-            BufferInactiveMod = { fg = cp.peach, bg = cp.surface0 },
-            BufferInactiveSign = { fg = cp.subtext0, bg = cp.surface0 },
-            BufferInactiveHINT = { fg = cp.subtext0, bg = cp.surface0 },
-            BufferInactiveINFO = { fg = cp.subtext0, bg = cp.surface0 },
-            BufferInactiveWARN = { fg = cp.subtext0, bg = cp.surface0 },
-            BufferInactiveERROR = { fg = cp.subtext0, bg = cp.surface0 },
-            BufferInactiveADDED = { fg = cp.subtext0, bg = cp.surface0 },
-            BufferInactiveCHANGED = { fg = cp.subtext0, bg = cp.surface0 },
-            BufferInactiveDELETED = { fg = cp.subtext0, bg = cp.surface0 },
+            BufferInactive = { fg = frappe.subtext0, bg = frappe.surface0 },
+            BufferInactiveIndex = { fg = frappe.subtext0, bg = frappe.surface0 },
+            BufferInactiveMod = { fg = frappe.peach, bg = frappe.surface0 },
+            BufferInactiveSign = { fg = frappe.subtext0, bg = frappe.surface0 },
+            BufferInactiveHINT = { fg = frappe.subtext0, bg = frappe.surface0 },
+            BufferInactiveINFO = { fg = frappe.subtext0, bg = frappe.surface0 },
+            BufferInactiveWARN = { fg = frappe.subtext0, bg = frappe.surface0 },
+            BufferInactiveERROR = { fg = frappe.subtext0, bg = frappe.surface0 },
+            BufferInactiveADDED = { fg = frappe.subtext0, bg = frappe.surface0 },
+            BufferInactiveCHANGED = { fg = frappe.subtext0, bg = frappe.surface0 },
+            BufferInactiveDELETED = { fg = frappe.subtext0, bg = frappe.surface0 },
 
             -- barbar
             -- visible
-            BufferVisible = { fg = cp.subtext0, bg = cp.surface0 },
-            BufferVisibleIndex = { fg = cp.subtext0, bg = cp.surface0 },
-            BufferVisibleMod = { fg = cp.peach, bg = cp.surface0 },
-            BufferVisibleSign = { fg = cp.subtext0, bg = cp.surface0 },
-            BufferVisibleHINT = { fg = cp.subtext0, bg = cp.surface0 },
-            BufferVisibleINFO = { fg = cp.subtext0, bg = cp.surface0 },
-            BufferVisibleWARN = { fg = cp.subtext0, bg = cp.surface0 },
-            BufferVisibleERROR = { fg = cp.subtext0, bg = cp.surface0 },
-            BufferVisibleADDED = { fg = cp.subtext0, bg = cp.surface0 },
-            BufferVisibleCHANGED = { fg = cp.subtext0, bg = cp.surface0 },
-            BufferVisibleDELETED = { fg = cp.subtext0, bg = cp.surface0 },
+            BufferVisible = { fg = frappe.subtext0, bg = frappe.surface0 },
+            BufferVisibleIndex = { fg = frappe.subtext0, bg = frappe.surface0 },
+            BufferVisibleMod = { fg = frappe.peach, bg = frappe.surface0 },
+            BufferVisibleSign = { fg = frappe.subtext0, bg = frappe.surface0 },
+            BufferVisibleHINT = { fg = frappe.subtext0, bg = frappe.surface0 },
+            BufferVisibleINFO = { fg = frappe.subtext0, bg = frappe.surface0 },
+            BufferVisibleWARN = { fg = frappe.subtext0, bg = frappe.surface0 },
+            BufferVisibleERROR = { fg = frappe.subtext0, bg = frappe.surface0 },
+            BufferVisibleADDED = { fg = frappe.subtext0, bg = frappe.surface0 },
+            BufferVisibleCHANGED = { fg = frappe.subtext0, bg = frappe.surface0 },
+            BufferVisibleDELETED = { fg = frappe.subtext0, bg = frappe.surface0 },
 
             -- barbar
             -- alternate
-            BufferAlternate = { fg = cp.subtext0 },
-            BufferAlternateIndex = { fg = cp.subtext0, bg = cp.surface0 },
-            BufferAlternateMod = { fg = cp.peach, bg = cp.surface0 },
-            BufferAlternateSign = { fg = cp.subtext0, bg = cp.surface0 },
-            BufferAlternateHINT = { fg = cp.subtext0, bg = cp.surface0 },
-            BufferAlternateINFO = { fg = cp.subtext0, bg = cp.surface0 },
-            BufferAlternateWARN = { fg = cp.subtext0, bg = cp.surface0 },
-            BufferAlternateERROR = { fg = cp.subtext0, bg = cp.surface0 },
-            BufferAlternateADDED = { fg = cp.subtext0, bg = cp.surface0 },
-            BufferAlternateCHANGED = { fg = cp.subtext0, bg = cp.surface0 },
-            BufferAlternateDELETED = { fg = cp.subtext0, bg = cp.surface0 },
+            BufferAlternate = { fg = frappe.subtext0 },
+            BufferAlternateIndex = { fg = frappe.subtext0, bg = frappe.surface0 },
+            BufferAlternateMod = { fg = frappe.peach, bg = frappe.surface0 },
+            BufferAlternateSign = { fg = frappe.subtext0, bg = frappe.surface0 },
+            BufferAlternateHINT = { fg = frappe.subtext0, bg = frappe.surface0 },
+            BufferAlternateINFO = { fg = frappe.subtext0, bg = frappe.surface0 },
+            BufferAlternateWARN = { fg = frappe.subtext0, bg = frappe.surface0 },
+            BufferAlternateERROR = { fg = frappe.subtext0, bg = frappe.surface0 },
+            BufferAlternateADDED = { fg = frappe.subtext0, bg = frappe.surface0 },
+            BufferAlternateCHANGED = { fg = frappe.subtext0, bg = frappe.surface0 },
+            BufferAlternateDELETED = { fg = frappe.subtext0, bg = frappe.surface0 },
 
             -- LSP
             LspInfoBorder = { link = "FloatBorder" },
