@@ -15,11 +15,10 @@ return {
 
     which_key.setup({
       plugins = {
-        marks = false, -- shows a list of your marks on ' and `
-        registers = false, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+        marks = false,
+        registers = false,
         spelling = {
-          enabled = true,
-          suggestions = 20,
+          enabled = false,
         },
 
         presets = {
@@ -41,7 +40,7 @@ return {
       },
 
       layout = {
-        height = { min = 4, max = 16 }, -- min and max height of the columns
+        height = { min = 16, max = 24 }, -- min and max height of the columns
         width = { min = 20, max = 40 }, -- min and max width of the columns
         spacing = 5, -- spacing between columns
         align = "center", -- align columns left, center or right
@@ -94,6 +93,74 @@ return {
       ["<leader>9"] = "which_key_ignore",
       ["<leader>0"] = "which_key_ignore",
     }
+
+    -- normal mode opts
+    local opts = {
+      mode = "n",
+      prefix = "<leader>",
+      buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+      silent = true, -- use `silent` when creating keymaps
+      noremap = true, -- use `noremap` when creating keymaps
+      nowait = true, -- use `nowait` when creating keymaps
+    }
+
+    -- local mappings = {
+    --   [";"] = { "<cmd>Alpha<cr>", "" },
+    --   ["/"] = { "<cmd><cr>", "" },
+    --   ["?"] = { "<cmd><cr>", "" },
+    --   [">"] = { "<cmd><cr>", "" },
+    --   ["<lt>"] = { "<cmd><cr>", "" },
+    --   --groups
+    --   ["a"] = { name = "" },
+    --   ["b"] = { name = "[b]uffers" },
+    --   ["c"] = { name = "" },
+    --   ["d"] = { name = "[d]ebug" },
+    --   ["e"] = { name = "" },
+    --   ["f"] = { name = "" },
+    --   ["g"] = { name = "[g]it" },
+    --   ["h"] = { name = "" },
+    --   ["i"] = { name = "" },
+    --   ["j"] = { name = "" },
+    --   ["k"] = { name = "" },
+    --   ["l"] = { name = "[l]sp" },
+    --   ["m"] = { name = "" },
+    --   ["n"] = { name = "" },
+    --   ["o"] = { name = "[o]utline" },
+    --   ["p"] = { name = "" },
+    --   ["q"] = { name = "" },
+    --   ["s"] = { name = "[s]earch" },
+    --   ["t"] = { name = "" },
+    --   ["u"] = { name = "" },
+    --   ["v"] = { name = "" },
+    --   ["w"] = { name = "" },
+    --   ["x"] = { name = "diagnosti[x]" },
+    --   ["y"] = { name = "" },
+    --   ["z"] = { name = "" },
+    -- }
+
+    -- insert mode options
+    local vopts = {
+      mode = "v",
+      prefix = "<leader>",
+      buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+      silent = true, -- use `silent` when creating keymaps
+      noremap = true, -- use `noremap` when creating keymaps
+      nowait = true, -- use `nowait` when creating keymaps
+    }
+
+    -- local v_mappings = {}
+
+    -- insert mode options
+    local iopts = {
+      mode = "i",
+      prefix = "<C-i>",
+      buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+      silent = true, -- use `silent` when creating keymaps
+      noremap = true, -- use `noremap` when creating keymaps
+      nowait = true, -- use `nowait` when creating keymaps
+    }
+
+    -- local i_mappings = {}
 
     which_key.register(groups)
   end,

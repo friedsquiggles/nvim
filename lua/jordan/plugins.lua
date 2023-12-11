@@ -12,6 +12,9 @@ return {
   -- align buffer indentation with project/folder
   { "tpope/vim-sleuth" },
 
+  -- motions for editing around text objects
+  { "tpope/vim-surround" },
+
   -- function abstractions for nvim
   { "nvim-lua/plenary.nvim" },
 
@@ -43,6 +46,13 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     opts = {},
   },
+
+  -- {
+  --   "andrewferrier/wrapping.nvim",
+  --   config = function()
+  --     require("wrapping").setup()
+  --   end,
+  -- },
 
   -- import plugins from config folder
   { import = "jordan.config" },
