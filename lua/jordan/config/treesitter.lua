@@ -1,12 +1,10 @@
 return {
-  -- {
   "nvim-treesitter/nvim-treesitter",
   version = false,
   dependencies = {
     "nvim-treesitter/playground",
     "HiPhish/rainbow-delimiters.nvim",
     "nvim-treesitter/nvim-treesitter-textobjects",
-    "JoosepAlviste/nvim-ts-context-commentstring",
     "nvim-treesitter/nvim-treesitter-refactor",
     "windwp/nvim-ts-autotag",
   },
@@ -40,12 +38,14 @@ return {
       "vimdoc",
       "yaml",
     },
+
     ignore_install = {
       "go",
       "julia",
       "java",
       "javac",
     },
+
     textobjects = {
       select = {
         enable = true,
@@ -82,6 +82,7 @@ return {
         },
       },
     },
+
     refactor = {
       highlight_definitions = { enable = true },
       highlight_current_scope = { enable = true },
@@ -100,10 +101,7 @@ return {
         keymaps = { smart_rename = "gR" },
       },
     },
-    context_commentstring = {
-      enable = true,
-      enable_autocmd = false,
-    },
+
     autotag = {
       enable = true,
     },
