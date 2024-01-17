@@ -147,11 +147,11 @@ return {
 
       cmp.setup.filetype("gitcommit", {
         sources = cmp.config.sources({
-          { name = "git" },
+          { name = "git", priority = 600 },
         }, {
-          { name = "buffer" },
+          { name = "emoji", priority = 500 },
         }, {
-          { name = "emoji" },
+          { name = "buffer", priority = 400 },
         }),
       }),
 
