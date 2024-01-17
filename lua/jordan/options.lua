@@ -31,7 +31,6 @@ opt.updatetime = 250
 opt.timeout = true
 opt.timeoutlen = 300
 
-opt.completeopt = "menuone,noselect"
 opt.hlsearch = false
 
 opt.breakindent = true

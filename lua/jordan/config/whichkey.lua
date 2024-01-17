@@ -1,11 +1,14 @@
 return {
   "folke/which-key.nvim",
+
   event = "VeryLazy",
+
   config = function()
     vim.o.timeout = true
     vim.o.timeoutlen = 300
 
     local which_key = require("which-key")
+
     local icons = {
       ui = require("jordan.ui.icons").get("ui", true),
       cmp = require("jordan.ui.icons").get("cmp", true),
@@ -22,13 +25,13 @@ return {
         },
 
         presets = {
-          operators = true, -- adds help for operators like d, y, ...
-          motions = true, -- adds help for motions
-          text_objects = true, -- help for text objects triggered after entering an operator
-          windows = false, -- default bindings on <c-w>
-          nav = true, -- misc bindings to work with windows
-          z = true, -- bindings for folds, spelling and others prefixed with z
-          g = true, -- bindings for prefixed with g
+          operators = true,
+          motions = true,
+          text_objects = true,
+          windows = false,
+          nav = true,
+          z = true,
+          g = true,
         },
       },
 
@@ -40,10 +43,10 @@ return {
       },
 
       layout = {
-        height = { min = 16, max = 24 }, -- min and max height of the columns
-        width = { min = 20, max = 40 }, -- min and max width of the columns
-        spacing = 5, -- spacing between columns
-        align = "center", -- align columns left, center or right
+        height = { min = 16, max = 24 },
+        width = { min = 20, max = 40 },
+        spacing = 5,
+        align = "center",
       },
 
       triggers_nowait = {

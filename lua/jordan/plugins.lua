@@ -47,13 +47,7 @@ return {
     opts = {},
   },
 
-  -- {
-  --   "andrewferrier/wrapping.nvim",
-  --   config = function()
-  --     require("wrapping").setup()
-  --   end,
-  -- },
-
   -- import plugins from config folder
   { import = "jordan.config" },
+  { import = "jordan.after" },
 }

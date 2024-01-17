@@ -92,7 +92,7 @@ return {
     map.set("n", "<leader>sf", menus.getFindFiles, { desc = "files" })
 
     -- find text
-    map.set("n", "<leader><space>", menus.getBufferFzy, { desc = "search current buffer" })
+    map.set("n", "/", menus.getBufferFzy, { desc = "search current buffer" })
     map.set("n", "<leader>sc", menus.getGrepCurrentWord, { desc = "cursor word" })
     map.set("n", "<leader>sg", menus.getLiveGrep, { desc = "grep" })
 

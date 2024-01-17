@@ -15,10 +15,10 @@ return {
   dependencies = { "nvim-tree/nvim-web-devicons" },
   cmd = { "NvimTreeOpen", "NvimTreeToggle", "NvimTreeFocus", "NvimTreeFindFile" },
   keys = {
-    { "<leader>ee", toggle, desc = "toggle explorer" },
-    { "<leader>ef", focus, desc = "focus explorer" },
-    { "<leader>er", refresh, desc = "refresh explorer" },
-    { "<leader>eo", opened, desc = "opened file explorer" },
+    { "<leader>e", toggle, desc = "toggle explorer" },
+    -- { "<leader>ef", focus, desc = "focus explorer" },
+    -- { "<leader>er", refresh, desc = "refresh explorer" },
+    -- { "<leader>eo", opened, desc = "opened file explorer" },
   },
 
   opts = {
@@ -28,6 +28,7 @@ return {
     },
 
     git = { enable = true, ignore = false },
+
     modified = {
       enable = true,
       show_on_dirs = true,

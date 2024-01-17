@@ -1,5 +1,9 @@
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+-- completion settings
+vim.g.completion_confirm_key = ""
+vim.g.completion_matching_strategy_list = { "exact", "substring", "fuzzy" }
 
 -- Do not load tohtml.vim
 vim.g.loaded_2html_plugin = 1
