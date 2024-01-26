@@ -27,7 +27,7 @@ return {
     local dashboard = require("alpha.themes.dashboard")
 
     dashboard.section.buttons.val = {
-      dashboard.button("e", explorer, "<Cmd>NvimTreeFocus<CR>>"),
+      -- dashboard.button("e", explorer, "<Cmd>NvimTreeFocus<CR>>"),
       dashboard.button("f", file, findFiles),
       dashboard.button("r", recent, recentFiles),
       dashboard.button("g", text, liveGrep),
