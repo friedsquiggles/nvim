@@ -86,20 +86,19 @@ return {
 
     local map = vim.keymap
 
-    -- find buffers
-    map.set("n", "<leader>sr", menus.getRecentFiles, { desc = "recent files" })
-    map.set("n", "<leader>sb", menus.getActiveBuffers, { desc = "active buffers" })
-    map.set("n", "<leader>sf", menus.getFindFiles, { desc = "files" })
+    -- main
+    map.set("n", "<leader><space>", menus.getActiveBuffers, { desc = "active buffers" })
+    map.set("n", "<leader>/", menus.getRecentFiles, { desc = "recent files" })
 
-    -- find text
-    map.set("n", "/", menus.getBufferFzy, { desc = "search current buffer" })
+    -- search
+    map.set("n", "<leader>sf", menus.getFindFiles, { desc = "files" })
     map.set("n", "<leader>sc", menus.getGrepCurrentWord, { desc = "cursor word" })
     map.set("n", "<leader>sg", menus.getLiveGrep, { desc = "grep" })
 
     -- symbols
     map.set("n", "<leader>ld", menus.getTreeSitter, { desc = "doc symbols" })
     map.set("n", "<leader>lr", menus.getLspRefs, { desc = "references" })
-    map.set("n", "<leader>lq", menus.getQuickFix, { desc = "quick fix" })
+    -- map.set("n", "<leader>lq", menus.getQuickFix, { desc = "quick fix" })
 
     -- git files and commands
     map.set("n", "<leader>gs", menus.getGitStatus, { desc = "git status" })

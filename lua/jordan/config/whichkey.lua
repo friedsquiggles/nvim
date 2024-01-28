@@ -97,74 +97,39 @@ return {
       ["<leader>0"] = "which_key_ignore",
     }
 
-    -- normal mode opts
-    local opts = {
-      mode = "n",
-      prefix = "<leader>",
-      buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-      silent = true, -- use `silent` when creating keymaps
-      noremap = true, -- use `noremap` when creating keymaps
-      nowait = true, -- use `nowait` when creating keymaps
-    }
-
-    -- local mappings = {
-    --   [";"] = { "<cmd>Alpha<cr>", "" },
-    --   ["/"] = { "<cmd><cr>", "" },
-    --   ["?"] = { "<cmd><cr>", "" },
-    --   [">"] = { "<cmd><cr>", "" },
-    --   ["<lt>"] = { "<cmd><cr>", "" },
-    --   --groups
-    --   ["a"] = { name = "" },
-    --   ["b"] = { name = "[b]uffers" },
-    --   ["c"] = { name = "" },
-    --   ["d"] = { name = "[d]ebug" },
-    --   ["e"] = { name = "" },
-    --   ["f"] = { name = "" },
-    --   ["g"] = { name = "[g]it" },
-    --   ["h"] = { name = "" },
-    --   ["i"] = { name = "" },
-    --   ["j"] = { name = "" },
-    --   ["k"] = { name = "" },
-    --   ["l"] = { name = "[l]sp" },
-    --   ["m"] = { name = "" },
-    --   ["n"] = { name = "" },
-    --   ["o"] = { name = "[o]utline" },
-    --   ["p"] = { name = "" },
-    --   ["q"] = { name = "" },
-    --   ["s"] = { name = "[s]earch" },
-    --   ["t"] = { name = "" },
-    --   ["u"] = { name = "" },
-    --   ["v"] = { name = "" },
-    --   ["w"] = { name = "" },
-    --   ["x"] = { name = "diagnosti[x]" },
-    --   ["y"] = { name = "" },
-    --   ["z"] = { name = "" },
-    -- }
-
-    -- insert mode options
-    local vopts = {
-      mode = "v",
-      prefix = "<leader>",
-      buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-      silent = true, -- use `silent` when creating keymaps
-      noremap = true, -- use `noremap` when creating keymaps
-      nowait = true, -- use `nowait` when creating keymaps
-    }
-
-    -- local v_mappings = {}
-
-    -- insert mode options
-    local iopts = {
-      mode = "i",
-      prefix = "<C-i>",
-      buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-      silent = true, -- use `silent` when creating keymaps
-      noremap = true, -- use `noremap` when creating keymaps
-      nowait = true, -- use `nowait` when creating keymaps
-    }
-
-    -- local i_mappings = {}
-
     which_key.register(groups)
+
+    which_key.register({
+      -- flash
+      l = {
+        name = "flash",
+        s = {
+          function()
+            require("flash").jump()
+          end,
+          "flash jump",
+        },
+        t = {
+          function()
+            require("flash").treesitter()
+          end,
+          "flash treesitter",
+        },
+        r = {
+          function()
+            require("flash").treesitter_search()
+          end,
+          "flash treesitter search",
+        },
+        c = {
+          function()
+            require("flash").jump({
+              pattern = vim.fn.expand("<cword>"),
+            })
+          end,
+          "flash cursor word",
+        },
+      },
+    }, { prefix = "<leader>" })
   end,
 }

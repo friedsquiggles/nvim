@@ -10,6 +10,7 @@ return {
     "hrsh7th/cmp-nvim-lsp",
     "jose-elias-alvarez/typescript.nvim",
   },
+
   opts = {
     diagnostics = {
       underline = true,
@@ -17,6 +18,7 @@ return {
       autoformat = true,
       virtual_text = { prefix = "icons" },
     },
+
     servers = {
       lua_ls = {
         settings = {
@@ -41,12 +43,15 @@ return {
           },
         },
       },
+
       tsserver = {
         completions = { completeFunctionCalls = true },
+
         diagnostics = {
           -- "cannot redeclare block-scoped variable" -> useless when applied to JXA
           ignoredCodes = { 2451 },
         },
+
         typescript = {
           inlayHints = {
             includeInlayEnumMemberValueHints = true,
@@ -59,6 +64,7 @@ return {
             includeInlayVariableTypeHintsWhenTypeMatchesName = true,
           },
         },
+
         javascript = {
           inlayHints = {
             includeInlayEnumMemberValueHints = true,
@@ -72,6 +78,7 @@ return {
           },
         },
       },
+
       yamlls = {
         settings = {
           yaml = {

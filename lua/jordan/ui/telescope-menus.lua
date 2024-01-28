@@ -13,8 +13,8 @@ local heightWithPreview = 0.7
 local widthWithPreview = 0.8
 
 -- dimensions no preview
-local heightWithoutPreview = 0.5
-local widthWithoutPreview = 0.4
+local heightWithoutPreview = 0.6
+local widthWithoutPreview = 0.6
 
 -- current buffer fuzzy find
 local bufFzyHeight = 0.7
@@ -147,6 +147,8 @@ function M.getActiveBuffers()
     prompt_prefix = iconPrefix(icon),
     cwd_only = true,
     win_blend = blend,
+    sort_lastused = false,
+    sort_mru = true,
     layout_config = {
       height = heightWithoutPreview,
       width = widthWithoutPreview,
