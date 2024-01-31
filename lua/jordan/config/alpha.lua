@@ -6,43 +6,126 @@ return {
 
     local icons = {
       kind = require("jordan.ui.icons").get("kind", true),
+      ui = require("jordan.ui.icons").get("ui", true),
       misc = require("jordan.ui.icons").get("misc", true),
       git = require("jordan.ui.icons").get("git", true),
       docs = require("jordan.ui.icons").get("documents", true),
     }
 
-    local explorer = icons.docs.FileTree .. " Explorer"
-    local file = icons.kind.File .. " Find file"
-    local text = icons.kind.Text .. " grep"
-    local recent = icons.misc.Watch .. " Recent files"
-    local mason = icons.misc.Lego .. " Mason"
-    local git = icons.git.Git .. " Changes"
+    -- button names
+    local exp = icons.ui.Search .. " explorer"
+    local file = icons.kind.File .. " file"
+    local text = icons.kind.Text .. " text"
+    local recent = icons.misc.Watch .. " recent"
+    local mason = icons.misc.Lego .. " mason"
+    local git = icons.git.Git .. " git"
 
+    -- button commands
+    local explorer = ":lua require(oil).actions.open_cwd()<CR>"
     local findFiles = ":lua require('jordan.ui.telescope-menus').getFindFiles()<CR>"
     local recentFiles = ":lua require('jordan.ui.telescope-menus').getRecentFiles()<CR>"
     local liveGrep = ":lua require('jordan.ui.telescope-menus').getLiveGrep()<CR>"
     local gitStatus = ":lua require('jordan.ui.telescope-menus').getGitStatus()<CR>"
-    -- local liveGrep =
 
-    local dashboard = require("alpha.themes.dashboard")
+    local startify = require("alpha.themes.startify")
+    local section = startify.section
 
-    dashboard.section.buttons.val = {
-      -- dashboard.button("e", explorer, "<Cmd>NvimTreeFocus<CR>>"),
-      dashboard.button("f", file, findFiles),
-      dashboard.button("r", recent, recentFiles),
-      dashboard.button("g", text, liveGrep),
-      dashboard.button("c", git, gitStatus),
-      dashboard.button("l", "󰒲 " .. " Lazy", ":Lazy<CR>"),
-      dashboard.button("m", mason, ":Mason<CR>"),
-      dashboard.button("q", " " .. " Quit", ":qa<CR>"),
+    section.header.opts.hl = "AlphaHeader"
+
+    section.top_buttons = {
+      type = "group",
+      val = {
+        startify.button("e", exp, explorer),
+        startify.button("f", file, findFiles),
+        startify.button("r", recent, recentFiles),
+        startify.button("t", text, liveGrep),
+        startify.button("g", git, gitStatus),
+        startify.button("l", "󰒲 " .. " lazy", ":Lazy<CR>"),
+        startify.button("m", mason, ":Mason<CR>"),
+      },
     }
 
-    dashboard.section.header.opts.hl = "AlphaHeader"
-    -- dashboard.section.buttons.opts.hl = "AlphaButtons"
-    -- dashboard.section.buttons.opts.hl_shortcut = "Boolean"
-    -- dashboard.section.footer.opts.hl = "AlphaFooter"
-    dashboard.opts.layout[1].val = 8
+    section.bottom_buttons.val = {
+      startify.button("q", " " .. " quit", ":qa<CR>"),
+    }
 
-    alpha.setup(dashboard.config)
+    -- MRU
+    section.mru = {
+      type = "group",
+      val = {
+        { type = "padding", val = 1 },
+        {
+          type = "text",
+          val = " Recent Files",
+          opts = { hl = "SpecialComment" },
+        },
+        { type = "padding", val = 1 },
+        {
+          type = "group",
+          val = function()
+            return { startify.mru(1, false, 3) }
+          end,
+          -- opts = { shrink_margin = false },
+        },
+      },
+    }
+
+    -- cwd title
+    local function mru_title()
+      return "MRU " .. vim.fn.getcwd()
+    end
+
+    -- MRU cwd
+    section.mru_cwd = {
+      type = "group",
+      val = {
+        { type = "padding", val = 1 },
+        {
+          type = "text",
+          val = " " .. mru_title(),
+          opts = { hl = "SpecialComment" },
+        },
+        { type = "padding", val = 1 },
+        {
+          type = "group",
+          val = function()
+            return { startify.mru(4, vim.fn.getcwd()) }
+          end,
+          opts = { shrink_margin = false },
+        },
+      },
+    }
+
+    -- disable nvim_web_devicons
+    startify.nvim_web_devicons.enabled = true
+    startify.nvim_web_devicons.highlight = true
+    startify.nvim_web_devicons.highlight = "Keyword"
+
+    -- startify.section.footer.val = {
+    --   { type = "text", val = "footer" },
+    -- }
+
+    local default_mru_ignore = { "gitcommit" }
+
+    -- ignore filetypes in MRU
+    startify.mru_opts.ignore = function(path, ext)
+      return (string.find(path, "COMMIT_EDITMSG")) or (vim.tbl_contains(default_mru_ignore, ext))
+    end
+
+    startify.config.layout = {
+      { type = "padding", val = 1 },
+      section.header,
+      { type = "padding", val = 3 },
+      section.top_buttons,
+      { type = "padding", val = 1 },
+      section.mru,
+      { type = "padding", val = 1 },
+      section.mru_cwd,
+      { type = "padding", val = 1 },
+      section.bottom_buttons,
+      -- section.footer,
+    }
+
+    alpha.setup(startify.config)
   end,
 }

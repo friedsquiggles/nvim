@@ -21,12 +21,18 @@ return {
       defaults = {
         path_display = { "smart" },
         color_devicons = true,
-        layout_strategy = "horizontal",
+        layout_strategy = "vertical",
         sorting_strategy = "ascending",
         prompt_prefix = "   ",
         selection_caret = "  ",
         border = true,
         borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+
+        layout_config = {
+          vertical = {
+            prompt_position = "top",
+          },
+        },
 
         mappings = {
           i = {
@@ -82,6 +88,7 @@ return {
     pcall(telescope.load_extension, "fzf")
 
     local builtin = require("telescope.builtin")
+    local utils = require("telescope.utils")
     local menus = require("jordan.ui.telescope-menus")
 
     local map = vim.keymap
@@ -106,7 +113,8 @@ return {
     map.set("n", "<leader>gl", menus.getGitCommits, { desc = "git log" })
 
     -- reference
-    map.set("n", "<leader>dd", builtin.diagnostics, { desc = "diagnostics" })
+    map.set("n", "<leader>sd", builtin.diagnostics, { desc = "diagnostics" })
     map.set("n", "<leader>sh", builtin.highlights, { desc = "highlights" })
+    map.set("n", "<leader>sk", builtin.keymaps, { desc = "keymaps" })
   end,
 }

@@ -120,6 +120,7 @@ local data = {
     Perf = "󰅒",
     Pin = "",
     Play = "",
+    Power = "",
     Project = "",
     Right = "",
     RootFolderOpened = "",
