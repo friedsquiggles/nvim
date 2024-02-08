@@ -1,7 +1,7 @@
 return {
 
   -- use same keymaps for moving between panes
-  { "christoomey/vim-tmux-navigator" },
+  -- { "christoomey/vim-tmux-navigator" },
 
   -- git from nvim command line
   { "tpope/vim-fugitive" },

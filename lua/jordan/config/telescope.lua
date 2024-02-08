@@ -29,9 +29,7 @@ return {
         borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
 
         layout_config = {
-          vertical = {
-            prompt_position = "top",
-          },
+          prompt_position = "top",
         },
 
         mappings = {

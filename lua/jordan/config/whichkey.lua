@@ -12,6 +12,7 @@ return {
     local icons = {
       ui = require("jordan.ui.icons").get("ui", true),
       cmp = require("jordan.ui.icons").get("cmp", true),
+      documents = require("jordan.ui.icons").get("documents", true),
       misc = require("jordan.ui.icons").get("misc", true),
       type = require("jordan.ui.icons").get("type", true),
     }
@@ -25,11 +26,11 @@ return {
         },
 
         presets = {
-          operators = true,
-          motions = true,
+          operators = false,
+          motions = false,
           text_objects = true,
           windows = false,
-          nav = true,
+          nav = false,
           z = true,
           g = true,
         },
@@ -74,15 +75,6 @@ return {
 
     local groups = {
       mode = { "n" },
-      ["<leader>b"] = { name = icons.ui.FolderOpen .. "buffers" },
-      ["<leader>d"] = { name = icons.ui.Bug .. "diag" },
-      ["<leader>e"] = { name = icons.ui.List .. "explorer" },
-      ["<leader>s"] = { name = icons.ui.Search .. "search" },
-      -- ["<leader>g"] = { name = icons.cmp.copilot_alt .. "git" },
-      -- ["<leader>l"] = { name = icons.misc.LspAvailable .. "lsp" },
-      ["<leader>x"] = { name = icons.ui.Fire .. "trouble" },
-      ["<leader>t"] = { name = icons.ui.Toggle .. "toggle" },
-      ["<leader>c"] = { name = icons.ui.Gear .. "config" },
 
       --ignore
       ["<leader>1"] = "which_key_ignore",
@@ -101,13 +93,21 @@ return {
 
     which_key.register({
 
-      ["x"] = { "<cmd>x<cr>", icons.ui.Pencil .. "write & quit" },
-      ["q"] = { "<cmd>bw<cr>", icons.ui.Close .. "close" },
-      ["Q"] = { "<cmd>qa!<cr>", icons.ui.Power .. "quit!" },
+      ["x"] = { "<cmd>x<cr>", icons.ui.Pencil .. " write & quit" },
+      ["q"] = { "<cmd>bw<cr>", icons.ui.Close .. " close" },
+      ["Q"] = { "<cmd>qa!<cr>", icons.ui.Power .. " quit!" },
+
+      b = {
+        name = icons.documents.Files .. " buffer",
+      },
+
+      c = {
+        name = icons.ui.Gear .. " config",
+      },
 
       -- git
       g = {
-        name = icons.cmp.copilot_alt .. "git",
+        name = icons.cmp.copilot_alt .. " git",
         -- g = { "<cmd>lua require 'lvim.core.terminal'.lazygit_toggle()<cr>", "Lazygit" },
         j = {
           "<cmd>lua require 'gitsigns'.next_hunk({navigation_message = false})<cr>",
@@ -128,8 +128,8 @@ return {
           "undo stage hunk",
         },
         s = { "<cmd>Telescope git_status<cr>", "status" },
-        b = { "<cmd>Telescope git_branches<cr>", "checkout branch" },
-        c = { "<cmd>Telescope git_commits<cr>", "checkout commit" },
+        b = { "<cmd>Telescope git_branches<cr>", "branches" },
+        c = { "<cmd>Telescope git_commits<cr>", "commits" },
         C = {
           "<cmd>Telescope git_bcommits<cr>",
           "checkout commit(file)",
@@ -142,7 +142,7 @@ return {
 
       -- LSP
       l = {
-        name = icons.misc.LspAvailable .. "LSP",
+        name = icons.misc.LspAvailable .. " lsp",
         a = { "<cmd>Lspsaga code_action<cr>", "code action" },
         d = { "<cmd>Lspsaga peek_definition<cr>", "peek def" },
         D = { "<cmd>Lspsaga goto_definition<cr>", "goto def" },
@@ -169,7 +169,11 @@ return {
 
       s = {
         name = icons.ui.Search .. " search",
-        n = { "<cmd>Telescope notify<cr>", "Notifications" },
+        n = { "<cmd>lua require('telescope').extensions.notify.notify({})<cr>", "notify" },
+      },
+      -- <cmd>Telescope notify<cr>
+      t = {
+        name = icons.ui.Toggle .. " toggle",
       },
     }, {
       prefix = "<leader>",

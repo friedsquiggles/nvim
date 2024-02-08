@@ -21,7 +21,7 @@ return {
     local git = icons.git.Git .. " git"
 
     -- button commands
-    local explorer = ":lua require(oil).actions.open_cwd()<CR>"
+    local explorer = ":Oil<CR>"
     local findFiles = ":lua require('jordan.ui.telescope-menus').getFindFiles()<CR>"
     local recentFiles = ":lua require('jordan.ui.telescope-menus').getRecentFiles()<CR>"
     local liveGrep = ":lua require('jordan.ui.telescope-menus').getLiveGrep()<CR>"
