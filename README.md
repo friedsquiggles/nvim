@@ -2,4 +2,4 @@
 
 🚧 WIP
 
-Personal neovim configuration files running on macOS, iTerm2, and tmux
+Personal neovim configuration files running on macOS, wezterm, and tmux
