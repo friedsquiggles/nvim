@@ -1,3 +1,12 @@
+local has_words_before = function()
+  if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
+    return false
+  end
+  local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0
+    and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
+end
+
 return {
   "hrsh7th/nvim-cmp",
   event = { "InsertEnter", "CmdLineEnter" },
@@ -22,10 +31,6 @@ return {
     local luasnip = require("luasnip")
     local lspkind = require("lspkind")
     local defaults = require("cmp.config.default")()
-
-    local t = function(str)
-      return vim.api.nvim_replace_termcodes(str, true, true, true)
-    end
 
     local border = function(hl)
       return {
@@ -71,39 +76,54 @@ return {
         end,
       },
 
-      mapping = cmp.mapping.preset.insert({
-        ["<CR>"] = cmp.mapping.confirm({ select = false, behavior = cmp.ConfirmBehavior.Replace }),
-        ["<C-p>"] = cmp.mapping.select_prev_item(),
-        ["<C-n>"] = cmp.mapping.select_next_item(),
-        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        ["<C-w>"] = cmp.mapping.close(),
+      mapping = {
+        ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
+        ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
+
+        ["<Down>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
+        ["<Up>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
+
+        ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
+        ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
+
+        ["<C-e>"] = cmp.mapping({
+          i = cmp.mapping.abort(),
+          c = cmp.mapping.close(),
+        }),
+
+        ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+
+        ["<CR>"] = cmp.mapping.confirm({ select = true }),
+
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
-          elseif require("luasnip").expand_or_locally_jumpable() then
-            vim.fn.feedkeys(t("<Plug>luasnip-expand-or-jump"))
+          elseif luasnip.expand_or_locally_jumpable() then
+            luasnip.expand_or_jump()
+          elseif has_words_before() then
+            cmp.complete()
           else
             fallback()
           end
         end, { "i", "s" }),
+
         ["<S-Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
-          elseif require("luasnip").jumpable(-1) then
-            vim.fn.feedkeys(t("<Plug>luasnip-jump-prev"), "")
+          elseif luasnip.jumpable(-1) then
+            luasnip.jump(-1)
           else
             fallback()
           end
         end, { "i", "s" }),
-      }),
+      },
 
       sources = cmp.config.sources({
         { name = "nvim_lsp", max_item_count = 5, priority = 1000 },
         { name = "luasnip", max_item_count = 5, priority = 700 },
         { name = "buffer", max_item_count = 3, priority = 500 },
         { name = "path", max_item_count = 5, priority = 200 },
-        { name = "emoji", max_item_count = 5, priority = 100 },
+        { name = "emoji", max_item_count = 12, priority = 100 },
       }),
 
       sorting = defaults.sorting,
@@ -129,7 +149,7 @@ return {
           local strings = vim.split(kind.kind, "%s", { trimempty = true })
 
           kind.kind = " " .. (strings[1] or "") .. " "
-          kind.menu = "    (" .. (strings[2] or "") .. ")"
+          kind.menu = "    (" .. (strings[2] or "") .. ") "
 
           return kind
         end,

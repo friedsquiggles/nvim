@@ -96,9 +96,20 @@ return {
       ["x"] = { "<cmd>x<cr>", icons.ui.Pencil .. " write & quit" },
       ["q"] = { "<cmd>bw<cr>", icons.ui.Close .. " close" },
       ["Q"] = { "<cmd>qa!<cr>", icons.ui.Power .. " quit!" },
+      ["."] = { "<cmd>bn<cr>", icons.ui.Power .. " next buffer" },
+      [","] = { "<cmd>bp<cr>", icons.ui.Power .. " prev buffer" },
+
+      a = {
+        name = "" .. " ai",
+        s = { "<cmd>Copilot status<cr>", "status" },
+        p = { "<cmd>Copilot panel<cr>", "panel" },
+        e = { "<cmd>Copilot enable<cr>", "enable" },
+        x = { "<cmd>Copilot disable<cr>", "disable" },
+      },
 
       b = {
         name = icons.documents.Files .. " buffer",
+        c = { "<cmd>bd<cr>", "close buffer" },
       },
 
       c = {
@@ -165,6 +176,24 @@ return {
         S = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "symbols (ws)" },
         t = { "<cmd>Lspsaga peek_type_definition<cr>", "peek type def" },
         T = { "<cmd>Lspsaga goto_type_definition<cr>", "goto type def" },
+      },
+
+      n = {
+        name = "notes",
+        n = { "<cmd>ObsidianNew<cr>", "new note" },
+        o = { "<cmd>ObsidianOpen<cr>", "open note" },
+        r = { "<cmd>ObsidianRename<cr>", "rename note" },
+        d = { "<cmd>ObsidianToday<cr>", "daily note" },
+        t = { "<cmd>ObsidianTomorrow<cr>", "tomorrow's note" },
+        y = { "<cmd>ObsidianYesterday<cr>", "yesterday's note" },
+        s = { "<cmd>ObsidianSearch<cr>", "search notes" },
+        f = { "<cmd>ObsidianFollowLink<cr>", "follow url" },
+        p = { "<cmd>ObsidianQuickSwitch<cr>", "switch" },
+        l = {
+          name = "list...",
+          b = { "<cmd>ObsidianBacklinks<cr>", "backlinks" },
+          t = { "<cmd>ObsidianTags<cr>", "tags" },
+        },
       },
 
       s = {

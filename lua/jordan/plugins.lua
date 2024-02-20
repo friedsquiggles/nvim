@@ -1,8 +1,5 @@
 return {
 
-  -- use same keymaps for moving between panes
-  -- { "christoomey/vim-tmux-navigator" },
-
   -- git from nvim command line
   { "tpope/vim-fugitive" },
 
@@ -23,6 +20,26 @@ return {
 
   -- highlight word under cursor
   { "echasnovski/mini.cursorword", version = "*", opts = {} },
+
+  -- clear visual distractions
+  {
+    "folke/zen-mode.nvim",
+    opts = {
+      wezterm = {
+        enable = true,
+      },
+    },
+  },
+
+  -- dim out of scope code
+  {
+    "folke/twilight.nvim",
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    },
+  },
 
   -- neovim config helper
   {

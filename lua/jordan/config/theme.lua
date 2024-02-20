@@ -5,14 +5,17 @@ return {
   config = function()
     require("catppuccin").setup({
       flavour = "macchiato", -- Can be one of: latte, frappe, macchiato, mocha
+
       dim_inactive = {
         enabled = true,
         shade = "dark",
         percentage = 0.2,
       },
+
       show_end_of_buffer = false, -- show the '~' characters after the end of buffers
       term_colors = true,
       compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
+
       styles = {
         comments = { "italic" },
         properties = {},
@@ -27,6 +30,7 @@ return {
         strings = {},
         variables = {},
       },
+
       integrations = {
         treesitter = true,
         native_lsp = {
@@ -44,9 +48,10 @@ return {
             information = { "underline" },
           },
         },
+
         aerial = false,
         alpha = true,
-        barbar = true,
+        barbar = false,
         beacon = false,
         cmp = true,
         coc_nvim = false,
@@ -54,13 +59,13 @@ return {
         dashboard = false,
         dropbar = { enabled = false, color_mode = true },
         fern = false,
-        fidget = true,
-        flash = false,
+        fidget = false,
+        flash = true,
         gitgutter = false,
         gitsigns = true,
         harpoon = false,
         headlines = false,
-        hop = true,
+        hop = false,
         illuminate = true,
         indent_blankline = { enabled = false, colored_indent_levels = false },
         leap = false,
@@ -76,7 +81,7 @@ return {
         neotree = { enabled = false, show_root = true, transparent_panel = false },
         noice = false,
         notify = true,
-        nvimtree = true,
+        nvimtree = false,
         overseer = false,
         pounce = false,
         rainbow_delimiters = true,
@@ -122,67 +127,6 @@ return {
             AlphaFooter = { fg = cp.blue },
 
             ColorColumn = { bg = frappe.mantle },
-
-            -- barbar
-            -- tabpage
-            BufferTabpageFill = { bg = cp.none },
-
-            -- barbar
-            -- current buffer
-            BufferCurrent = { fg = latte.text, bg = latte.surface2 },
-            BufferCurrentIndex = { fg = latte.text, bg = latte.surface2 },
-            BufferCurrentMod = { fg = latte.peach, bg = latte.surface2 },
-            BufferCurrentSign = { fg = latte.pink, bg = latte.surface2 },
-            BufferCurrentSignRight = { fg = latte.pink, bg = latte.surface2 },
-            BufferCurrentHINT = { fg = latte.subtext0, bg = latte.surface2 },
-            BufferCurrentINFO = { fg = latte.subtext0, bg = latte.surface2 },
-            BufferCurrentWARN = { fg = latte.subtext0, bg = latte.surface2 },
-            BufferCurrentERROR = { fg = latte.subtext0, bg = latte.surface2 },
-            BufferCurrentADDED = { fg = latte.subtext0, bg = latte.surface2 },
-            BufferCurrentCHANGED = { fg = latte.subtext0, bg = latte.surface2 },
-            BufferCurrentDELETED = { fg = latte.subtext0, bg = latte.surface2 },
-
-            -- barbar
-            -- inactive
-            BufferInactive = { fg = latte.subtext0, bg = latte.surface0 },
-            BufferInactiveIndex = { fg = latte.subtext0, bg = latte.surface0 },
-            BufferInactiveMod = { fg = latte.peach, bg = latte.surface0 },
-            BufferInactiveSign = { fg = latte.subtext0, bg = latte.surface0 },
-            BufferInactiveHINT = { fg = latte.subtext0, bg = latte.surface0 },
-            BufferInactiveINFO = { fg = latte.subtext0, bg = latte.surface0 },
-            BufferInactiveWARN = { fg = latte.subtext0, bg = latte.surface0 },
-            BufferInactiveERROR = { fg = latte.subtext0, bg = latte.surface0 },
-            BufferInactiveADDED = { fg = latte.subtext0, bg = latte.surface0 },
-            BufferInactiveCHANGED = { fg = latte.subtext0, bg = latte.surface0 },
-            BufferInactiveDELETED = { fg = latte.subtext0, bg = latte.surface0 },
-
-            -- barbar
-            -- visible
-            BufferVisible = { fg = latte.subtext0, bg = latte.surface0 },
-            BufferVisibleIndex = { fg = latte.subtext0, bg = latte.surface0 },
-            BufferVisibleMod = { fg = latte.peach, bg = latte.surface0 },
-            BufferVisibleSign = { fg = latte.subtext0, bg = latte.surface0 },
-            BufferVisibleHINT = { fg = latte.subtext0, bg = latte.surface0 },
-            BufferVisibleINFO = { fg = latte.subtext0, bg = latte.surface0 },
-            BufferVisibleWARN = { fg = latte.subtext0, bg = latte.surface0 },
-            BufferVisibleERROR = { fg = latte.subtext0, bg = latte.surface0 },
-            BufferVisibleADDED = { fg = latte.subtext0, bg = latte.surface0 },
-            BufferVisibleCHANGED = { fg = latte.subtext0, bg = latte.surface0 },
-            BufferVisibleDELETED = { fg = latte.subtext0, bg = latte.surface0 },
-
-            -- barbar
-            -- alternate
-            BufferAlternate = { fg = latte.subtext0 },
-            BufferAlternateIndex = { fg = latte.subtext0, bg = latte.surface0 },
-            BufferAlternateMod = { fg = latte.peach, bg = latte.surface0 },
-            BufferAlternateSign = { fg = latte.subtext0, bg = latte.surface0 },
-            BufferAlternateHINT = { fg = latte.subtext0, bg = latte.surface0 },
-            BufferAlternateINFO = { fg = latte.subtext0, bg = latte.surface0 },
-            BufferAlternateWARN = { fg = latte.subtext0, bg = latte.surface0 },
-            BufferAlternateERROR = { fg = latte.subtext0, bg = latte.surface0 },
-            BufferAlternateADDED = { fg = latte.subtext0, bg = latte.surface0 },
-            BufferAlternateCHANGED = { fg = latte.subtext0, bg = latte.surface0 },
-            BufferAlternateDELETED = { fg = latte.subtext0, bg = latte.surface0 },
 
             -- LSP
             LspInfoBorder = { link = "FloatBorder" },
@@ -240,16 +184,6 @@ return {
             -- Mini
             MiniIndentscopeSymbol = { fg = cp.flamingo },
             MiniIndentscopeSymbolOff = { fg = cp.flamingo },
-
-            -- For nvim-tree
-            NvimTreeRootFolder = { fg = cp.pink },
-            NvimTreeIndentMarker = { fg = cp.surface2 },
-            NvimTreeGitDirty = { fg = cp.yellow },
-            NvimTreeGitStaged = { fg = cp.green },
-            NvimTreeGitMerge = { fg = cp.maroon },
-            NvimTreeGitRenamed = { fg = cp.lavender },
-            NvimTreeGitNew = { fg = cp.yellow },
-            NvimTreeGitDeleted = { fg = cp.rosewater },
 
             -- For trouble.nvim
             TroubleNormal = { bg = cp.base },

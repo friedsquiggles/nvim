@@ -2,9 +2,29 @@ return {
   "mfussenegger/nvim-lint",
   lazy = "true",
   event = { "BufReadPre", "BufNewFile" },
-  config = function(plugin)
+  config = function(_)
     local lint = require("lint")
 
+    -- Declare MD linting config location
+    local markdownlint = lint.linters.markdownlint
+    markdownlint.args = {
+      "--config",
+      "~/.config/markdownlint/markdownlint.yaml",
+      "--stdin",
+    }
+
+    local luacheck = lint.linters.luacheck
+    luacheck.args = {
+      "--config",
+      "~/.config/luacheck/luacheckrc",
+      "--formatter",
+      "plain",
+      "--codes",
+      "--ranges",
+      "-",
+    }
+
+    -- Map linters to filetypes
     lint.linters_by_ft = {
       text = { "vale" },
       markdown = { "markdownlint" },
@@ -15,6 +35,7 @@ return {
       toml = { "eslint" },
       sh = { "shellcheck" },
       bash = { "shellcheck" },
+      lua = { "luacheck" },
     }
 
     local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })

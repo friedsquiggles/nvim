@@ -20,18 +20,12 @@ return {
     },
 
     sections = {
-      lualine_a = { "mode" },
+      lualine_a = {
+        { "mode", separator = "" },
+      },
 
       lualine_b = {
-        { "branch" },
-        {
-          "diff",
-          symbols = {
-            added = icons.git.Add,
-            modified = icons.git.Mod,
-            removed = icons.git.Remove,
-          },
-        },
+        { "buffers" },
       },
 
       lualine_c = {
@@ -44,23 +38,26 @@ return {
             hint = icons.diagnostics.Hint,
           },
         },
-        { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-        { "filename", path = 1, symbols = { modified = icons.ui.Modified_alt } },
       },
 
       lualine_x = {
-        { "searchcount" },
+        { "branch" },
+        {
+          "diff",
+          symbols = {
+            added = icons.git.Add,
+            modified = icons.git.Mod,
+            removed = icons.git.Remove,
+          },
+        },
       },
 
       lualine_y = {
-        { "location", separator = " ", padding = { left = 1, right = 0 } },
-        { "progress", padding = { left = 0, right = 2 } },
+        { "location", separator = " ", padding = { left = 0, right = 1 } },
       },
 
       lualine_z = {
-        function()
-          return icons.misc.Watch .. os.date("%R")
-        end,
+        { "progress", padding = { left = 1, right = 1 } },
       },
     },
   },

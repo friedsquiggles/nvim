@@ -21,13 +21,40 @@ return {
 
     servers = {
       lua_ls = {
+        single_file_support = true,
         settings = {
           Lua = {
             workspace = { checkThirdParty = false },
-            completion = { callSnippet = "Replace" },
-            diagnostics = { globals = { "vim" } },
+            completion = {
+              workspaceWord = true,
+              callSnippet = "Replace",
+            },
+            diagnostics = {
+              enable = true,
+              globals = { "vim" },
+              disable = { "incomplete-signature-doc", "trailing-space", "no-unknown" },
+              groupSeverity = {
+                strong = "Warning",
+                strict = "Warning",
+              },
+              groupFileStatus = {
+                ["ambiguity"] = "Opened",
+                ["await"] = "Opened",
+                ["codestyle"] = "None",
+                ["duplicate"] = "Opened",
+                ["global"] = "Opened",
+                ["luadoc"] = "Opened",
+                ["redefined"] = "Opened",
+                ["strict"] = "Opened",
+                ["strong"] = "Opened",
+                ["type-check"] = "Opened",
+                ["unbalanced"] = "Opened",
+                ["unused"] = "Opened",
+              },
+              unusedLocalExclude = { "_*" },
+            },
             format = {
-              enable = false,
+              enable = true,
               defaultConfig = {
                 indent_style = "space",
                 indent_size = "2",
@@ -36,7 +63,10 @@ return {
             },
             hint = {
               enable = true,
-              setType = true,
+              setType = false,
+              paramType = true,
+              paramName = "Disable",
+              semicolon = "Disable",
               arrayIndex = "Disable",
             },
             telemetry = false,
