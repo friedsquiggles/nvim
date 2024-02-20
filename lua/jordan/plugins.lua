@@ -21,16 +21,6 @@ return {
   -- highlight word under cursor
   { "echasnovski/mini.cursorword", version = "*", opts = {} },
 
-  -- clear visual distractions
-  {
-    "folke/zen-mode.nvim",
-    opts = {
-      wezterm = {
-        enable = true,
-      },
-    },
-  },
-
   -- dim out of scope code
   {
     "folke/twilight.nvim",

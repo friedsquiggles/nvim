@@ -93,9 +93,18 @@ return {
 
     which_key.register({
 
+      -- exit and close
       ["x"] = { "<cmd>x<cr>", icons.ui.Pencil .. " write & quit" },
       ["q"] = { "<cmd>bw<cr>", icons.ui.Close .. " close" },
       ["Q"] = { "<cmd>qa!<cr>", icons.ui.Power .. " quit!" },
+
+      -- modes
+      ["z"] = {
+        "<cmd>ZenMode<cr>",
+        "zen mode",
+      },
+
+      -- buffers
       ["."] = { "<cmd>bn<cr>", icons.ui.Power .. " next buffer" },
       [","] = { "<cmd>bp<cr>", icons.ui.Power .. " prev buffer" },
 
