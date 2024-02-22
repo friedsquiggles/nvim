@@ -10,6 +10,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     "preservim/vim-markdown",
   },
+
   opts = {
     mappings = {
 
@@ -76,10 +77,10 @@ return {
       min_chars = 2,
     },
 
-    tags = {
-      height = 10,
-      wrap = true,
-    },
+    -- tags = {
+    --   height = 10,
+    --   wrap = true,
+    -- },
 
     ui = {
       enable = true,

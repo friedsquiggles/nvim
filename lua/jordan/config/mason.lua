@@ -8,49 +8,82 @@ return {
   cmd = "Mason",
   keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
   build = ":MasonUpdate",
+
   opts = {
     automatic_installation = true,
+
     ensure_installed = {
+
+      -- typescript & javascript
       "typescript-language-server",
       "prettier",
       "eslint_d",
       "eslint-lsp",
-      "lua-language-server",
-      "luacheck",
-      "terraform-ls",
-      "tfsec",
-      "tflint",
-      "yaml-language-server",
-      "yamlfix",
-      "yamllint",
       "json-lsp",
       "jsonlint",
       "fixjson",
+
+      -- lua
+      "lua-language-server",
+      "luacheck",
+      "stylua",
+
+      -- terraform
+      "terraform-ls",
+      "tfsec",
+      "tflint",
+
+      -- yaml
+      "yaml-language-server",
+      "yamlfix",
+      "yamllint",
+
+      -- bash & shell
       "bash-language-server",
+      "shellcheck",
+
+      -- docker
       "docker-compose-language-service",
       "dockerfile-language-server",
-      "html-lsp",
+
+      -- html
+      -- "html-lsp",
+
+      -- vim
       "vim-language-server",
+
+      -- markdown
       "marksman",
       "markdownlint",
       "mdformat",
-      "ansible-language-server",
-      "ansible-lint",
+      "markdown-toc",
+
+      -- ansible
+      -- "ansible-language-server",
+      -- "ansible-lint",
+
+      -- todo: verify
       "codespell",
       "doctoc",
+
+      -- SQL
       "sql-formatter",
       "sqlls",
-      "stylua",
+
+      -- git & github
       "gh",
-      "shellcheck",
-      "vale",
+
+      -- freeform text
+      -- "vale",
     },
+
     ui = {
       package_installed = icons.ui.Accepted,
       package_pending = icons.ui.CloudDownload,
       package_uninstalled = icons.misc.Ghost,
     },
   },
+
   config = function(_, opts)
     require("mason").setup(opts)
     require("mason-lspconfig").setup(opts)
