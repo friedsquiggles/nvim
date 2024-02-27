@@ -94,14 +94,14 @@ M.config = function()
 
   -- search
   map("n", "<leader>sf", menus.getFindFiles, { desc = "files" })
-  map("n", "<leader>sc", menus.getGrepCurrentWord, { desc = "cursor word" })
-  map("n", "<leader>sw", menus.getLiveGrep, { desc = "grep" })
-  map("n", "<leader>sy", menus.getTreeSitter, { desc = "doc symbols" })
+  map("n", "<leader>sc", menus.getGrepCurrentWord, { desc = "cursor" })
+  map("n", "<leader>st", menus.getLiveGrep, { desc = "text" })
+  map("n", "<leader>sy", menus.getTreeSitter, { desc = "symbols" })
   map("n", "<leader>sr", menus.getLspRefs, { desc = "references" })
   map("n", "<leader>sg", menus.getGitStatus, { desc = "git status" })
   map("n", "<leader>sb", menus.getGitBranches, { desc = "git branches" })
   map("n", "<leader>sl", menus.getGitCommits, { desc = "git log" })
-  map("n", "<leader>sd", builtin.diagnostics, { desc = "diagnostics" })
+  map("n", "<leader>sd", builtin.diagnostics, { desc = "diags" })
   map("n", "<leader>sh", builtin.highlights, { desc = "highlights" })
   map("n", "<leader>sk", builtin.keymaps, { desc = "keymaps" })
 end

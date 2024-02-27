@@ -14,64 +14,65 @@ return {
 
     ensure_installed = {
 
+      -- todo: fix list
+
       -- typescript & javascript
-      "typescript-language-server",
-      "prettier",
-      "eslint_d",
-      "eslint-lsp",
-      "json-lsp",
-      "jsonlint",
-      "fixjson",
+      -- "typescript-language-server",
+      -- "prettier",
+      -- "eslint_d",
+      -- "eslint-lsp",
+      -- "json-lsp",
+      -- "jsonlint",
+      -- "fixjson",
 
       -- lua
-      "lua-language-server",
-      "luacheck",
-      "stylua",
+      -- "lua-language-server",
+      -- "luacheck",
+      -- "stylua",
 
       -- terraform
-      "terraform-ls",
-      "tfsec",
+      -- "terraform-ls",
+      -- "tfsec",
       "tflint",
 
       -- yaml
-      "yaml-language-server",
-      "yamlfix",
-      "yamllint",
+      -- "yaml-language-server",
+      -- "yamlfix",
+      -- "yamllint",
 
       -- bash & shell
-      "bash-language-server",
-      "shellcheck",
+      -- "bash-language-server",
+      -- "shellcheck",
 
       -- docker
-      "docker-compose-language-service",
-      "dockerfile-language-server",
+      -- "docker-compose-language-service",
+      -- "dockerfile-language-server",
 
       -- html
       -- "html-lsp",
 
       -- vim
-      "vim-language-server",
+      -- "vim-language-server",
 
       -- markdown
       "marksman",
-      "markdownlint",
-      "mdformat",
-      "markdown-toc",
+      -- "markdownlint",
+      -- "mdformat",
+      -- "markdown-toc",
 
       -- ansible
       -- "ansible-language-server",
       -- "ansible-lint",
 
-      -- todo: verify
-      "codespell",
-      "doctoc",
+      -- "codespell",
+      -- "doctoc",
 
       -- SQL
-      "sql-formatter",
+      -- "sql-formatter",
       "sqlls",
 
       -- git & github
-      "gh",
+      -- "gh",
 
       -- freeform text
       -- "vale",

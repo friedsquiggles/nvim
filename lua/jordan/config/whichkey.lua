@@ -213,6 +213,10 @@ return {
       t = {
         name = icons.ui.Toggle .. " toggle",
       },
+
+      x = {
+        name = "+diag/fix",
+      },
     }, {
       prefix = "<leader>",
       buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings

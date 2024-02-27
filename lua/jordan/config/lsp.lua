@@ -137,6 +137,7 @@ M.opts = {
 M.config = function(_, opts)
   local servers = opts.servers
   local cmp_lsp = require("cmp_nvim_lsp")
+  require("neodev").setup()
 
   local capabilities = vim.tbl_deep_extend(
     "force",

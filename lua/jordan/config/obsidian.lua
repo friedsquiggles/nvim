@@ -1,6 +1,7 @@
 return {
   "epwalsh/obsidian.nvim",
   version = "*",
+  -- ft = "markdown", -- prevents loading on non-markdown files but also dashboard
 
   dependencies = {
     -- Required.
@@ -21,7 +22,7 @@ return {
         opts = { noremap = false, expr = true, buffer = true },
       },
 
-      ["<leader>ch"] = {
+      ["<C-x>"] = {
         action = function()
           return require("obsidian").util.toggle_checkbox()
         end,

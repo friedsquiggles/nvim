@@ -6,8 +6,9 @@ local icons = {
 
 return {
   "simrat39/symbols-outline.nvim",
-  keys = { { "<leader>ts", "<cmd>SymbolsOutline<cr>", desc = "symbols outline" } },
+  keys = { { "<leader>so", "<cmd>SymbolsOutline<cr>", desc = "outline" } },
   cmd = "SymbolsOutline",
+
   opts = {
     highlight_hovered_item = true,
     show_guides = true,
@@ -22,6 +23,7 @@ return {
     auto_unfold_hover = false,
     fold_markers = { icons.ui.ArrowClosed, icons.ui.ArrowOpen },
     wrap = false,
+
     keymaps = {
       close = { "<Esc>", "q" },
       goto_location = "<CR>",
@@ -36,6 +38,7 @@ return {
       unfold_all = "O",
       fold_reset = "R",
     },
+
     symbols = {
       -- Kind
       Class = { icon = icons.kind.Class, hl = "LspKindClass" },

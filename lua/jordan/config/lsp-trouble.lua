@@ -11,6 +11,7 @@ local M = {
 
 -- Module options
 M.opts = {
+  mode = "workspace_diagnostics",
   position = "bottom",
   height = 30,
   width = 50,
@@ -19,8 +20,14 @@ M.opts = {
   fold_closed = icons.ui.ArrowClosed,
   group = true,
   padding = true,
+  indent_lines = true,
+  auto_open = false,
+  auto_close = true,
+  auto_preview = true,
+  auto_fold = true,
+  auto_jump = { "lsp_definitions" },
+  use_diagnostic_signs = true,
 
-  mode = "workspace_diagnostics",
   action_keys = {
     close = "q",
     cancel = "<Esc>",
@@ -40,12 +47,7 @@ M.opts = {
     previous = "k",
     next = "j",
   },
-  indent_lines = true,
-  auto_open = false,
-  auto_close = true,
-  auto_preview = true,
-  auto_fold = true,
-  auto_jump = { "lsp_definitions" },
+
   signs = {
     error = icons.diagnostics.Error,
     warning = icons.diagnostics.Warning,
@@ -53,7 +55,6 @@ M.opts = {
     information = icons.diagnostics.Information,
     other = icons.diagnostics.Question,
   },
-  use_diagnostic_signs = false,
 }
 
 -- Module configuration
@@ -63,16 +64,12 @@ M.config = function(_, opts)
 
   -- Keybindings
   map("n", "<leader>xx", function()
-    require("trouble").toggle()
-  end, { desc = "open" })
-
-  map("n", "<leader>xw", function()
-    require("trouble").toggle("workspace_diagnostics")
-  end, { desc = "workspace" })
-
-  map("n", "<leader>xd", function()
     require("trouble").toggle("document_diagnostics")
   end, { desc = "document" })
+
+  map("n", "<leader>xX", function()
+    require("trouble").toggle("workspace_diagnostics")
+  end, { desc = "workspace" })
 
   map("n", "<leader>xq", function()
     require("trouble").toggle("quickfix")

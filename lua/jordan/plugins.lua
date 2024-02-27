@@ -24,18 +24,11 @@ return {
   -- dim out of scope code
   {
     "folke/twilight.nvim",
-    opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-    },
+    opts = {},
   },
 
   -- neovim config helper
-  {
-    "folke/neodev.nvim",
-    opts = {},
-  },
+  { "folke/neodev.nvim" },
 
   -- comment toggler and helper
   {
@@ -54,7 +47,7 @@ return {
     opts = {},
   },
 
-  -- import plugins from config folder
+  -- import plugins folders
   { import = "jordan.config" },
   { import = "jordan.after" },
 }
