@@ -5,7 +5,7 @@ local leader_map = function()
   vim.api.nvim_set_keymap("x", " ", "", { noremap = true })
 end
 
-local load_package_manager = function ()
+local load_package_manager = function()
   local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
   if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
@@ -18,13 +18,14 @@ local load_package_manager = function ()
     })
   end
   vim.opt.rtp:prepend(lazypath)
-  require("lazy").setup(require 'jordan.plugins')
+  require("lazy").setup(require("jordan.plugins"))
 end
 
-local load = function ()
+local load = function()
   leader_map()
-  require 'jordan.globals'
-  require 'jordan.options'
+  require("jordan.globals")
+  require("jordan.autocmds")
+  require("jordan.options")
   load_package_manager()
 end
 
