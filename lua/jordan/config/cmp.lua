@@ -17,6 +17,7 @@ return {
     -- icons
     "onsails/lspkind.nvim",
   },
+
   opts = function()
     local has_words_before = function()
       local unpack = table.unpack or unpack ---@diagnostic disable-line: deprecated
