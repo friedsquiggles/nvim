@@ -137,7 +137,7 @@ M.opts = {
 M.config = function(_, opts)
   local servers = opts.servers
   local cmp_lsp = require("cmp_nvim_lsp")
-  require("neodev").setup()
+  -- require("neodev").setup()
 
   local capabilities = vim.tbl_deep_extend(
     "force",
@@ -186,6 +186,9 @@ M.config = function(_, opts)
   } -- string[]
 
   for server, server_opts in pairs(servers) do
+    if server == "lua_ls" then
+      require("neodev").setup()
+    end
     if server_opts then
       server_opts = server_opts == true and {} or server_opts
       if server_opts.mason == false or not vim.tbl_contains(all_mlsp_servers, server) then
