@@ -109,6 +109,7 @@ function M.getFindFiles()
 
   require("telescope.builtin").find_files(themes.get_dropdown({
     previewer = false,
+    hidden = true,
     prompt_title = getTitle(icon, title),
     prompt_prefix = iconPrefix(icon),
     win_blend = blend,
@@ -125,6 +126,7 @@ function M.getRecentFiles()
 
   require("telescope.builtin").oldfiles(themes.get_dropdown({
     previewer = false,
+    hidden = true,
     prompt_title = getTitle(icon, title),
     prompt_prefix = iconPrefix(icon),
     cwd_only = true,
