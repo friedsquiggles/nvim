@@ -1,28 +1,34 @@
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+local g = vim.g
+local map = vim.api.nvim_set_keymap
+
+-- set leader keys and disallow remapping
+g.mapleader = " "
+g.maplocalleader = " "
+map("n", " ", "", { noremap = true })
+map("x", " ", "", { noremap = true })
 
 -- completion settings
-vim.g.completion_confirm_key = ""
-vim.g.completion_matching_strategy_list = { "exact", "substring", "fuzzy" }
+g.completion_confirm_key = ""
+g.completion_matching_strategy_list = { "exact", "substring", "fuzzy" }
 
 -- Do not load tohtml.vim
-vim.g.loaded_2html_plugin = 1
+g.loaded_2html_plugin = 1
 
 -- Do not load zipPlugin.vim, gzip.vim and tarPlugin.vim (all these plugins are
 -- related to checking files inside compressed files)
-vim.g.loaded_zipPlugin = 1
-vim.g.loaded_gzip = 1
-vim.g.loaded_tarPlugin = 1
+g.loaded_zipPlugin = 1
+g.loaded_gzip = 1
+g.loaded_tarPlugin = 1
 
 -- Do not load the tutor plugin
-vim.g.loaded_tutor_mode_plugin = 1
+g.loaded_tutor_mode_plugin = 1
 
 -- Do not use builtin matchit.vim and matchparen.vim since we use vim-matchup
-vim.g.loaded_matchit = 1
-vim.g.loaded_matchparen = 1
+g.loaded_matchit = 1
+g.loaded_matchparen = 1
 
 -- Disable sql omni completion, it is broken.
-vim.g.loaded_sql_completion = 1
+g.loaded_sql_completion = 1
 
-vim.g.copilot_no_tab_map = true
-vim.g.copilot_assume_mapped = true
+g.copilot_no_tab_map = true
+g.copilot_assume_mapped = true

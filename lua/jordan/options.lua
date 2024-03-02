@@ -45,3 +45,7 @@ opt.timeoutlen = 300
 
 -- search
 opt.hlsearch = false
+
+-- split behavior
+opt.splitbelow = true
+opt.splitright = true
