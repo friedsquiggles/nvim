@@ -75,6 +75,23 @@ return {
 
     local groups = {
       mode = { "n" },
+      -- previous
+      ["["] = {
+        name = " previous",
+        g = {
+          "<cmd>lua require 'gitsigns'.prev_hunk({navigation_message = false})<cr>",
+          "prev hunk",
+        },
+      },
+
+      -- next
+      ["]"] = {
+        name = " next",
+        g = {
+          "<cmd>lua require 'gitsigns'.next_hunk({navigation_message = false})<cr>",
+          "next hunk",
+        },
+      },
 
       --ignore
       ["<leader>1"] = "which_key_ignore",
@@ -94,22 +111,15 @@ return {
     which_key.register({
 
       -- exit and close
-      -- ["x"] = { "<cmd>x<cr>", icons.ui.Pencil .. " write & quit" },
       ["q"] = { "<cmd>bw<cr>", icons.ui.Close .. " close" },
       ["Q"] = { "<cmd>qa!<cr>", icons.ui.Power .. " quit!" },
-
-      -- modes
-      ["z"] = {
-        "<cmd>ZenMode<cr>",
-        "zen mode",
-      },
 
       -- buffers
       ["."] = { "<cmd>bn<cr>", icons.ui.Power .. " next buffer" },
       [","] = { "<cmd>bp<cr>", icons.ui.Power .. " prev buffer" },
 
       a = {
-        name = "" .. " ai",
+        name = " ai",
         s = { "<cmd>Copilot status<cr>", "status" },
         p = { "<cmd>Copilot panel<cr>", "panel" },
         e = { "<cmd>Copilot enable<cr>", "enable" },
@@ -128,15 +138,6 @@ return {
       -- git
       g = {
         name = icons.cmp.copilot_alt .. " git",
-        -- g = { "<cmd>lua require 'lvim.core.terminal'.lazygit_toggle()<cr>", "Lazygit" },
-        j = {
-          "<cmd>lua require 'gitsigns'.next_hunk({navigation_message = false})<cr>",
-          "next hunk",
-        },
-        k = {
-          "<cmd>lua require 'gitsigns'.prev_hunk({navigation_message = false})<cr>",
-          "prev hunk",
-        },
         l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "blame" },
         p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "preview hunk" },
         r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "reset hunk" },
@@ -212,6 +213,10 @@ return {
       -- <cmd>Telescope notify<cr>
       t = {
         name = icons.ui.Toggle .. " toggle",
+        z = {
+          "<cmd>ZenMode<cr>",
+          "zen mode",
+        },
       },
 
       x = {

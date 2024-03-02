@@ -101,9 +101,10 @@ return {
         --   return "<Ignore>"
         -- end
         --
-        local diffThis = function()
-          gs.diffthis("~")
-        end
+
+        -- local diffThis = function()
+        --   gs.diffthis("~")
+        -- end
 
         -- Navigation
         -- map("n", "<leader>gj", gs.next_hunk, { expr = true, desc = "git change next" })
