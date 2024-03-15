@@ -103,7 +103,11 @@ local normal_leader_keys = {
       "checkout commit(file)",
     },
     d = {
-      "<cmd>Gitsigns diffthis HEAD<cr>",
+      "<cmd>lua require 'gitsigns'.diffthis()<cr>",
+      "git diff",
+    },
+    D = {
+      "<cmd>lua require 'gitsigns'.diffthis('~')<cr>",
       "git diff",
     },
   },

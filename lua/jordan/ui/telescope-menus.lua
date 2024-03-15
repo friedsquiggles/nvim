@@ -9,19 +9,12 @@ local icons = {
 local M = {}
 
 -- dimensions with preview
-local heightWithPreview = 0.7
-local widthWithPreview = 0.8
+local hwp = 0.7
+local wwp = 0.8
 
 -- dimensions no preview
-local heightWithoutPreview = 0.6
-local widthWithoutPreview = 0.6
-
--- current buffer fuzzy find
-local bufFzyHeight = 0.7
-local bufFzyWidth = 0.6
-
--- transparency
-local blend = 10
+local hnp = 0.6
+local wnp = 0.6
 
 local iconPrefix = function(icon)
   return " " .. icon .. " "
@@ -45,36 +38,13 @@ function M.getLiveGrep()
     previewer = true,
     prompt_title = getTitle(icon, title),
     prompt_prefix = iconPrefix(icon),
-    win_blend = blend,
     layout_strategy = "horizontal",
     sorting_strategy = "ascending",
-    path_display = function(_, path)
-      local tail = require("telescope.utils").path_tail(path)
-      return string.format("%s (%s)", tail, path)
-    end,
     layout_config = {
-      height = heightWithPreview,
-      width = widthWithPreview,
+      height = hwp,
+      width = wwp,
       prompt_position = "top",
       preview_cutoff = 120,
-    },
-  }))
-end
-
-function M.getBufferFzy()
-  local icon = icons.kind.Text
-  local title = "HERE"
-
-  require("telescope.builtin").current_buffer_fuzzy_find(themes.get_dropdown({
-    previewer = false,
-    show_line = true,
-    prompt_title = getTitle(icon, title),
-    prompt_prefix = iconPrefix(icon),
-    win_blend = blend,
-    path_display = "hidden",
-    layout_config = {
-      height = bufFzyHeight,
-      width = bufFzyWidth,
     },
   }))
 end
@@ -87,16 +57,11 @@ function M.getGrepCurrentWord()
     previewer = true,
     prompt_title = getTitle(icon, title),
     prompt_prefix = iconPrefix(icon),
-    win_blend = blend,
     layout_strategy = "horizontal",
     sorting_strategy = "ascending",
-    path_display = function(_, path)
-      local tail = require("telescope.utils").path_tail(path)
-      return string.format("%s (%s)", tail, path)
-    end,
     layout_config = {
-      height = heightWithPreview,
-      width = widthWithPreview,
+      height = hwp,
+      width = wwp,
       prompt_position = "top",
       preview_cutoff = 120,
     },
@@ -109,13 +74,12 @@ function M.getFindFiles()
 
   require("telescope.builtin").find_files(themes.get_dropdown({
     previewer = false,
-    hidden = true,
+    no_ignore = false,
     prompt_title = getTitle(icon, title),
     prompt_prefix = iconPrefix(icon),
-    win_blend = blend,
     layout_config = {
-      height = heightWithoutPreview,
-      width = widthWithoutPreview,
+      height = hnp,
+      width = wnp,
     },
   }))
 end
@@ -129,11 +93,9 @@ function M.getRecentFiles()
     hidden = true,
     prompt_title = getTitle(icon, title),
     prompt_prefix = iconPrefix(icon),
-    cwd_only = true,
-    win_blend = blend,
     layout_config = {
-      height = heightWithoutPreview,
-      width = widthWithoutPreview,
+      height = hnp,
+      width = wnp,
     },
   }))
 end
@@ -147,13 +109,11 @@ function M.getActiveBuffers()
     ignore_current_buffer = true,
     prompt_title = getTitle(icon, title),
     prompt_prefix = iconPrefix(icon),
-    cwd_only = true,
-    win_blend = blend,
     sort_lastused = false,
     sort_mru = true,
     layout_config = {
-      height = heightWithoutPreview,
-      width = widthWithoutPreview,
+      height = hnp,
+      width = wnp,
     },
   }))
 end
@@ -166,10 +126,9 @@ function M.getGitStatus()
     previewer = false,
     prompt_title = getTitle(icon, title),
     prompt_prefix = iconPrefix(icon),
-    win_blend = blend,
     layout_config = {
-      height = heightWithoutPreview,
-      width = widthWithoutPreview,
+      height = hnp,
+      width = wnp,
     },
     git_icons = {
       added = icons.git.Add,
@@ -193,10 +152,9 @@ function M.getGitCommits()
     previewer = false,
     prompt_title = getTitle(icon, title),
     prompt_prefix = iconPrefix(icon),
-    win_blend = blend,
     layout_config = {
-      height = heightWithoutPreview,
-      width = widthWithoutPreview,
+      height = hnp,
+      width = wnp,
     },
   }))
 end
@@ -209,10 +167,9 @@ function M.getGitBranches()
     previewer = false,
     prompt_title = getTitle(icon, title),
     prompt_prefix = iconPrefix(icon),
-    win_blend = blend,
     layout_config = {
-      height = heightWithoutPreview,
-      width = widthWithoutPreview,
+      height = hnp,
+      width = wnp,
     },
   }))
 end
@@ -225,10 +182,9 @@ function M.getQuickFix()
     previewer = false,
     prompt_title = getTitle(icon, title),
     prompt_prefix = iconPrefix(icon),
-    win_blend = blend,
     layout_config = {
-      height = heightWithoutPreview,
-      width = widthWithoutPreview,
+      height = hnp,
+      width = wnp,
     },
   }))
 end
@@ -241,10 +197,9 @@ function M.getTreeSitter()
     previewer = false,
     prompt_title = getTitle(icon, title),
     prompt_prefix = iconPrefix(icon),
-    win_blend = blend,
     layout_config = {
-      height = heightWithoutPreview,
-      width = widthWithoutPreview,
+      height = hnp,
+      width = wnp,
     },
   }))
 end
@@ -257,10 +212,9 @@ function M.getLspRefs()
     previewer = false,
     prompt_title = getTitle(icon, title),
     prompt_prefix = iconPrefix(icon),
-    win_blend = blend,
     layout_config = {
-      height = heightWithoutPreview,
-      width = widthWithoutPreview,
+      height = hnp,
+      width = wnp,
     },
   }))
 end

@@ -4,7 +4,6 @@ return {
   -- ft = "markdown", -- prevents loading on non-markdown files but also dashboard
 
   dependencies = {
-    -- Required.
     "nvim-lua/plenary.nvim",
     "hrsh7th/nvim-cmp",
     "nvim-telescope/telescope.nvim",
@@ -77,11 +76,6 @@ return {
       nvim_cmp = true,
       min_chars = 2,
     },
-
-    -- tags = {
-    --   height = 10,
-    --   wrap = true,
-    -- },
 
     ui = {
       enable = true,

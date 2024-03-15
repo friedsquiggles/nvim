@@ -80,36 +80,35 @@ return {
         end
 
         -- move cursor to next change
-        -- local nextHunk = function()
-        --   if vim.wo.diff then
-        --     return "]c"
-        --   end
-        --   vim.schedule(function()
-        --     gs.next_hunk()
-        --   end)
-        --   return "<Ignore>"
-        -- end
-        --
-        -- -- move cursor to previous change
-        -- local prevHunk = function()
-        --   if vim.wo.diff then
-        --     return "[c"
-        --   end
-        --   vim.schedule(function()
-        --     gs.prev_hunk()
-        --   end)
-        --   return "<Ignore>"
-        -- end
-        --
+        local nextHunk = function()
+          if vim.wo.diff then
+            return "]g"
+          end
+          vim.schedule(function()
+            gs.next_hunk()
+          end)
+          return "<Ignore>"
+        end
+
+        -- move cursor to previous change
+        local prevHunk = function()
+          if vim.wo.diff then
+            return "[g"
+          end
+          vim.schedule(function()
+            gs.prev_hunk()
+          end)
+          return "<Ignore>"
+        end
 
         -- local diffThis = function()
         --   gs.diffthis("~")
         -- end
 
         -- Navigation
-        -- map("n", "<leader>gj", gs.next_hunk, { expr = true, desc = "git change next" })
-        -- map("n", "<leader>gk", gs.prev_hunk, { expr = true, desc = "git change prev" })
-        --
+        map("n", "]g", nextHunk, { expr = true, desc = "git change next" })
+        map("n", "[g", prevHunk, { expr = true, desc = "git change prev" })
+
         -- -- Staging
         -- map("n", "<leader>gh", gs.stage_hunk, { desc = "stage hunk" })
         -- map("n", "<leader>gu", gs.undo_stage_hunk, { desc = "unstage hunk" })
@@ -118,10 +117,10 @@ return {
         -- -- Resetting
         -- map("n", "<leader>gr", gs.reset_hunk, { desc = "reset hunk" })
         -- map("n", "<leader>gR", gs.reset_buffer, { desc = "reset buffer" })
-        --
-        -- -- Blame
-        -- map("n", "<leader>tb", gs.toggle_current_line_blame, { desc = "blame" })
-        --
+
+        -- Blame
+        map("n", "<leader>tb", gs.toggle_current_line_blame, { desc = "blame" })
+
         -- -- Diff
         -- map("n", "<leader>gd", gs.diffthis, { desc = "git diff" })
         -- map("n", "<leader>gD", diffThis, { desc = "git diff" })
