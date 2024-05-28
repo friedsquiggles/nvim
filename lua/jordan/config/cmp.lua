@@ -1,6 +1,7 @@
 return {
   "hrsh7th/nvim-cmp",
-  event = { "InsertEnter", "CmdLineEnter" },
+  lazy = false,
+  priority = 100,
   dependencies = {
     -- completion types
     "hrsh7th/cmp-nvim-lsp",
@@ -18,21 +19,14 @@ return {
     "onsails/lspkind.nvim",
   },
 
-  opts = function()
-    local has_words_before = function()
-      local unpack = table.unpack or unpack ---@diagnostic disable-line: deprecated
-      if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
-        return false
-      end
-      local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-      return col ~= 0
-        and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
-    end
+  config = function()
+    local lspkind = require("lspkind")
+    lspkind.init({})
 
     local cmp = require("cmp")
     local luasnip = require("luasnip")
-    local lspkind = require("lspkind")
-    local defaults = require("cmp.config.default")()
+
+    require("luasnip.loaders.from_vscode").lazy_load()
 
     local border = function(hl)
       return {
@@ -46,8 +40,6 @@ return {
         { "│", hl },
       }
     end
-
-    require("luasnip.loaders.from_vscode").lazy_load()
 
     cmp.setup({
 
@@ -79,14 +71,8 @@ return {
       },
 
       mapping = {
-        ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
-        ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
-
         ["<Down>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
         ["<Up>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
-
-        ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
-        ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
 
         ["<C-e>"] = cmp.mapping({
           i = cmp.mapping.abort(),
@@ -102,8 +88,6 @@ return {
             cmp.select_next_item()
           elseif luasnip.expand_or_locally_jumpable() then
             luasnip.expand_or_jump()
-          elseif has_words_before() then
-            cmp.complete()
           else
             fallback()
           end
@@ -127,8 +111,6 @@ return {
         { name = "path", max_item_count = 5, priority = 200 },
         { name = "emoji", max_item_count = 12, priority = 100 },
       }),
-
-      sorting = defaults.sorting,
 
       performance = {
         max_view_entries = 15,
@@ -187,14 +169,11 @@ return {
       cmp.setup.cmdline(":", {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
-          { name = "path" },
-        }, {
           {
             name = "cmdline",
-            option = {
-              ignore_cmds = { "Man", "!" },
-            },
           },
+        }, {
+          { name = "path" },
         }),
       }),
     })

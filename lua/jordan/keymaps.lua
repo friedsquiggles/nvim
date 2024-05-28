@@ -23,16 +23,6 @@ local normal_leaderless_opts = {
   mode = "n",
 }
 
--- keymap options for insert mode
-local insert_opts = {
-  "i",
-}
-
--- keymap options for visual mode
-local visual_opts = {
-  "v",
-}
-
 -- keys to be ignored in normal mode
 local wki = "which_key_ignore"
 local ignore = {
@@ -51,16 +41,24 @@ local ignore = {
 -- Ignore keys in normal mode
 wk.register(ignore, normal_leaderless_opts)
 
+local base = {
+  ["-"] = { "<cmd>lua MiniFiles.open()<cr>", "view dir" },
+}
+
+wk.register(base, normal_leader_opts)
+
 -- keymaps for normal mode, after pressing leader key
 local normal_leader_keys = {
-
-  -- exit and close
-  ["q"] = { "<cmd>bw<cr>", icons.ui.Close .. " close" },
-  ["Q"] = { "<cmd>qa!<cr>", icons.ui.Power .. " quit!" },
 
   -- buffers
   ["."] = { "<cmd>bn<cr>", icons.ui.Power .. " next buffer" },
   [","] = { "<cmd>bp<cr>", icons.ui.Power .. " prev buffer" },
+
+  -- windows
+  ["\\"] = { "<cmd>vpnew<cr>", "split vertical (new)" },
+  ["|"] = { "<cmd>vplit<cr>", "split vertical" },
+  ["-"] = { "<cmd>new<cr>", "split horizontal (new)" },
+  ["_"] = { "<cmd>split<cr>", "split horizontal" },
 
   -- ai
   a = {
@@ -69,17 +67,6 @@ local normal_leader_keys = {
     p = { "<cmd>Copilot panel<cr>", "panel" },
     e = { "<cmd>Copilot enable<cr>", "enable" },
     x = { "<cmd>Copilot disable<cr>", "disable" },
-  },
-
-  -- buffer
-  b = {
-    name = icons.documents.Files .. " buffer",
-    c = { "<cmd>bd<cr>", "close buffer" },
-  },
-
-  -- config
-  c = {
-    name = icons.ui.Gear .. " config",
   },
 
   -- git
@@ -116,9 +103,7 @@ local normal_leader_keys = {
   l = {
     name = icons.misc.LspAvailable .. " lsp",
     a = { "<cmd>Lspsaga code_action<cr>", "code action" },
-    d = { "<cmd>Lspsaga peek_definition<cr>", "peek def" },
     D = { "<cmd>Lspsaga goto_definition<cr>", "goto def" },
-    -- f = { "<cmd>LspZeroFormat<cr>", "Format" },
     g = { "<cmd>Lspsaga finder<cr>", "finder" },
     G = { "<cmd>Telescope lsp_references<cr>", "refs" },
     h = { "<cmd>Lspsaga hover_doc<cr>", "hover" },
@@ -135,80 +120,22 @@ local normal_leader_keys = {
     R = { "<cmd>Lspsaga project_replace<cr>", "replace" },
     s = { "<cmd>Telescope lsp_document_symbols<cr>", "symbols (doc)" },
     S = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "symbols (ws)" },
-    t = { "<cmd>Lspsaga peek_type_definition<cr>", "peek type def" },
     T = { "<cmd>Lspsaga goto_type_definition<cr>", "goto type def" },
   },
 
-  -- notes
   n = {
-    name = icons.ui.Notes .. " notes",
-
-    -- create or edit notes
-    c = { "<cmd>ObsidianNew<cr>", "create" },
-    o = { "<cmd>ObsidianOpen<cr>", "open" },
-    r = { "<cmd>ObsidianRename<cr>", "rename" },
-
-    -- daily notes
-    d = { "<cmd>ObsidianToday<cr>", "to[d]ay" },
-    m = { "<cmd>ObsidianTomorrow<cr>", "to[m]orrow" },
-    y = { "<cmd>ObsidianYesterday<cr>", "[y]esterday" },
-
-    -- navigate notes
-    s = { "<cmd>ObsidianSearch<cr>", "search" },
-    f = { "<cmd>ObsidianFollowLink<cr>", "follow url" },
-    p = { "<cmd>ObsidianQuickSwitch<cr>", "switch" },
-
-    -- list note details
-    l = {
-      name = "list...",
-      b = { "<cmd>ObsidianBacklinks<cr>", "backlinks" },
-      t = { "<cmd>ObsidianTags<cr>", "tags" },
-    },
+    name = " notifications",
+    n = { "<cmd>lua MiniNotify.show_history()<cr>", "history" },
+    a = { "<cmd>lua MiniNotify.get_all()<cr>", "history" },
   },
 
   -- search
   s = {
     name = icons.ui.Search .. " search",
-    n = { "<cmd>lua require('telescope').extensions.notify.notify({})<cr>", "notify" },
+    -- n = { "<cmd>lua require('telescope').extensions.notify.notify({})<cr>", "notify" },
   },
 
-  -- toggle
-  t = {
-    name = icons.ui.Toggle .. " toggle",
-    z = {
-      "<cmd>ZenMode<cr>",
-      "zen mode",
-    },
-  },
-
-  -- window
-  w = {
-    name = icons.ui.Window .. " window",
-
-    -- move cursor to window
-    j = { "<C-w><C-j>", "move cursor down" },
-    k = { "<C-w><C-k>", "move cursor up" },
-    h = { "<C-w><C-h>", "move cursor left" },
-    l = { "<C-w><C-l>", "move cursor right" },
-
-    -- move window
-    J = { "<C-w>j", "move window down" },
-    K = { "<C-w>k", "move up" },
-    H = { "<C-w>h", "move left" },
-    L = { "<C-w>l", "move right" },
-
-    -- vertical split
-    v = { "<cmd>vsplit<cr>", "split vertical" },
-    V = { "<cmd>vnew<cr>", "split new vertical" },
-
-    -- horizontal split
-    b = { "<cmd>split<cr>", "split horizontal" },
-    B = { "<cmd>new<cr>", "split new horizontal" },
-  },
-
-  x = {
-    name = icons.ui.Diagnostic .. "diag/fix",
-  },
+  x = { "<cmd>bd<cr>", "close buffer" },
 }
 
 wk.register(normal_leader_keys, normal_leader_opts)

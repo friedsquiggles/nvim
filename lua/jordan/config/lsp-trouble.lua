@@ -63,25 +63,25 @@ M.config = function(_, opts)
   require("trouble").setup(opts)
 
   -- Keybindings
-  map("n", "<leader>xx", function()
+  map("n", "<leader>dd", function()
     require("trouble").toggle("document_diagnostics")
   end, { desc = "document" })
 
-  map("n", "<leader>xX", function()
+  map("n", "<leader>dD", function()
     require("trouble").toggle("workspace_diagnostics")
   end, { desc = "workspace" })
 
-  map("n", "<leader>xq", function()
-    require("trouble").toggle("quickfix")
-  end, { desc = "quickfix" })
+  -- map("n", "<leader>xq", function()
+  --   require("trouble").toggle("quickfix")
+  -- end, { desc = "quickfix" })
+  --
+  -- map("n", "<leader>xl", function()
+  --   require("trouble").toggle("loclist")
+  -- end, { desc = "loclist" })
 
-  map("n", "<leader>xl", function()
-    require("trouble").toggle("loclist")
-  end, { desc = "loclist" })
-
-  map("n", "<leader>xr", function()
-    require("trouble").toggle("lsp_references")
-  end, { desc = "references" })
+  -- map("n", "<leader>xr", function()
+  --   require("trouble").toggle("lsp_references")
+  -- end, { desc = "references" })
 end
 
 return M
