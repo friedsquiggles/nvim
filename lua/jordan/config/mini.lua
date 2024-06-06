@@ -36,14 +36,20 @@ return {
         { name = "Explorer", action = "lua MiniFiles.open()", section = "Files" },
         {
           name = "Directory",
-          action = "lua require('jordan.ui.telescope-menus').getFiles(true)",
+          action = "lua require('jordan.ui.telescope-menus').getFiles(true)()",
+          section = "Files",
+        },
+        {
+          name = "Git Files",
+          action = "Telescope git_files",
           section = "Files",
         },
         {
           name = "Git Status",
-          action = "lua require('jordan.ui.telescope-menus').getGitStatus",
+          action = "lua require('jordan.ui.telescope-menus').getGitStatus()",
           section = "Files",
         },
+
         { name = "Lazy", action = "Lazy", section = "Packages" },
         { name = "Mason", action = "Mason", section = "Packages" },
         starter.sections.recent_files(5, true, false),
