@@ -3,6 +3,7 @@ local icons = {
   git = require("jordan.ui.icons").get("git", true),
   cmp = require("jordan.ui.icons").get("cmp", true),
   kind = require("jordan.ui.icons").get("kind", true),
+  doc = require("jordan.ui.icons").get("documents", true),
 }
 
 local map = vim.keymap.set
@@ -19,15 +20,22 @@ local M = {
 M.config = function()
   local telescope = require("telescope")
   local act = require("telescope.actions")
-  local trouble = require("trouble.providers.telescope")
+  -- local trouble = require("trouble.providers.telescope")
   local builtin = require("telescope.builtin")
   local menus = require("jordan.ui.telescope-menus")
 
   telescope.setup({
     defaults = {
-      path_display = { "smart" },
+      path_display = function(_, path)
+        local cwd = vim.fn.getcwd()
+        local p = path:gsub(cwd, "")
+        local tail = require("telescope.utils").path_tail(path)
+        local text = tail .. "  " .. p .. " "
+        local hl = { { { #tail + 1, #text }, "TelescopeResultsComment" } }
+        return text, hl
+      end,
       color_devicons = true,
-      layout_strategy = "vertical",
+      layout_strategy = "horizontal",
       sorting_strategy = "ascending",
       prompt_prefix = "   ",
       selection_caret = "  ",
@@ -47,7 +55,7 @@ M.config = function()
           ["<C-q>"] = act.send_selected_to_qflist + act.open_qflist,
           ["<C-u>"] = act.preview_scrolling_up,
           ["<C-d>"] = act.preview_scrolling_down,
-          ["<C-t>"] = trouble.open_with_trouble,
+          -- ["<C-t>"] = trouble.open_with_trouble,
         },
       },
 
@@ -66,7 +74,7 @@ M.config = function()
       git_icons = {
         added = icons.git.Add,
         changed = icons.git.Mod,
-        copied = ">",
+        copied = icons.doc.Files,
         deleted = icons.git.Remove,
         renamed = icons.git.Rename,
         staged = icons.git.Staged,
@@ -76,6 +84,7 @@ M.config = function()
       },
     },
 
+    -- config opts
     extensions = {
       fzf = {
         fuzzy = true,
@@ -86,24 +95,48 @@ M.config = function()
     },
   })
 
+  -- load extensions
   pcall(telescope.load_extension, "fzf")
+  pcall(telescope.load_extension, "notify")
+  pcall(telescope.load_extension, "noice")
 
   -- quick search
-  map("n", "<leader><space>", menus.getActiveBuffers, { desc = "active buffers" })
-  map("n", "<leader>/", menus.getRecentFiles, { desc = "recent files" })
+  map("n", "<leader><space>", menus.getRecent(true), { desc = " old" })
+  map("n", "<leader>so", menus.getRecent(true), { desc = " [o]ld" })
+  map("n", "<leader>sO", menus.getRecent(false), { desc = " [o]ld" })
+  -- map("n", "<leader>/", menus.getRecentFiles, { desc = "recent files" })
 
-  -- search
-  map("n", "<leader>sf", menus.getFindFiles, { desc = "files" })
-  map("n", "<leader>sc", menus.getGrepCurrentWord, { desc = "cursor" })
-  map("n", "<leader>st", menus.getLiveGrep, { desc = "text" })
-  map("n", "<leader>sy", menus.getTreeSitter, { desc = "symbols" })
-  map("n", "<leader>sr", menus.getLspRefs, { desc = "references" })
-  map("n", "<leader>sg", menus.getGitStatus, { desc = "git status" })
-  map("n", "<leader>sb", menus.getGitBranches, { desc = "git branches" })
-  map("n", "<leader>sl", menus.getGitCommits, { desc = "git log" })
-  map("n", "<leader>sd", builtin.diagnostics, { desc = "diags" })
-  map("n", "<leader>sh", builtin.highlights, { desc = "highlights" })
-  map("n", "<leader>sk", builtin.keymaps, { desc = "keymaps" })
+  -- search for files by name
+  map("n", "<leader>sf", menus.getFiles(false), { desc = " [f]iles" })
+  map("n", "<leader>sF", menus.getFiles(true), { desc = " [f]iles" })
+
+  -- search word under cursor (and by file type groups)
+  map("n", "<leader>scc", menus.getCursor("*.*"), { desc = " [c]ursor" })
+  map("n", "<leader>scc", menus.getCursor({ "*.css", ".scss" }), { desc = " [c]ss" })
+  map("n", "<leader>scj", menus.getCursor({ "*.json", "*.jsonc" }), { desc = " [j]son" })
+  map("n", "<leader>sct", menus.getCursor({ "*.ts", "!*.spec.ts" }), { desc = " [t]ypescript" })
+  map("n", "<leader>scu", menus.getCursor({ "*.spec.ts" }), { desc = " [t]ypescript" })
+
+  -- search text (and by file type groups)
+  map("n", "<leader>st", menus.getText("*.*"), { desc = " [t]ext" })
+  map("n", "<leader>stc", menus.getText({ "*.css", ".scss" }), { desc = " [c]ss" })
+  map("n", "<leader>stj", menus.getText({ "*.json", "*.jsonc" }), { desc = " [j]son" })
+  map("n", "<leader>stt", menus.getText({ "*.ts", "!*.spec.ts" }), { desc = " [t]ypescript" })
+  map("n", "<leader>stu", menus.getText({ "*.spec.ts" }), { desc = " [t]ypescript" })
+
+  -- lsp
+  map("n", "<leader>sy", menus.getTreeSitter, { desc = " s[y]mbols" })
+  map("n", "<leader>sr", menus.getLspRefs, { desc = " [r]eferences" })
+  map("n", "<leader>sd", builtin.diagnostics, { desc = " [d]iags" })
+
+  -- git
+  map("n", "<leader>sg", menus.getGitStatus, { desc = " [g]it status" })
+  map("n", "<leader>sb", menus.getGitBranches, { desc = " git [b]ranches" })
+  map("n", "<leader>sl", menus.getGitCommits, { desc = " git [l]og" })
+
+  -- config
+  map("n", "<leader>sh", builtin.highlights, { desc = " [h]ighlights" })
+  map("n", "<leader>sk", builtin.keymaps, { desc = " [k]eymaps" })
 end
 
 return M

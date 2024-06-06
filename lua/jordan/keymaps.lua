@@ -41,101 +41,94 @@ local ignore = {
 -- Ignore keys in normal mode
 wk.register(ignore, normal_leaderless_opts)
 
+-- base keymaps
 local base = {
-  ["-"] = { "<cmd>lua MiniFiles.open()<cr>", "view dir" },
+  ["-"] = {
+    "<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<cr>",
+    icons.ui.FolderOpen .. "view dir",
+  },
+
+  ["<c-p>"] = { "<cmd>Telescope git_files<cr>", icons.ui.File .. " open file" },
+
+  -- set prefix names together here
+  ["<leader>"] = {
+    a = { name = icons.ui.Wizard .. " [a]i" },
+    d = { name = icons.ui.Diagnostic .. " [d]ebug" },
+    g = { name = icons.cmp.copilot_alt .. " [g]it" },
+    l = { name = icons.misc.LspAvailable .. " [l]sp" },
+    n = { name = icons.ui.Comment .. " [n]otify" },
+    s = { name = icons.ui.Search .. " [s]earch" },
+    q = { "<cmd>bd<cr>", icons.ui.Close_alt .. " close buffer" },
+    w = { "<cmd>wa<cr>", icons.ui.Pencil .. " [w]rite [a]ll" },
+  },
 }
 
-wk.register(base, normal_leader_opts)
+-- register base keymaps
+wk.register(base, normal_leaderless_opts)
 
 -- keymaps for normal mode, after pressing leader key
 local normal_leader_keys = {
 
   -- buffers
-  ["."] = { "<cmd>bn<cr>", icons.ui.Power .. " next buffer" },
-  [","] = { "<cmd>bp<cr>", icons.ui.Power .. " prev buffer" },
+  ["."] = { "<cmd>bn<cr>", icons.ui.DoubleSeparatorRight .. " buffer" },
+  [","] = { "<cmd>bp<cr>", icons.ui.DoubleSeparatorLeft .. " buffer" },
 
   -- windows
-  ["\\"] = { "<cmd>vpnew<cr>", "split vertical (new)" },
-  ["|"] = { "<cmd>vplit<cr>", "split vertical" },
-  ["-"] = { "<cmd>new<cr>", "split horizontal (new)" },
-  ["_"] = { "<cmd>split<cr>", "split horizontal" },
+  ["\\"] = { "<cmd>vnew<cr>", icons.cmp.tmux .. " right (new)" },
+  ["|"] = { "<cmd>vsplit<cr>", icons.cmp.tmux .. " right" },
+  ["-"] = { "<cmd>new<cr>", icons.cmp.tmux .. " below (new)" },
+  ["_"] = { "<cmd>split<cr>", icons.cmp.tmux .. " below" },
 
   -- ai
   a = {
-    name = icons.ui.Wizard .. " ai",
-    s = { "<cmd>Copilot status<cr>", "status" },
-    p = { "<cmd>Copilot panel<cr>", "panel" },
-    e = { "<cmd>Copilot enable<cr>", "enable" },
-    x = { "<cmd>Copilot disable<cr>", "disable" },
+    -- name = icons.ui.Wizard .. " ai",
+    s = { "<cmd>Copilot status<cr>", " [s]tatus" },
+    p = { "<cmd>Copilot panel<cr>", " [p]anel" },
+    e = { "<cmd>Copilot enable<cr>", " [e]nable" },
+    d = { "<cmd>Copilot disable<cr>", " [d]isable" },
   },
 
   -- git
   g = {
-    name = icons.cmp.copilot_alt .. " git",
-    l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "blame" },
-    p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "preview hunk" },
-    r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "reset hunk" },
-    R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "reset buffer" },
-    a = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "stage hunk" },
-    A = { "<cmd>lua require 'gitsigns'.stage_buffer()<cr>", "stage buffer" },
-    u = {
-      "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
-      "undo stage hunk",
-    },
-    s = { "<cmd>Telescope git_status<cr>", "status" },
-    b = { "<cmd>Telescope git_branches<cr>", "branches" },
-    c = { "<cmd>Telescope git_commits<cr>", "commits" },
-    C = {
-      "<cmd>Telescope git_bcommits<cr>",
-      "checkout commit(file)",
-    },
-    d = {
-      "<cmd>lua require 'gitsigns'.diffthis()<cr>",
-      "git diff",
-    },
-    D = {
-      "<cmd>lua require 'gitsigns'.diffthis('~')<cr>",
-      "git diff",
-    },
+    -- name = icons.cmp.copilot_alt .. " git",
+    l = { "<cmd>Gitsigns blame_line<cr>", " b[l]ame" },
+    p = { "<cmd>Gitsigns preview_hunk<cr>", " [p]review hunk" },
+    r = { "<cmd>Gitsigns reset_hunk<cr>", " [r]eset hunk" },
+    R = { "<cmd>Gitsigns reset_buffer<cr>", "[R]eset buffer" },
+    a = { "<cmd>Gitsigns stage_hunk<cr>", " [a]dd hunk" },
+    A = { "<cmd>Gitsigns stage_buffer<cr>", " [A]dd buffer" },
+    u = { "<cmd>Gitsigns undo_stage_hunk<cr>", " [u]ndo stage hunk" },
+    d = { "<cmd>Gitsigns diffthis<cr>", " [d]iff" },
+
+    -- s = { "<cmd>Telescope git_status<cr>", " [s]tatus" },
+    -- b = { "<cmd>Telescope git_branches<cr>", "[b]ranches" },
+    -- c = { "<cmd>Telescope git_commits<cr>", " [c]ommits" },
+    -- C = { "<cmd>Telescope git_bcommits<cr>", " [C]ommits (file)" },
   },
 
   -- LSP
   l = {
-    name = icons.misc.LspAvailable .. " lsp",
-    a = { "<cmd>Lspsaga code_action<cr>", "code action" },
-    D = { "<cmd>Lspsaga goto_definition<cr>", "goto def" },
-    g = { "<cmd>Lspsaga finder<cr>", "finder" },
-    G = { "<cmd>Telescope lsp_references<cr>", "refs" },
-    h = { "<cmd>Lspsaga hover_doc<cr>", "hover" },
-    i = { "<cmd>Telescope diagnostics<cr>", "diag" },
-    I = { "<cmd>Telescope lsp_workspace_diagnostics<cr>", "diag (ws)" },
-    j = { "<cmd>Lspsaga diagnostic_jump_next<cr>", "next diag" },
-    k = { "<cmd>Lspsaga diagnostic_jump_prev<cr>", "prev diag" },
-    l = { "<cmd>lua require('lsp_lines').toggle()<cr>", "toggle lsp lines" },
-    L = { "<cmd>LspInfo<cr>", "lsp info" },
-    o = { "<cmd>Lspsaga outline<cr>", "outline" },
-    p = { "<cmd>Telescope lsp_incoming_calls<cr>", "incoming calls" },
-    P = { "<cmd>Telescope lsp_outgoing_calls<cr>", "outgoing calls" },
-    r = { "<cmd>Lspsaga rename<cr>", "rename" },
-    R = { "<cmd>Lspsaga project_replace<cr>", "replace" },
-    s = { "<cmd>Telescope lsp_document_symbols<cr>", "symbols (doc)" },
-    S = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "symbols (ws)" },
-    T = { "<cmd>Lspsaga goto_type_definition<cr>", "goto type def" },
-  },
+    -- name = icons.misc.LspAvailable .. " lsp",
+    f = { "<cmd>Telescope lsp_references<cr>", " re[f]s" },
+    i = { "<cmd>Telescope diagnostics<cr>", " d[i]ag" },
+    I = { "<cmd>Telescope lsp_workspace_diagnostics<cr>", " d[I]ag (ws)" },
+    c = { "<cmd>Telescope lsp_incoming_calls<cr>", " [c]alls incoming" },
+    C = { "<cmd>Telescope lsp_outgoing_calls<cr>", " [C]alls outgoing" },
+    -- s = { "<cmd>Telescope lsp_document_symbols<cr>", " symbols (doc)" },
+    -- S = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", " symbols (ws)" },
 
-  n = {
-    name = " notifications",
-    n = { "<cmd>lua MiniNotify.show_history()<cr>", "history" },
-    a = { "<cmd>lua MiniNotify.get_all()<cr>", "history" },
-  },
+    l = { "<cmd>lua require('lsp_lines').toggle()<cr>", "toggle lsp [l]ines" },
+    L = { "<cmd>LspInfo<cr>", "[L]sp info" },
 
-  -- search
-  s = {
-    name = icons.ui.Search .. " search",
-    -- n = { "<cmd>lua require('telescope').extensions.notify.notify({})<cr>", "notify" },
+    a = { "<cmd>Lspsaga code_action<cr>", " [a]ction" },
+    D = { "<cmd>Lspsaga goto_definition<cr>", "[D]efinition" },
+    -- g = { "<cmd>Lspsaga finder<cr>", "finder" },
+    h = { "<cmd>Lspsaga hover_doc<cr>", "[h]over" },
+    o = { "<cmd>Lspsaga outline<cr>", "[o]utline" },
+    r = { "<cmd>Lspsaga rename<cr>", "[r]ename" },
+    R = { "<cmd>Lspsaga project_replace<cr>", "[R]eplace" },
+    T = { "<cmd>Lspsaga goto_type_definition<cr>", "[T]ype def" },
   },
-
-  x = { "<cmd>bd<cr>", "close buffer" },
 }
 
 wk.register(normal_leader_keys, normal_leader_opts)

@@ -1,49 +1,53 @@
 return {
   "nvimdev/lspsaga.nvim",
+  dependencies = {
+    "nvim-treesitter/nvim-treesitter", -- optional
+    "nvim-tree/nvim-web-devicons", -- optional
+  },
   config = function()
-    local gen_lspkind_hl = function()
-      local colors = require("catppuccin.palettes").get_palette("macchiato")
-      local dat = {
-        Class = colors.yellow,
-        Constant = colors.peach,
-        Constructor = colors.sapphire,
-        Enum = colors.yellow,
-        EnumMember = colors.teal,
-        Event = colors.yellow,
-        Field = colors.teal,
-        File = colors.rosewater,
-        Function = colors.blue,
-        Interface = colors.yellow,
-        Key = colors.red,
-        Method = colors.blue,
-        Module = colors.blue,
-        Namespace = colors.blue,
-        Number = colors.peach,
-        Operator = colors.sky,
-        Package = colors.blue,
-        Property = colors.teal,
-        Struct = colors.yellow,
-        TypeParameter = colors.blue,
-        Variable = colors.peach,
-        Array = colors.peach,
-        Boolean = colors.peach,
-        Null = colors.yellow,
-        Object = colors.yellow,
-        String = colors.green,
-        TypeAlias = colors.green,
-        Parameter = colors.blue,
-        StaticMethod = colors.peach,
-        Text = colors.green,
-        Snippet = colors.mauve,
-        Folder = colors.blue,
-        Unit = colors.green,
-        Value = colors.peach,
-      }
-
-      for kind, color in pairs(dat) do
-        vim.api.nvim_set_hl(0, "LspKind" .. kind, { fg = color, default = true })
-      end
-    end
+    -- local gen_lspkind_hl = function()
+    --   local colors = require("catppuccin.palettes").get_palette("macchiato")
+    --   local dat = {
+    --     Class = colors.yellow,
+    --     Constant = colors.peach,
+    --     Constructor = colors.sapphire,
+    --     Enum = colors.yellow,
+    --     EnumMember = colors.teal,
+    --     Event = colors.yellow,
+    --     Field = colors.teal,
+    --     File = colors.rosewater,
+    --     Function = colors.blue,
+    --     Interface = colors.yellow,
+    --     Key = colors.red,
+    --     Method = colors.blue,
+    --     Module = colors.blue,
+    --     Namespace = colors.blue,
+    --     Number = colors.peach,
+    --     Operator = colors.sky,
+    --     Package = colors.blue,
+    --     Property = colors.teal,
+    --     Struct = colors.yellow,
+    --     TypeParameter = colors.blue,
+    --     Variable = colors.peach,
+    --     Array = colors.peach,
+    --     Boolean = colors.peach,
+    --     Null = colors.yellow,
+    --     Object = colors.yellow,
+    --     String = colors.green,
+    --     TypeAlias = colors.green,
+    --     Parameter = colors.blue,
+    --     StaticMethod = colors.peach,
+    --     Text = colors.green,
+    --     Snippet = colors.mauve,
+    --     Folder = colors.blue,
+    --     Unit = colors.green,
+    --     Value = colors.peach,
+    --   }
+    --
+    --   for kind, color in pairs(dat) do
+    --     vim.api.nvim_set_hl(0, "LspKind" .. kind, { fg = color, default = true })
+    --   end
+    -- end
 
     local icons = {
       diagnostics = require("jordan.ui.icons").get("diagnostics", true),
@@ -67,7 +71,7 @@ return {
       end
     end
 
-    gen_lspkind_hl()
+    -- gen_lspkind_hl()
     set_sidebar_icons()
 
     require("lspsaga").setup({
@@ -197,9 +201,4 @@ return {
       },
     })
   end,
-
-  dependencies = {
-    "nvim-treesitter/nvim-treesitter", -- optional
-    "nvim-tree/nvim-web-devicons", -- optional
-  },
 }

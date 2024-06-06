@@ -30,93 +30,106 @@ local getTitle = function(icon, title)
   return left .. header .. right
 end
 
-function M.getLiveGrep()
+function M.getText(glob)
   local icon = icons.kind.Text
   local title = "GREP"
 
-  require("telescope.builtin").live_grep(themes.get_dropdown({
-    previewer = true,
-    prompt_title = getTitle(icon, title),
-    prompt_prefix = iconPrefix(icon),
-    layout_strategy = "horizontal",
-    sorting_strategy = "ascending",
-    layout_config = {
-      height = hwp,
-      width = wwp,
-      prompt_position = "top",
-      preview_cutoff = 120,
-    },
-  }))
+  return function()
+    require("telescope.builtin").live_grep(themes.get_dropdown({
+      previewer = true,
+      prompt_title = getTitle(icon, title),
+      prompt_prefix = iconPrefix(icon),
+      layout_strategy = "horizontal",
+      sorting_strategy = "ascending",
+      layout_config = {
+        height = hwp,
+        width = wwp,
+        prompt_position = "top",
+        preview_cutoff = 120,
+      },
+      glob_pattern = glob,
+    }))
+  end
 end
 
-function M.getGrepCurrentWord()
+function M.getCursor(glob)
   local icon = icons.kind.Text
   local title = "CURSOR"
-
-  require("telescope.builtin").grep_string(themes.get_dropdown({
-    previewer = true,
-    prompt_title = getTitle(icon, title),
-    prompt_prefix = iconPrefix(icon),
-    layout_strategy = "horizontal",
-    sorting_strategy = "ascending",
-    layout_config = {
-      height = hwp,
-      width = wwp,
-      prompt_position = "top",
-      preview_cutoff = 120,
-    },
-  }))
+  return function()
+    require("telescope.builtin").grep_string(themes.get_dropdown({
+      previewer = true,
+      prompt_title = getTitle(icon, title),
+      prompt_prefix = iconPrefix(icon),
+      layout_strategy = "horizontal",
+      sorting_strategy = "ascending",
+      layout_config = {
+        height = hwp,
+        width = wwp,
+        prompt_position = "top",
+        preview_cutoff = 120,
+      },
+      glob_pattern = glob,
+    }))
+  end
 end
 
-function M.getFindFiles()
+function M.getFiles(hidden)
   local icon = icons.ui.EmptyFolderOpen
   local title = "FILES"
 
-  require("telescope.builtin").find_files(themes.get_dropdown({
-    previewer = false,
-    no_ignore = false,
-    prompt_title = getTitle(icon, title),
-    prompt_prefix = iconPrefix(icon),
-    layout_config = {
-      height = hnp,
-      width = wnp,
-    },
-  }))
+  return function()
+    require("telescope.builtin").find_files(themes.get_dropdown({
+      previewer = false,
+      no_ignore = false,
+      prompt_title = getTitle(icon, title),
+      prompt_prefix = iconPrefix(icon),
+      layout_config = {
+        height = hnp,
+        width = wnp,
+      },
+      cwd = vim.fn.getcwd(),
+      hidden = hidden,
+    }))
+  end
 end
 
-function M.getRecentFiles()
+function M.getRecent(cwo)
   local icon = icons.ui.EmptyFolderOpen
   local title = "RECENT"
 
-  require("telescope.builtin").oldfiles(themes.get_dropdown({
-    previewer = false,
-    hidden = true,
-    prompt_title = getTitle(icon, title),
-    prompt_prefix = iconPrefix(icon),
-    layout_config = {
-      height = hnp,
-      width = wnp,
-    },
-  }))
+  return function()
+    require("telescope.builtin").oldfiles(themes.get_dropdown({
+      previewer = true,
+      hidden = true,
+      prompt_title = getTitle(icon, title),
+      prompt_prefix = iconPrefix(icon),
+      layout_config = {
+        height = hnp,
+        width = wnp,
+      },
+      cwd = vim.fn.getcwd(),
+      only_cwd = cwo,
+    }))
+  end
 end
 
-function M.getActiveBuffers()
-  local icon = icons.ui.EmptyFolderOpen
-  local title = "BUFFERS"
-
-  require("telescope.builtin").buffers(themes.get_dropdown({
-    previewer = false,
-    ignore_current_buffer = true,
-    prompt_title = getTitle(icon, title),
-    prompt_prefix = iconPrefix(icon),
-    sort_lastused = false,
-    sort_mru = true,
-    layout_config = {
-      height = hnp,
-      width = wnp,
-    },
-  }))
-end
+-- function M.getActiveBuffers()
+--   local icon = icons.ui.EmptyFolderOpen
+--   local title = "BUFFERS"
+--
+--   require("telescope.builtin").buffers(themes.get_dropdown({
+--     previewer = false,
+--     ignore_current_buffer = true,
+--     prompt_title = getTitle(icon, title),
+--     prompt_prefix = iconPrefix(icon),
+--     sort_lastused = false,
+--     sort_mru = true,
+--     layout_config = {
+--       height = hnp,
+--       width = wnp,
+--     },
+--   }))
+-- end
 
 function M.getGitStatus()
   local icon = icons.git.Git
