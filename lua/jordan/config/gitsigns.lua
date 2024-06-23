@@ -8,51 +8,6 @@ return {
   config = function()
     require("gitsigns").setup({
 
-      signs = {
-
-        add = {
-          hl = "GitGutterAdd",
-          text = icons.git.Add,
-          numhl = "GitSignsAddNr",
-          linehl = "GitSignsAddLn",
-        },
-
-        change = {
-          hl = "GitGutterChange",
-          text = icons.git.Mod,
-          numhl = "GitSignsChangeNr",
-          linehl = "GitSignsChangeLn",
-        },
-
-        delete = {
-          hl = "GitGutterDelete",
-          text = icons.git.Remove,
-          numhl = "GitSignsDeleteNr",
-          linehl = "GitSignsDeleteLn",
-        },
-
-        topdelete = {
-          hl = "GitGutterDelete",
-          text = icons.git.Remove,
-          numhl = "GitSignsDeleteNr",
-          linehl = "GitSignsDeleteLn",
-        },
-
-        changedelete = {
-          hl = "GitGutterChangeDelete",
-          text = icons.git.Remove,
-          numhl = "GitSignsChangeNr",
-          linehl = "GitSignsChangeLn",
-        },
-
-        untracked = {
-          hl = "GitGutterUntracked",
-          text = icons.git.Untracked,
-          numhl = "GitSignsChangeNr",
-          linehl = "GitSignsChangeLn",
-        },
-      },
-
       sign_priority = 6,
       update_debounce = 400,
 
@@ -119,7 +74,7 @@ return {
         -- map("n", "<leader>gR", gs.reset_buffer, { desc = "reset buffer" })
 
         -- Blame
-        map("n", "<leader>tb", gs.toggle_current_line_blame, { desc = "blame" })
+        -- map("n", "<leader>tb", gs.toggle_current_line_blame, { desc = "blame" })
 
         -- -- Diff
         -- map("n", "<leader>gd", gs.diffthis, { desc = "git diff" })

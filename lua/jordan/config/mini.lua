@@ -7,11 +7,11 @@ return {
     require("mini.bracketed").setup() -- jump by types
     require("mini.cursorword").setup() -- highlight word under cursor
     require("mini.indentscope").setup() -- show current scope
-    require("mini.surround").setup() -- surround text objects
+    -- require("mini.surround").setup() -- surround text objects
     require("mini.trailspace").setup() -- highlight trailing spaces
-    require("mini.move").setup() -- move lines and blocks
+    -- require("mini.move").setup() -- move lines and blocks
     require("mini.pairs").setup() -- auto pair characters
-    -- require("mini.notify").setup({ lsp_progress = { enable = false } }) -- show notifications
+
     require("mini.files").setup({
       mappings = {
         close = "q",
@@ -40,6 +40,11 @@ return {
           section = "Files",
         },
         {
+          name = "Text",
+          action = "lua require('jordan.ui.telescope-menus').getText(\'*.*\')()",
+          section = "Files",
+        },
+        {
           name = "Git Files",
           action = "Telescope git_files",
           section = "Files",
@@ -52,18 +57,16 @@ return {
 
         { name = "Lazy", action = "Lazy", section = "Packages" },
         { name = "Mason", action = "Mason", section = "Packages" },
-        starter.sections.recent_files(5, true, false),
-        starter.sections.recent_files(5, false, true),
+        starter.sections.recent_files(4, true, false),
+        starter.sections.recent_files(3, false, true),
         starter.sections.builtin_actions(),
       },
       content_hooks = {
         starter.gen_hook.adding_bullet(pad .. "░ ", false),
         starter.gen_hook.indexing("all", { "Builtin actions" }),
-        -- starter.gen_hook.padding(3, 2),
         starter.gen_hook.aligning("center", "center"),
       },
     })
 
-    -- vim.notify = require("mini.notify").make_notify()
   end,
 }

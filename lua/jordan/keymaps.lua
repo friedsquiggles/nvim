@@ -50,16 +50,16 @@ local base = {
 
   ["<c-p>"] = { "<cmd>Telescope git_files<cr>", icons.ui.File .. " open file" },
 
-  -- set prefix names together here
+  -- set prefix and immediate action names together here
   ["<leader>"] = {
-    a = { name = icons.ui.Wizard .. " [a]i" },
-    d = { name = icons.ui.Diagnostic .. " [d]ebug" },
+    -- d = { name = icons.ui.Diagnostic .. " [d]iag" },
     g = { name = icons.cmp.copilot_alt .. " [g]it" },
     l = { name = icons.misc.LspAvailable .. " [l]sp" },
-    n = { name = icons.ui.Comment .. " [n]otify" },
     s = { name = icons.ui.Search .. " [s]earch" },
+
+    -- actions
     q = { "<cmd>bd<cr>", icons.ui.Close_alt .. " close buffer" },
-    w = { "<cmd>wa<cr>", icons.ui.Pencil .. " [w]rite [a]ll" },
+    w = { "<cmd>wa<cr>", icons.ui.Pencil .. " [w]rite all" },
   },
 }
 
@@ -69,65 +69,34 @@ wk.register(base, normal_leaderless_opts)
 -- keymaps for normal mode, after pressing leader key
 local normal_leader_keys = {
 
-  -- buffers
-  ["."] = { "<cmd>bn<cr>", icons.ui.DoubleSeparatorRight .. " buffer" },
-  [","] = { "<cmd>bp<cr>", icons.ui.DoubleSeparatorLeft .. " buffer" },
-
   -- windows
   ["\\"] = { "<cmd>vnew<cr>", icons.cmp.tmux .. " right (new)" },
   ["|"] = { "<cmd>vsplit<cr>", icons.cmp.tmux .. " right" },
   ["-"] = { "<cmd>new<cr>", icons.cmp.tmux .. " below (new)" },
   ["_"] = { "<cmd>split<cr>", icons.cmp.tmux .. " below" },
 
-  -- ai
-  a = {
-    -- name = icons.ui.Wizard .. " ai",
-    s = { "<cmd>Copilot status<cr>", " [s]tatus" },
-    p = { "<cmd>Copilot panel<cr>", " [p]anel" },
-    e = { "<cmd>Copilot enable<cr>", " [e]nable" },
-    d = { "<cmd>Copilot disable<cr>", " [d]isable" },
-  },
-
   -- git
   g = {
-    -- name = icons.cmp.copilot_alt .. " git",
-    l = { "<cmd>Gitsigns blame_line<cr>", " b[l]ame" },
-    p = { "<cmd>Gitsigns preview_hunk<cr>", " [p]review hunk" },
     r = { "<cmd>Gitsigns reset_hunk<cr>", " [r]eset hunk" },
     R = { "<cmd>Gitsigns reset_buffer<cr>", "[R]eset buffer" },
     a = { "<cmd>Gitsigns stage_hunk<cr>", " [a]dd hunk" },
     A = { "<cmd>Gitsigns stage_buffer<cr>", " [A]dd buffer" },
     u = { "<cmd>Gitsigns undo_stage_hunk<cr>", " [u]ndo stage hunk" },
     d = { "<cmd>Gitsigns diffthis<cr>", " [d]iff" },
-
-    -- s = { "<cmd>Telescope git_status<cr>", " [s]tatus" },
-    -- b = { "<cmd>Telescope git_branches<cr>", "[b]ranches" },
-    -- c = { "<cmd>Telescope git_commits<cr>", " [c]ommits" },
-    -- C = { "<cmd>Telescope git_bcommits<cr>", " [C]ommits (file)" },
   },
 
   -- LSP
   l = {
-    -- name = icons.misc.LspAvailable .. " lsp",
-    f = { "<cmd>Telescope lsp_references<cr>", " re[f]s" },
-    i = { "<cmd>Telescope diagnostics<cr>", " d[i]ag" },
-    I = { "<cmd>Telescope lsp_workspace_diagnostics<cr>", " d[I]ag (ws)" },
-    c = { "<cmd>Telescope lsp_incoming_calls<cr>", " [c]alls incoming" },
-    C = { "<cmd>Telescope lsp_outgoing_calls<cr>", " [C]alls outgoing" },
-    -- s = { "<cmd>Telescope lsp_document_symbols<cr>", " symbols (doc)" },
-    -- S = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", " symbols (ws)" },
-
-    l = { "<cmd>lua require('lsp_lines').toggle()<cr>", "toggle lsp [l]ines" },
-    L = { "<cmd>LspInfo<cr>", "[L]sp info" },
-
-    a = { "<cmd>Lspsaga code_action<cr>", " [a]ction" },
-    D = { "<cmd>Lspsaga goto_definition<cr>", "[D]efinition" },
-    -- g = { "<cmd>Lspsaga finder<cr>", "finder" },
+    c = { "<cmd>Telescope lsp_incoming_calls<cr>", " [c]alls in" },
+    C = { "<cmd>Telescope lsp_outgoing_calls<cr>", " [C]alls out" },
+    e = { "<cmd>Lspsaga rename<cr>", "[e]dit" },
+    i = { "<cmd>LspInfo<cr>", "[i]nfo" },
+    d = { "<cmd>Lspsaga goto_definition<cr>", "[d]ef" },
     h = { "<cmd>Lspsaga hover_doc<cr>", "[h]over" },
     o = { "<cmd>Lspsaga outline<cr>", "[o]utline" },
-    r = { "<cmd>Lspsaga rename<cr>", "[r]ename" },
+    r = { "<cmd>Telescope lsp_references<cr>", " [r]efs" },
     R = { "<cmd>Lspsaga project_replace<cr>", "[R]eplace" },
-    T = { "<cmd>Lspsaga goto_type_definition<cr>", "[T]ype def" },
+    t = { "<cmd>Lspsaga goto_type_definition<cr>", "[t]ype" },
   },
 }
 

@@ -101,7 +101,7 @@ M.config = function()
   pcall(telescope.load_extension, "noice")
 
   -- quick search
-  map("n", "<leader><space>", menus.getRecent(true), { desc = " old" })
+  map("n", "<leader><space>", menus.getRecent(true), { desc = "recent" })
   map("n", "<leader>so", menus.getRecent(true), { desc = " [o]ld" })
   map("n", "<leader>sO", menus.getRecent(false), { desc = " [o]ld" })
   -- map("n", "<leader>/", menus.getRecentFiles, { desc = "recent files" })
@@ -115,14 +115,14 @@ M.config = function()
   map("n", "<leader>scc", menus.getCursor({ "*.css", ".scss" }), { desc = " [c]ss" })
   map("n", "<leader>scj", menus.getCursor({ "*.json", "*.jsonc" }), { desc = " [j]son" })
   map("n", "<leader>sct", menus.getCursor({ "*.ts", "!*.spec.ts" }), { desc = " [t]ypescript" })
-  map("n", "<leader>scu", menus.getCursor({ "*.spec.ts" }), { desc = " [t]ypescript" })
+  map("n", "<leader>scu", menus.getCursor({ "*.spec.ts" }), { desc = " [u]nit tests" })
 
   -- search text (and by file type groups)
   map("n", "<leader>st", menus.getText("*.*"), { desc = " [t]ext" })
   map("n", "<leader>stc", menus.getText({ "*.css", ".scss" }), { desc = " [c]ss" })
   map("n", "<leader>stj", menus.getText({ "*.json", "*.jsonc" }), { desc = " [j]son" })
   map("n", "<leader>stt", menus.getText({ "*.ts", "!*.spec.ts" }), { desc = " [t]ypescript" })
-  map("n", "<leader>stu", menus.getText({ "*.spec.ts" }), { desc = " [t]ypescript" })
+  map("n", "<leader>stu", menus.getText({ "*.spec.ts" }), { desc = " [u]nit tests" })
 
   -- lsp
   map("n", "<leader>sy", menus.getTreeSitter, { desc = " s[y]mbols" })
@@ -130,9 +130,9 @@ M.config = function()
   map("n", "<leader>sd", builtin.diagnostics, { desc = " [d]iags" })
 
   -- git
-  map("n", "<leader>sg", menus.getGitStatus, { desc = " [g]it status" })
-  map("n", "<leader>sb", menus.getGitBranches, { desc = " git [b]ranches" })
-  map("n", "<leader>sl", menus.getGitCommits, { desc = " git [l]og" })
+  map("n", "<leader>gg", menus.getGitStatus, { desc = " [g]it status" })
+  map("n", "<leader>gb", menus.getGitBranches, { desc = " git [b]ranches" })
+  map("n", "<leader>gl", menus.getGitCommits, { desc = " git [l]og" })
 
   -- config
   map("n", "<leader>sh", builtin.highlights, { desc = " [h]ighlights" })

@@ -9,12 +9,12 @@ local icons = {
 local M = {}
 
 -- dimensions with preview
-local hwp = 0.7
-local wwp = 0.8
+local hwp = 0.85
+local wwp = 0.85
 
 -- dimensions no preview
-local hnp = 0.6
-local wnp = 0.6
+local hnp = 0.8
+local wnp = 0.8
 
 local iconPrefix = function(icon)
   return " " .. icon .. " "
@@ -136,12 +136,13 @@ function M.getGitStatus()
   local title = "CHANGES"
 
   require("telescope.builtin").git_status(themes.get_dropdown({
-    previewer = false,
+    previewer = true,
     prompt_title = getTitle(icon, title),
     prompt_prefix = iconPrefix(icon),
+    layout_strategy = "vertical",
     layout_config = {
-      height = hnp,
-      width = wnp,
+      height = hwp,
+      width = wwp,
     },
     git_icons = {
       added = icons.git.Add,

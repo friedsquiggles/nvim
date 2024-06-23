@@ -35,8 +35,8 @@ M.opts = {
 }
 
 -- Setup function
-function M.config()
-  require("flash").setup({})
+function M.config(_, opts)
+  require("flash").setup(opts)
 end
 
 return M
