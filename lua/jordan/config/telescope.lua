@@ -113,16 +113,18 @@ M.config = function()
   -- search word under cursor (and by file type groups)
   map("n", "<leader>scc", menus.getCursor("*.*"), { desc = " [c]ursor" })
   map("n", "<leader>scc", menus.getCursor({ "*.css", ".scss" }), { desc = " [c]ss" })
+  map("n", "<leader>sch", menus.getCursor({ "*.html" }), { desc = " [h]tml" })
   map("n", "<leader>scj", menus.getCursor({ "*.json", "*.jsonc" }), { desc = " [j]son" })
   map("n", "<leader>sct", menus.getCursor({ "*.ts", "!*.spec.ts" }), { desc = " [t]ypescript" })
   map("n", "<leader>scu", menus.getCursor({ "*.spec.ts" }), { desc = " [u]nit tests" })
 
   -- search text (and by file type groups)
   map("n", "<leader>st", menus.getText("*.*"), { desc = " [t]ext" })
-  map("n", "<leader>stc", menus.getText({ "*.css", ".scss" }), { desc = " [c]ss" })
-  map("n", "<leader>stj", menus.getText({ "*.json", "*.jsonc" }), { desc = " [j]son" })
-  map("n", "<leader>stt", menus.getText({ "*.ts", "!*.spec.ts" }), { desc = " [t]ypescript" })
-  map("n", "<leader>stu", menus.getText({ "*.spec.ts" }), { desc = " [u]nit tests" })
+  map("n", "<leader>ssc", menus.getText({ "*.css", ".scss" }), { desc = " [c]ss" })
+  map("n", "<leader>ssh", menus.getText({ "*.html" }), { desc = " [h]tml" })
+  map("n", "<leader>ssj", menus.getText({ "*.json", "*.jsonc" }), { desc = " [j]son" })
+  map("n", "<leader>sst", menus.getText({ "*.ts", "!*.spec.ts" }), { desc = " [t]ypescript" })
+  map("n", "<leader>ssu", menus.getText({ "*.spec.ts" }), { desc = " [u]nit tests" })
 
   -- lsp
   map("n", "<leader>sy", menus.getTreeSitter, { desc = " s[y]mbols" })
@@ -137,6 +139,7 @@ M.config = function()
   -- config
   map("n", "<leader>sh", builtin.highlights, { desc = " [h]ighlights" })
   map("n", "<leader>sk", builtin.keymaps, { desc = " [k]eymaps" })
+  map("n", "<leader>sn", telescope.extensions.notify.notify, { desc = " [n]otifications" })
 end
 
 return M

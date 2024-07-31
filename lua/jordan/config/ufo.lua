@@ -133,53 +133,59 @@ local virtual_text_handler = function(virt_text, lnum, end_lnum, width, truncate
 end
 
 return {
-  -- {
-  --   "neovim/nvim-lspconfig",
-  --   opts = {
-  --     capabilities = {
-  --       textDocument = {
-  --         foldingRange = {
-  --           dynamicRegistration = false,
-  --           lineFoldingOnly = true,
-  --         },
-  --       },
-  --     },
-  --   },
-  -- },
-  {
-    "kevinhwang91/nvim-ufo",
-    dependencies = {
-      "kevinhwang91/promise-async",
-      "luukvbaal/statuscol.nvim",
-    },
-    event = "BufReadPost",
-    opts = {},
-    config = function()
-      ufo = require("ufo")
-
-      vim.o.foldcolumn = "1"
-      vim.o.foldlevel = 99
-      vim.o.foldlevelstart = 99
-      vim.g.has_folding_ufo = 1
-      vim.o.foldenable = true
-      vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-
-      ufo.setup({
-        open_fold_hl_timeout = 150,
-        provider_selector = function(bufnr, filetype)
-          if pcall(require, "nvim-treesitter.parsers") then
-            if require("nvim-treesitter.parsers").has_parser(filetype) then
-              return { "treesitter", "indent" }
-            end
-          end
-          return ""
-        end,
-
-        enable_get_fold_virt_text = true,
-        fold_virt_text_handler = virtual_text_handler,
-      })
-
-      setup_folding_keymaps()
-    end,
+  "kevinhwang91/nvim-ufo",
+  dependencies = {
+    "kevinhwang91/promise-async",
+    "luukvbaal/statuscol.nvim",
   },
+  event = "BufReadPost",
+  opts = {},
+  config = function()
+    ufo = require("ufo")
+
+    vim.o.foldcolumn = "1"
+    vim.o.foldlevel = 99
+    vim.o.foldlevelstart = 99
+    vim.g.has_folding_ufo = 1
+    vim.o.foldenable = true
+    vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+
+    ufo.setup({
+      open_fold_hl_timeout = 150,
+      provider_selector = function(_, _)
+        return { "treesitter", "indent" }
+      end,
+      close_fold_kinds_for_ft = {
+        default = {
+          "imports",
+          "comment",
+        },
+        -- json = {
+        --     "array",
+        -- },
+        c = {
+          "comment",
+          "region",
+        },
+      },
+      preview = {
+        win_config = {
+          border = { "", "─", "", "", "", "─", "", "" },
+          winhighlight = "Normal:Folded",
+          winblend = 0,
+        },
+        mappings = {
+          scrollU = "<C-u>",
+          scrollD = "<C-d>",
+          jumpTop = "[",
+          jumpBot = "]",
+          close = "<Esc>",
+        },
+      },
+      enable_get_fold_virt_text = true,
+      fold_virt_text_handler = virtual_text_handler,
+    })
+
+    setup_folding_keymaps()
+  end,
 }

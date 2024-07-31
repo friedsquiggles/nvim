@@ -12,6 +12,9 @@ return {
   -- neovim config helper
   { "folke/neodev.nvim" },
 
+  -- terminal support
+  { "justinsgithub/wezterm-types", lazy = true },
+
   -- import plugins folders
   { import = "jordan.config" },
   { import = "jordan.after" },

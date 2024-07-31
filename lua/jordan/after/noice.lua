@@ -14,6 +14,7 @@ local disabled_message_prefixes = {
   "%d+ lines ", -- Other action on multiple lines
   "Already at newest change", -- Redone
   '"[^"]+" %d+L, %d+B', -- Save
+  "written",
 }
 
 local filter_message_routes = vim.tbl_map(create_skip_filter, disabled_message_prefixes)
@@ -43,6 +44,7 @@ function M.config()
         ["cmp.entry.get_documentation"] = true,
       },
 
+      progress = { enabled = false },
       hover = { enabled = true },
 
       signature = {

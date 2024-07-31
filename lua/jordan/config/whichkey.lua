@@ -5,45 +5,34 @@ local M = {
 
 M.opts = {
   plugins = {
-    marks = false,
+    marks = true,
     registers = false,
     spelling = {
       enabled = false,
     },
 
     presets = {
-      operators = false,
-      motions = false,
+      operators = true,
+      motions = true,
       text_objects = true,
-      windows = false,
-      nav = false,
+      windows = true,
+      nav = true,
       z = true,
       g = true,
     },
   },
 
-  window = {
+  win = {
     border = "double",
-    position = "bottom",
-    margin = { 4, 4, 4, 4 },
-    padding = { 4, 4, 4, 4 },
+    -- position = "bottom",
+    padding = { 2, 2, 2, 2 },
   },
 
   layout = {
-    height = { min = 10, max = 25 },
+    height = { min = 16, max = 25 },
     width = { min = 20, max = 40 },
-    spacing = 6,
+    spacing = 4,
     align = "left",
-  },
-
-  triggers_nowait = {
-    "`",
-    "'",
-    "g`",
-    "g'",
-    '"',
-    "<c-r>",
-    "z=",
   },
 
   hidden = { "<cmd>", "<Cmd>", "<CR>", "^:", "^ ", "^call ", "^lua " },
