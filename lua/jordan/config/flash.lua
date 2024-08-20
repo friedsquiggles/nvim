@@ -11,7 +11,7 @@ M.keys = {
     function()
       require("flash").jump()
     end,
-    desc = "Flash",
+    desc = "flash",
   },
   {
     "S",
@@ -19,7 +19,7 @@ M.keys = {
     function()
       require("flash").treesitter()
     end,
-    desc = "Flash Treesitter",
+    desc = "flash (ts)",
   },
 }
 
@@ -32,6 +32,9 @@ M.opts = {
       },
     },
   },
+  label = {
+    uppercase = false,
+  }
 }
 
 -- Setup function

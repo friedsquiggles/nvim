@@ -18,13 +18,12 @@ local M = {
 }
 
 M.config = function()
-  local telescope = require("telescope")
-  local act = require("telescope.actions")
-  -- local trouble = require("trouble.providers.telescope")
-  local builtin = require("telescope.builtin")
-  local menus = require("jordan.ui.telescope-menus")
+  local t = require("telescope")
+  local a = require("telescope.actions")
+  local b = require("telescope.builtin")
+  local m = require("jordan.ui.telescope-menus")
 
-  telescope.setup({
+  t.setup({
     defaults = {
       path_display = function(_, path)
         local cwd = vim.fn.getcwd()
@@ -48,13 +47,13 @@ M.config = function()
 
       mappings = {
         i = {
-          ["<ESC>"] = act.close,
-          ["<TAB>"] = act.toggle_selection + act.move_selection_next,
-          ["<C-k>"] = act.move_selection_previous,
-          ["<C-j>"] = act.move_selection_next,
-          ["<C-q>"] = act.send_selected_to_qflist + act.open_qflist,
-          ["<C-u>"] = act.preview_scrolling_up,
-          ["<C-d>"] = act.preview_scrolling_down,
+          ["<ESC>"] = a.close,
+          ["<TAB>"] = a.toggle_selection + a.move_selection_next,
+          ["<C-k>"] = a.move_selection_previous,
+          ["<C-j>"] = a.move_selection_next,
+          ["<C-q>"] = a.send_selected_to_qflist + a.open_qflist,
+          ["<C-u>"] = a.preview_scrolling_up,
+          ["<C-d>"] = a.preview_scrolling_down,
           -- ["<C-t>"] = trouble.open_with_trouble,
         },
       },
@@ -96,50 +95,50 @@ M.config = function()
   })
 
   -- load extensions
-  pcall(telescope.load_extension, "fzf")
-  pcall(telescope.load_extension, "notify")
-  pcall(telescope.load_extension, "noice")
+  pcall(t.load_extension, "fzf")
+  pcall(t.load_extension, "notify")
+  pcall(t.load_extension, "noice")
 
   -- quick search
-  map("n", "<leader><space>", menus.getRecent(true), { desc = "recent" })
-  map("n", "<leader>so", menus.getRecent(true), { desc = " [o]ld" })
-  map("n", "<leader>sO", menus.getRecent(false), { desc = " [o]ld" })
+  map("n", "<leader><space>", m.recent(true), { desc = "recent" })
+  map("n", "<leader>so", m.recent(true), { desc = "[o]ld" })
+  map("n", "<leader>sO", m.recent(false), { desc = "[o]ld" })
   -- map("n", "<leader>/", menus.getRecentFiles, { desc = "recent files" })
 
   -- search for files by name
-  map("n", "<leader>sf", menus.getFiles(false), { desc = " [f]iles" })
-  map("n", "<leader>sF", menus.getFiles(true), { desc = " [f]iles" })
+  map("n", "<leader>sf", m.files(false), { desc = "[f]iles" })
+  map("n", "<leader>sF", m.files(true), { desc = "[f]iles" })
 
   -- search word under cursor (and by file type groups)
-  map("n", "<leader>scc", menus.getCursor("*.*"), { desc = " [c]ursor" })
-  map("n", "<leader>scc", menus.getCursor({ "*.css", ".scss" }), { desc = " [c]ss" })
-  map("n", "<leader>sch", menus.getCursor({ "*.html" }), { desc = " [h]tml" })
-  map("n", "<leader>scj", menus.getCursor({ "*.json", "*.jsonc" }), { desc = " [j]son" })
-  map("n", "<leader>sct", menus.getCursor({ "*.ts", "!*.spec.ts" }), { desc = " [t]ypescript" })
-  map("n", "<leader>scu", menus.getCursor({ "*.spec.ts" }), { desc = " [u]nit tests" })
+  map("n", "<leader>scc", m.cursor("*.*"), { desc = "[c]ursor" })
+  map("n", "<leader>scc", m.cursor({ "*.css", ".scss" }), { desc = "[c]ss" })
+  map("n", "<leader>sch", m.cursor({ "*.html" }), { desc = "[h]tml" })
+  map("n", "<leader>scj", m.cursor({ "*.json", "*.jsonc" }), { desc = "[j]son" })
+  map("n", "<leader>sct", m.cursor({ "*.ts", "!*.spec.ts" }), { desc = "[t]ypescript" })
+  map("n", "<leader>scu", m.cursor({ "*.spec.ts" }), { desc = "[u]nit tests" })
 
   -- search text (and by file type groups)
-  map("n", "<leader>st", menus.getText("*.*"), { desc = " [t]ext" })
-  map("n", "<leader>ssc", menus.getText({ "*.css", ".scss" }), { desc = " [c]ss" })
-  map("n", "<leader>ssh", menus.getText({ "*.html" }), { desc = " [h]tml" })
-  map("n", "<leader>ssj", menus.getText({ "*.json", "*.jsonc" }), { desc = " [j]son" })
-  map("n", "<leader>sst", menus.getText({ "*.ts", "!*.spec.ts" }), { desc = " [t]ypescript" })
-  map("n", "<leader>ssu", menus.getText({ "*.spec.ts" }), { desc = " [u]nit tests" })
+  map("n", "<leader>st", m.text("*.*"), { desc = "[t]ext" })
+  map("n", "<leader>ssc", m.text({ "*.css", ".scss" }), { desc = "[c]ss" })
+  map("n", "<leader>ssh", m.text({ "*.html" }), { desc = "[h]tml" })
+  map("n", "<leader>ssj", m.text({ "*.json", "*.jsonc" }), { desc = "[j]son" })
+  map("n", "<leader>sst", m.text({ "*.ts", "!*.spec.ts" }), { desc = "[t]ypescript" })
+  map("n", "<leader>ssu", m.text({ "*.spec.ts" }), { desc = "[u]nit tests" })
 
   -- lsp
-  map("n", "<leader>sy", menus.getTreeSitter, { desc = " s[y]mbols" })
-  map("n", "<leader>sr", menus.getLspRefs, { desc = " [r]eferences" })
-  map("n", "<leader>sd", builtin.diagnostics, { desc = " [d]iags" })
+  map("n", "<leader>sy", m.treesitter, { desc = "s[y]mbols" })
+  map("n", "<leader>sr", m.refs, { desc = "[r]eferences" })
+  map("n", "<leader>sd", b.diagnostics, { desc = "[d]iags" })
 
   -- git
-  map("n", "<leader>gg", menus.getGitStatus, { desc = " [g]it status" })
-  map("n", "<leader>gb", menus.getGitBranches, { desc = " git [b]ranches" })
-  map("n", "<leader>gl", menus.getGitCommits, { desc = " git [l]og" })
+  map("n", "<leader>gg", m.status, { desc = "[g]it status" })
+  map("n", "<leader>gb", m.branches, { desc = "git [b]ranches" })
+  map("n", "<leader>gl", m.commits, { desc = "git [l]og" })
 
   -- config
-  map("n", "<leader>sh", builtin.highlights, { desc = " [h]ighlights" })
-  map("n", "<leader>sk", builtin.keymaps, { desc = " [k]eymaps" })
-  map("n", "<leader>sn", telescope.extensions.notify.notify, { desc = " [n]otifications" })
+  map("n", "<leader>sh", b.highlights, { desc = "[h]ighlights" })
+  map("n", "<leader>sk", b.keymaps, { desc = "[k]eymaps" })
+  map("n", "<leader>sn", t.extensions.notify.notify, { desc = "[n]otifications" })
 end
 
 return M

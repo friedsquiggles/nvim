@@ -9,12 +9,8 @@ local icons = {
 local M = {}
 
 -- dimensions with preview
-local hwp = 0.85
-local wwp = 0.85
-
--- dimensions no preview
-local hnp = 0.8
-local wnp = 0.8
+local h = 0.85
+local w = 0.85
 
 local iconPrefix = function(icon)
   return " " .. icon .. " "
@@ -30,7 +26,7 @@ local getTitle = function(icon, title)
   return left .. header .. right
 end
 
-function M.getText(glob)
+function M.text(glob)
   local icon = icons.kind.Text
   local title = "GREP"
 
@@ -42,8 +38,8 @@ function M.getText(glob)
       layout_strategy = "horizontal",
       sorting_strategy = "ascending",
       layout_config = {
-        height = hwp,
-        width = wwp,
+        height = h,
+        width = w,
         prompt_position = "top",
         preview_cutoff = 120,
       },
@@ -52,7 +48,7 @@ function M.getText(glob)
   end
 end
 
-function M.getCursor(glob)
+function M.cursor(glob)
   local icon = icons.kind.Text
   local title = "CURSOR"
   return function()
@@ -63,8 +59,8 @@ function M.getCursor(glob)
       layout_strategy = "horizontal",
       sorting_strategy = "ascending",
       layout_config = {
-        height = hwp,
-        width = wwp,
+        height = h,
+        width = w,
         prompt_position = "top",
         preview_cutoff = 120,
       },
@@ -73,19 +69,19 @@ function M.getCursor(glob)
   end
 end
 
-function M.getFiles(hidden)
+function M.files(hidden)
   local icon = icons.ui.EmptyFolderOpen
   local title = "FILES"
 
   return function()
     require("telescope.builtin").find_files(themes.get_dropdown({
-      previewer = false,
+      previewer = true,
       no_ignore = false,
       prompt_title = getTitle(icon, title),
       prompt_prefix = iconPrefix(icon),
       layout_config = {
-        height = hnp,
-        width = wnp,
+        height = h,
+        width = w,
       },
       cwd = vim.fn.getcwd(),
       hidden = hidden,
@@ -93,7 +89,7 @@ function M.getFiles(hidden)
   end
 end
 
-function M.getRecent(cwo)
+function M.recent(cwo)
   local icon = icons.ui.EmptyFolderOpen
   local title = "RECENT"
 
@@ -104,8 +100,8 @@ function M.getRecent(cwo)
       prompt_title = getTitle(icon, title),
       prompt_prefix = iconPrefix(icon),
       layout_config = {
-        height = hnp,
-        width = wnp,
+        height = h,
+        width = w,
       },
       cwd = vim.fn.getcwd(),
       only_cwd = cwo,
@@ -113,25 +109,7 @@ function M.getRecent(cwo)
   end
 end
 
--- function M.getActiveBuffers()
---   local icon = icons.ui.EmptyFolderOpen
---   local title = "BUFFERS"
---
---   require("telescope.builtin").buffers(themes.get_dropdown({
---     previewer = false,
---     ignore_current_buffer = true,
---     prompt_title = getTitle(icon, title),
---     prompt_prefix = iconPrefix(icon),
---     sort_lastused = false,
---     sort_mru = true,
---     layout_config = {
---       height = hnp,
---       width = wnp,
---     },
---   }))
--- end
-
-function M.getGitStatus()
+function M.status()
   local icon = icons.git.Git
   local title = "CHANGES"
 
@@ -141,8 +119,8 @@ function M.getGitStatus()
     prompt_prefix = iconPrefix(icon),
     layout_strategy = "vertical",
     layout_config = {
-      height = hwp,
-      width = wwp,
+      height = h,
+      width = w,
     },
     git_icons = {
       added = icons.git.Add,
@@ -158,77 +136,62 @@ function M.getGitStatus()
   }))
 end
 
-function M.getGitCommits()
+function M.commits()
   local icon = icons.git.Git
   local title = "COMMITS"
 
   require("telescope.builtin").git_commits(themes.get_dropdown({
-    previewer = false,
+    previewer = true,
     prompt_title = getTitle(icon, title),
     prompt_prefix = iconPrefix(icon),
     layout_config = {
-      height = hnp,
-      width = wnp,
+      height = h,
+      width = w,
     },
   }))
 end
 
-function M.getGitBranches()
+function M.branches()
   local icon = icons.git.Git
   local title = "BRANCHES"
 
   require("telescope.builtin").git_branches(themes.get_dropdown({
-    previewer = false,
+    previewer = true,
     prompt_title = getTitle(icon, title),
     prompt_prefix = iconPrefix(icon),
     layout_config = {
-      height = hnp,
-      width = wnp,
+      height = h,
+      width = w,
     },
   }))
 end
 
-function M.getQuickFix()
-  local icon = icons.ui.CodeAction
-  local title = "FIX"
-
-  require("telescope.builtin").quickfix(themes.get_dropdown({
-    previewer = false,
-    prompt_title = getTitle(icon, title),
-    prompt_prefix = iconPrefix(icon),
-    layout_config = {
-      height = hnp,
-      width = wnp,
-    },
-  }))
-end
-
-function M.getTreeSitter()
+function M.treesitter()
   local icon = icons.cmp.treesitter
   local title = "SYMBOLS"
 
   require("telescope.builtin").treesitter(themes.get_dropdown({
-    previewer = false,
+    previewer = true,
     prompt_title = getTitle(icon, title),
     prompt_prefix = iconPrefix(icon),
     layout_config = {
-      height = hnp,
-      width = wnp,
+      height = h,
+      width = w,
     },
   }))
 end
 
-function M.getLspRefs()
+function M.refs()
   local icon = icons.cmp.nvim_lsp
   local title = "REFERENCES"
 
   require("telescope.builtin").lsp_references(themes.get_dropdown({
-    previewer = false,
+    previewer = true,
     prompt_title = getTitle(icon, title),
     prompt_prefix = iconPrefix(icon),
     layout_config = {
-      height = hnp,
-      width = wnp,
+      height = h,
+      width = w,
     },
   }))
 end
