@@ -4,6 +4,7 @@ local M = {
 }
 
 M.opts = {
+  preset = "helix",
   plugins = {
     marks = true,
     registers = false,
@@ -23,8 +24,10 @@ M.opts = {
   },
 
   win = {
-    border = "double",
-    -- position = "bottom",
+    border = "rounded",
+    no_overlap = false,
+    title = false,
+    height = { min = 10, max = 80 },
     padding = { 2, 2, 2, 2 },
   },
 
@@ -35,16 +38,8 @@ M.opts = {
     align = "left",
   },
 
-  hidden = { "<cmd>", "<Cmd>", "<CR>", "^:", "^ ", "^call ", "^lua " },
-
   icons = {
     group = "",
-  },
-
-  key_labels = {
-    ["<space>"] = "SPC",
-    ["<cr>"] = "RET",
-    ["<tab>"] = "TAB",
   },
 }
 
