@@ -13,16 +13,16 @@ return {
       "--stdin",
     }
 
-    local luacheck = lint.linters.luacheck
-    luacheck.args = {
-      "--config",
-      "~/.config/luacheck/luacheckrc",
-      "--formatter",
-      "plain",
-      "--codes",
-      "--ranges",
-      "-",
-    }
+    -- local luacheck = lint.linters.luacheck
+    -- luacheck.args = {
+    --   "--config",
+    --   "~/.config/luacheck/luacheckrc",
+    --   "--formatter",
+    --   "plain",
+    --   "--codes",
+    --   "--ranges",
+    --   "-",
+    -- }
 
     -- Map linters to filetypes
     lint.linters_by_ft = {
@@ -35,7 +35,7 @@ return {
       toml = { "eslint" },
       sh = { "shellcheck" },
       bash = { "shellcheck" },
-      lua = { "luacheck" },
+      -- lua = { "luacheck" },
     }
 
     local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })

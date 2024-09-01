@@ -8,6 +8,10 @@ local i = {
   type = require("jordan.ui.icons").get("type", true),
 }
 
+-- wezterm pane navigation
+local util = require("jordan.util")
+util.wezterm()
+
 -- keymap options for normal mode, with leader
 local normal_leader_opts = {
   mode = "n",
