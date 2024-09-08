@@ -1,5 +1,5 @@
 # nvim
 
-🚧 WIP
+[!NOTE] WIP
 
-Personal neovim configuration files running on macOS, wezterm, and tmux
+Personal neovim configuration files mainly created for macOS, wezterm, and tmux environment

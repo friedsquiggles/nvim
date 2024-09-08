@@ -12,9 +12,12 @@ return {
 
         -- diagnostic symbols
         {
-          sign = { name = { "Diagnostic" }, colwidth = 2, maxwidth = 1, auto = false },
+          sign = { name = { ".*" }, text = { ".*" }, },
           click = "v:lua.ScSa",
         },
+
+        -- folding symbols
+        { text = { builtin.foldfunc }, click = "v:lua.ScFa", colwidth = 2 },
 
         -- empty space
         {
@@ -24,9 +27,6 @@ return {
 
         -- line numbers
         { text = { builtin.lnumfunc }, click = "v:lua.ScLa", colwidth = 4 },
-
-        -- folding symbols
-        { text = { builtin.foldfunc }, click = "v:lua.ScFa", colwidth = 2 },
 
         -- empty space
         {
