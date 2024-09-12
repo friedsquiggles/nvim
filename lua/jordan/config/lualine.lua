@@ -1,10 +1,3 @@
-local icons = {
-  git = require("jordan.ui.icons").get("git", true),
-  ui = require("jordan.ui.icons").get("ui", true),
-  misc = require("jordan.ui.icons").get("misc", true),
-  diagnostics = require("jordan.ui.icons").get("diagnostics", true),
-}
-
 return {
   "nvim-lualine/lualine.nvim",
   dependencies = {
@@ -17,47 +10,36 @@ return {
     options = {
       theme = "catppuccin",
       globalstatus = true,
+      component_separators = "|",
+      section_separators = ""
     },
 
     sections = {
+      -- left side
       lualine_a = {
         { "mode", separator = "" },
       },
 
       lualine_b = {
-        { "buffers" },
+        { "buffers", mode = 1, },
+        { "filename", path = 1, },
       },
 
       lualine_c = {
-        {
-          "diagnostics",
-          symbols = {
-            error = icons.diagnostics.Error,
-            warn = icons.diagnostics.Warning,
-            info = icons.diagnostics.Information,
-            hint = icons.diagnostics.Hint,
-          },
-        },
+        { "diagnostics", },
       },
 
+      -- right side
       lualine_x = {
-        { "branch" },
-        {
-          "diff",
-          symbols = {
-            added = icons.git.Add,
-            modified = icons.git.Mod,
-            removed = icons.git.Remove,
-          },
-        },
+        { "diff" },
       },
 
       lualine_y = {
-        { "location", separator = " ", padding = { left = 0, right = 1 } },
+        { "branch" },
       },
 
       lualine_z = {
-        { "progress", padding = { left = 1, right = 1 } },
+        { "progress", padding = { left = 1, right = 1 }, },
       },
     },
   },

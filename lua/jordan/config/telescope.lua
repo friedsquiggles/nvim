@@ -34,7 +34,7 @@ M.config = function()
         return text, hl
       end,
       color_devicons = true,
-      layout_strategy = "horizontal",
+      layout_strategy = "flex",
       sorting_strategy = "ascending",
       prompt_prefix = "   ",
       selection_caret = "  ",
@@ -43,6 +43,9 @@ M.config = function()
 
       layout_config = {
         prompt_position = "top",
+        anchor = "E",
+        height = 0.8,
+        width = 0.8,
       },
 
       mappings = {
