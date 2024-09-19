@@ -36,15 +36,15 @@ local base = {
     icon = i.ui.FolderOpen,
   },
 
-  { "<c-p>", "<cmd>Telescope git_files<cr>", icon =  i.ui.File, desc = "open file" },
+  { "<c-p>", "<cmd>Telescope git_files<cr>", icon = i.ui.File, desc = "open file" },
 
   -- set prefix and immediate action names together here
-    -- d = { name = icons.ui.Diagnostic .. " [d]iag" },
+  -- d = { name = icons.ui.Diagnostic .. " [d]iag" },
   { "<leader>g", icon = i.cmp.copilot_alt, name = "[g]it" },
   { "<leader>l", icon = i.misc.LspAvailable, name = "[l]sp" },
   { "<leader>s", icon = i.ui.Search, name = "[s]earch" },
 
-    -- actions
+  -- actions
   { "<leader>q", "<cmd>bd<cr>", icon = i.ui.Close_alt, desc = "close buffer" },
   { "<leader>w", "<cmd>wa<cr>", icon = i.ui.Pencil, desc = "[w]rite all" },
 }
@@ -59,13 +59,13 @@ local normal_leader_keys = {
   { "<leader>\\", "<cmd>vnew<cr>", icon = i.cmp.tmux, desc = "right (new)" },
   { "<leader>|", "<cmd>vsplit<cr>", icon = i.cmp.tmux, desc = "right" },
   { "<leader>-", "<cmd>new<cr>", icon = i.cmp.tmux, desc = "below (new)" },
-  {"<leader>_", "<cmd>split<cr>", icon = i.cmp.tmux, desc = "below" },
+  { "<leader>_", "<cmd>split<cr>", icon = i.cmp.tmux, desc = "below" },
 
   -- git
   { "<leader>gr", "<cmd>Gitsigns reset_hunk<cr>", desc = "[r]eset hunk" },
   { "<leader>gR", "<cmd>Gitsigns reset_buffer<cr>", desc = "[R]eset buffer" },
   { "<leader>ga", "<cmd>Gitsigns stage_hunk<cr>", desc = "[a]dd hunk" },
-  {  "<leader>gA", "<cmd>Gitsigns stage_buffer<cr>", desc = "[A]dd buffer" },
+  { "<leader>gA", "<cmd>Gitsigns stage_buffer<cr>", desc = "[A]dd buffer" },
   { "<leader>gu", "<cmd>Gitsigns undo_stage_hunk<cr>", desc = "[u]ndo stage hunk" },
   { "<leader>gd", "<cmd>Gitsigns diffthis<cr>", desc = "[d]iff" },
 

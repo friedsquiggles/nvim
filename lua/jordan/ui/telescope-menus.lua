@@ -1,3 +1,4 @@
+local builtin = require("telescope.builtin")
 local themes = require("telescope.themes")
 local icons = {
   ui = require("jordan.ui.icons").get("ui", true),
@@ -8,11 +9,11 @@ local icons = {
 
 local M = {}
 
-local iconPrefix = function(icon)
+local prefix = function(icon)
   return " " .. icon .. " "
 end
 
-local getTitle = function(icon, title)
+local header = function(icon, title)
   local cl = icons.ui.ChevronLeft
   local cr = icons.ui.ChevronRight
   local left = " " .. cl .. cl .. cl .. " "
@@ -23,39 +24,34 @@ local getTitle = function(icon, title)
 end
 
 function M.text(glob)
-  local icon = icons.kind.Text
-  local title = "GREP"
-
+  local i = icons.kind.Text
   return function()
-    require("telescope.builtin").live_grep(themes.get_dropdown({
-      prompt_title = getTitle(icon, title),
-      prompt_prefix = iconPrefix(icon),
+    builtin.live_grep(themes.get_dropdown({
+      prompt_title = header(i, "TEXT"),
+      prompt_prefix = prefix(i),
       glob_pattern = glob,
     }))
   end
 end
 
 function M.cursor(glob)
-  local icon = icons.kind.Text
-  local title = "CURSOR"
+  local i = icons.kind.Text
   return function()
-    require("telescope.builtin").grep_string(themes.get_dropdown({
-      prompt_title = getTitle(icon, title),
-      prompt_prefix = iconPrefix(icon),
+    builtin.grep_string(themes.get_dropdown({
+      prompt_title = header(i, "CURSOR"),
+      prompt_prefix = prefix(i),
       glob_pattern = glob,
     }))
   end
 end
 
 function M.files(hidden)
-  local icon = icons.ui.EmptyFolderOpen
-  local title = "FILES"
-
+  local i = icons.ui.EmptyFolderOpen
   return function()
-    require("telescope.builtin").find_files(themes.get_dropdown({
+    builtin.find_files(themes.get_dropdown({
       no_ignore = false,
-      prompt_title = getTitle(icon, title),
-      prompt_prefix = iconPrefix(icon),
+      prompt_title = header(i, "FILES"),
+      prompt_prefix = prefix(i),
       cwd = vim.fn.getcwd(),
       hidden = hidden,
     }))
@@ -63,14 +59,12 @@ function M.files(hidden)
 end
 
 function M.recent(cwo)
-  local icon = icons.ui.EmptyFolderOpen
-  local title = "RECENT"
-
+  local i = icons.ui.EmptyFolderOpen
   return function()
-    require("telescope.builtin").oldfiles(themes.get_dropdown({
+    builtin.oldfiles(themes.get_dropdown({
       hidden = true,
-      prompt_title = getTitle(icon, title),
-      prompt_prefix = iconPrefix(icon),
+      prompt_title = header(i, "RECENT"),
+      prompt_prefix = prefix(i),
       cwd = vim.fn.getcwd(),
       only_cwd = cwo,
     }))
@@ -78,52 +72,42 @@ function M.recent(cwo)
 end
 
 function M.status()
-  local icon = icons.git.Git
-  local title = "CHANGES"
-
-  require("telescope.builtin").git_status(themes.get_dropdown({
-    prompt_title = getTitle(icon, title),
-    prompt_prefix = iconPrefix(icon),
+  local i = icons.git.Git
+  builtin.git_status(themes.get_dropdown({
+    prompt_title = header(i, "CHANGES"),
+    prompt_prefix = prefix(i),
   }))
 end
 
 function M.commits()
-  local icon = icons.git.Git
-  local title = "COMMITS"
-
-  require("telescope.builtin").git_commits(themes.get_dropdown({
-    prompt_title = getTitle(icon, title),
-    prompt_prefix = iconPrefix(icon),
+  local i = icons.git.Git
+  builtin.git_commits(themes.get_dropdown({
+    prompt_title = header(i, "COMMITS"),
+    prompt_prefix = prefix(i),
   }))
 end
 
 function M.branches()
-  local icon = icons.git.Git
-  local title = "BRANCHES"
-
-  require("telescope.builtin").git_branches(themes.get_dropdown({
-    prompt_title = getTitle(icon, title),
-    prompt_prefix = iconPrefix(icon),
+  local i = icons.git.Git
+  builtin.git_branches(themes.get_dropdown({
+    prompt_title = header(i, "BRANCHES"),
+    prompt_prefix = prefix(i),
   }))
 end
 
 function M.treesitter()
-  local icon = icons.cmp.treesitter
-  local title = "SYMBOLS"
-
-  require("telescope.builtin").treesitter(themes.get_dropdown({
-    prompt_title = getTitle(icon, title),
-    prompt_prefix = iconPrefix(icon),
+  local i = icons.cmp.treesitter
+  builtin.treesitter(themes.get_dropdown({
+    prompt_title = header(i, "SYMBOLS"),
+    prompt_prefix = prefix(i),
   }))
 end
 
 function M.refs()
-  local icon = icons.cmp.nvim_lsp
-  local title = "REFERENCES"
-
-  require("telescope.builtin").lsp_references(themes.get_dropdown({
-    prompt_title = getTitle(icon, title),
-    prompt_prefix = iconPrefix(icon),
+  local i = icons.cmp.nvim_lsp
+  builtin.lsp_references(themes.get_dropdown({
+    prompt_title = header(i, "REFERENCES"),
+    prompt_prefix = prefix(i),
   }))
 end
 

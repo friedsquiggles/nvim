@@ -1,3 +1,8 @@
+local icons = {
+  git = require("jordan.ui.icons").get("git", true),
+  ui = require("jordan.ui.icons").get("ui", true),
+}
+
 return {
   "nvim-lualine/lualine.nvim",
   dependencies = {
@@ -17,12 +22,12 @@ return {
     sections = {
       -- left side
       lualine_a = {
-        { "mode", separator = "" },
+        { "mode", separator = "", fmt = function(str) return str:sub(1,1) end },
       },
 
       lualine_b = {
         { "buffers", mode = 1, },
-        { "filename", path = 1, },
+        { "filename", path = 1, shorting_target = 60, },
       },
 
       lualine_c = {
