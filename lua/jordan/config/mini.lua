@@ -4,13 +4,32 @@ return {
   config = function()
     require("mini.align").setup() -- align text
     require("mini.ai").setup() -- text objects
-    require("mini.bracketed").setup() -- jump by types
     require("mini.cursorword").setup() -- highlight word under cursor
     require("mini.indentscope").setup() -- show current scope
-    -- require("mini.surround").setup() -- surround text objects
+    require("mini.surround").setup() -- surround text objects
     require("mini.trailspace").setup() -- highlight trailing spaces
     -- require("mini.move").setup() -- move lines and blocks
-    require("mini.pairs").setup() -- auto pair characters
+
+    require("mini.pairs").setup({
+      modes = { insert = true, command = true, terminal = false },
+    }) -- auto pair characters
+
+    require("mini.bracketed").setup({
+      buffer = { suffix = "b", },
+      comment = { suffix = "c", },
+      conflict = { suffix = "x", },
+      diagnostic = { suffix = "d", },
+      file = { suffix = "", },
+      indent = { suffix = "i", },
+      jump = { suffix = "", },
+      location = { suffix = "", },
+      oldfile = { suffix = "o", },
+      quickfix = { suffix = "", },
+      treesitter = { suffix = "t", },
+      undo = { suffix = "u", },
+      window = { suffix = "w", },
+      yank = { suffix = "y", },
+    }) -- jump by types
 
     require("mini.files").setup({
       mappings = {
@@ -41,7 +60,7 @@ return {
         },
         {
           name = "Text",
-          action = "lua require('jordan.ui.telescope-menus').text(\'*.*\')()",
+          action = "lua require('jordan.ui.telescope-menus').text('*.*')()",
           section = "Files",
         },
         {
@@ -67,6 +86,5 @@ return {
         starter.gen_hook.aligning("center", "center"),
       },
     })
-
   end,
 }

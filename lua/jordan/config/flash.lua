@@ -6,7 +6,7 @@ local M = {
 -- Keybindings
 M.keys = {
   {
-    "s",
+    "<cr>",
     mode = { "n", "x", "o" },
     function()
       require("flash").jump()

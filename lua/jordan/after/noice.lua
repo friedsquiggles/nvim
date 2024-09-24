@@ -15,6 +15,7 @@ local disabled_message_prefixes = {
   "Already at newest change", -- Redone
   '"[^"]+" %d+L, %d+B', -- Save
   "written",
+  "mini.surround"
 }
 
 local filter_message_routes = vim.tbl_map(create_skip_filter, disabled_message_prefixes)

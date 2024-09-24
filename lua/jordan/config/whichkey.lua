@@ -38,6 +38,8 @@ M.opts = {
     align = "left",
   },
 
+  sort = { "alphanum" },
+
   icons = {
     group = "",
   },

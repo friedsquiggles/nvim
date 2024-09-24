@@ -61,6 +61,9 @@ local normal_leader_keys = {
   { "<leader>-", "<cmd>new<cr>", icon = i.cmp.tmux, desc = "below (new)" },
   { "<leader>_", "<cmd>split<cr>", icon = i.cmp.tmux, desc = "below" },
 
+  -- ai
+  { "<leader>a", "<cmd>CopilotChatToggle<cr>", desc = "[a]i chat toggle" },
+
   -- git
   { "<leader>gr", "<cmd>Gitsigns reset_hunk<cr>", desc = "[r]eset hunk" },
   { "<leader>gR", "<cmd>Gitsigns reset_buffer<cr>", desc = "[R]eset buffer" },
