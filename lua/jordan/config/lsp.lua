@@ -22,11 +22,13 @@ return { -- LSP Configuration & Plugins
   config = function()
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
+
       callback = function(event)
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         if client and client.server_capabilities.documentHighlightProvider then
           local highlight_augroup =
             vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
+
           vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
             buffer = event.buf,
             group = highlight_augroup,
@@ -71,9 +73,12 @@ return { -- LSP Configuration & Plugins
     vim.list_extend(ensure_installed, {
       "stylua", -- Used to format Lua code
     })
+
     require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
     require("mason-lspconfig").setup({
+      automatic_installation = false,
+      ensure_installed = {},
       handlers = {
         function(server_name)
           local server = servers[server_name] or {}
@@ -82,6 +87,16 @@ return { -- LSP Configuration & Plugins
           require("lspconfig")[server_name].setup(server)
         end,
       },
+    })
+
+    local nvim_lsp = require("lspconfig")
+    nvim_lsp.denols.setup({
+      root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc"),
+    })
+
+    nvim_lsp.ts_ls.setup({
+      root_dir = nvim_lsp.util.root_pattern("package.json"),
+      single_file_support = false,
     })
   end,
 }

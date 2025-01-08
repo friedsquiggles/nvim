@@ -30,7 +30,7 @@ return {
       markdown = { "markdownlint" },
       javascript = { "eslint" },
       typescript = { "eslint" },
-      json = { "eslint" },
+      -- json = { "eslint" },
       yaml = { "eslint" },
       toml = { "eslint" },
       sh = { "shellcheck" },

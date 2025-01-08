@@ -20,6 +20,7 @@ return {
         markdown = { "markdownlint" },
         graphql = { "prettier" },
         lua = { "stylua" },
+        ruby = { "rubocop" },
       },
 
       -- format_on_save = {
